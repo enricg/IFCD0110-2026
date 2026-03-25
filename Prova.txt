@@ -1,1 +1,2 @@
 Aquesta és la primera línia d'un document nou
+Ara escric una segona línia
