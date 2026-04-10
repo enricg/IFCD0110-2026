@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ca">
+    <head>
+        <title>Exemple d'ús del grid</title>
+        <meta charset="utf-8"/>
+        <style>
+            header, footer{
+                text-align: center;                
+                color: white;
+            }
+            .contenidor{
+                display: grid;
+                grid-template-areas: 
+                "capçalera capçalera capçalera capçalera"
+                "aside  principal  principal   principal"
+                "aside  principal  principal   principal"
+                "aside  principal  principal   principal"
+                "aside  principal  principal   principal"
+                "footer footer footer footer"
+                ;
+                grid-template-columns: 1fr 1fr 1fr 1fr; /* és equivalent a repeat(4, 1fr) */
+                grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr ;
+            }
+            main{
+                grid-area: principal;
+                background-color: yellow;
+            }
+            header{
+                grid-area: capçalera;
+                background-color: black;
+            }
+            aside{
+                grid-area: aside;
+                background-color: blue;
+            }
+            footer{
+                grid-area: footer;
+                background-color: pink;
+            }
+        </style>
+    </head>
+    <body class="contenidor">
+        <header>
+            <h1>Exemple d'ús de display grid</h1>
+        </header>
+        <main>
+            MAIN
+        </main>
+        <aside>
+            opcions de menú
+        </aside>
+        <footer>
+            Desenvolupat per mi
+        </footer>
+    </body>
+</html>

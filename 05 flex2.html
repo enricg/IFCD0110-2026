@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <title>Propietats Flex</title>
+    <style>
+        header{
+            text-align: center;
+            background-color: black;
+            color: white;
+            margin-bottom: 10px;
+        }
+        .petita{
+            height: 20px;
+            width: 20px;
+        }
+        .exemple{
+            height: 100px;
+            width: 200px;
+            display: flex;
+            border-style: dotted;
+        }
+        .vermell{background-color: red;}
+        .verd{background-color: green}
+        .taronja{background-color: orange}
+        .groc{background-color: yellow}
+        .titol{text-align: center;}
+        .tarjeta{
+            display: flex;
+            flex-direction: column;
+            height: 200px;
+            width: 200px;
+            border-style: dashed;
+        }
+    </style>
+</head>
+<body>
+    <header>Exemple de propietats del Flex</header>
+    <div class="tarjeta">
+        <div class="titol">Flex direction left</div>
+        <div class="exemple">
+            <div class="petita vermell">1</div>
+            <div class="petita verd">2</div>
+            <div class="petita taronja">3</div>
+            <div class="petita groc">4</div>
+        </div>
+    </div>
+    
+</body>
+</html>

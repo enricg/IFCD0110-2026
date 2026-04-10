@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Exercici sobre la propietat position</title>
+        <meta charset="utf-8"/>
+        <style>
+            .caixaLlarga{
+               width: 100px;
+               height: 800px;
+               background-color: red;
+            }
+            .caixa{
+                width: 100px;
+                height: 50px;
+                background-color: grey;
+            }
+            .caixaFixa{
+                top: 220px;
+                position:fixed;
+            }
+
+            .caixaRelativa{
+                position: relative;
+                left: 200px;
+                top:-763px;
+            }
+
+            .caixaAbsoluta{
+                position: absolute;
+                left:450px;
+                top:220px;
+                width: 200px;
+                height: 350px;
+            }
+
+            .rodona{
+                position: absolute;
+                background-color: blue;
+                height: 20px;
+                width: 20px;
+                top:20px;
+                left: 5px;
+                border-radius: 45%;
+            }
+        </style>
+    </head>
+    <body>
+<header>
+    <h1>
+        Exercici <span style="color: red;">sobre la propietat </span>position
+    </h1>
+</header>
+<main>
+    <b>Fixed</b>: la posició de l'element es queda fixada en un punt de la pantalla. Encara que es faci scroll, sempre queda a la mateixa posició.<br>
+    <b>Relative</b>: la posició de l'element és relativa a l'anterior ítem (és a dir, respecte a la posició que li pertocaría si no es trenqués la disposició que li pertoca per defecte).<br>
+    <b>Absolute</b>: la posició de l'element és absoluta respecte al seu pare.<br>
+
+    <div class="caixaLlarga"></div>
+    <div class="caixa caixaFixa">Fixed</div>
+    <div class="caixa caixaRelativa">Relative</div>
+    <div class="caixa caixaAbsoluta">Absolute
+        <div class="rodona"></div>
+    </div>
+</main>
+<footer>
+
+</footer>
+    </body>
+</html>
