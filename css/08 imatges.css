@@ -1,0 +1,34 @@
+header{
+    display: flex;
+    justify-content: space-around;
+}
+
+footer{
+    background-color: black;
+    color: white;
+    text-align: center;
+}
+
+ul{
+    list-style-type: none;
+}
+
+li{
+    display: inline;
+    background-color: orange;
+    border-radius: 25%;
+    border-color: red;
+    border-style: solid;
+}
+
+a:link{
+    text-decoration: none;
+}
+
+.titolCapçalera{
+    font-size: larger;
+    align-content: center;
+}
+nav{
+    width: 50%;
+}

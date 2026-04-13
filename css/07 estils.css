@@ -1,0 +1,28 @@
+.capçalera, .peu{
+    background-color: black;
+    color: white;
+    font-size: x-large;
+    text-align: center;
+}
+
+a:link{
+    color: red;
+    text-decoration: none;
+}
+a:visited{
+    color:green;
+}
+a:hover{
+    background-color: yellow;
+    text-decoration: underline;
+}
+a:active{
+    background-color: orange;
+}
+ul{
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    justify-content: space-around;
+    background-color: yellow;
+}
