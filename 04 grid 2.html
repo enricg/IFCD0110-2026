@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercici de distribució de contingut amb grid</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: serif;
+      background: white;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2em;
+      font-weight: bold;
+      padding: 10px 0 5px;
+      border-bottom: 2px solid black;
+      margin-bottom: 30px;
+    }
+
+    .contenidor-exemples {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+      align-items: flex-start;
+    }
+
+    /* ── Mides fixes iguals per a tots ── */
+    :root {
+      --ex-w: 320px;
+      --ex-h: 260px;
+      --cap-h: 30px;
+      --peu-h: 30px;
+      --mid-h: calc(var(--ex-h) - var(--cap-h) - var(--peu-h));
+      --col-nav: 75px;
+      --col-aside: 65px;
+    }
+
+    .exemple {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: var(--ex-w);
+    }
+
+    .exemple > h2 {
+      font-size: 0.72em;
+      font-weight: bold;
+      text-align: center;
+      border-bottom: 1px solid black;
+      width: 100%;
+      padding-bottom: 4px;
+      margin-bottom: 8px;
+    }
+
+    /* ══════════════════════════════════════════════
+       BASE GRID – compartit per tots els exemples
+    ══════════════════════════════════════════════ */
+    .grid-base {
+      display: grid;
+      width: var(--ex-w);
+      height: var(--ex-h);
+      grid-template-columns: var(--col-nav) 1fr var(--col-aside);
+      grid-template-rows: var(--cap-h) var(--mid-h) var(--peu-h);
+      font-size: 0.72em;
+    }
+
+    /* capçalera i peu: totes les columnes */
+    .grid-base .cap,
+    .grid-base header { grid-column: 1 / -1; }
+    .grid-base .peu,
+    .grid-base footer  { grid-column: 1 / -1; }
+
+    /* colors comuns */
+    .grid-base header,
+    .grid-base .cap       { background: gray;     padding: 5px; }
+
+    .grid-base nav,
+    .grid-base .menu      { background: orange;   padding: 5px; }
+
+    .grid-base main,
+    .grid-base .principal { background: firebrick; padding: 5px; }
+
+    .grid-base aside,
+    .grid-base .aside     { background: green;    padding: 5px; }
+
+    .grid-base footer,
+    .grid-base .peu       { background: blue; color: white; padding: 5px; }
+
+    /* ── interior de main / .principal (exemples 1 i 2) ── */
+    .ex1 main,
+    .ex2 .principal {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px;
+    }
+
+    .ex1 section,
+    .ex2 .seccio {
+      background: cyan;
+      padding: 4px;
+    }
+
+    .ex1 article,
+    .ex2 .article {
+      background: magenta;
+      padding: 3px;
+      margin: 3px 0;
+      display: block;
+    }
+
+    /* ── border groc per als exemples 3 i 4 ── */
+    .wrap-groc {
+      border: 4px solid yellow;
+      width: var(--ex-w);
+      height: var(--ex-h);
+    }
+
+    .wrap-groc .grid-base {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* ── exemple 4: grid-template-areas ── */
+    .ex4 {
+      grid-template-areas:
+        "cap   cap   cap"
+        "menu  princ aside"
+        "peu   peu   peu";
+    }
+
+    .ex4 .cap   { grid-area: cap; }
+    .ex4 .menu  { grid-area: menu; }
+    .ex4 .princ { grid-area: princ; background: firebrick; padding: 5px; }
+    .ex4 .aside { grid-area: aside; }
+    .ex4 .peu   { grid-area: peu; }
+  </style>
+</head>
+<body>
+
+  <h1>Exercici de distribució de contingut amb grid</h1>
+
+  <div class="contenidor-exemples">
+
+    <!-- ── 1. Caixes semàntiques ── -->
+    <div class="exemple">
+      <h2>Utilitzant caixes semàntiques</h2>
+      <div class="grid-base ex1">
+        <header>Capçalera</header>
+        <nav>Menú</nav>
+        <main>
+          <section>
+            Secció
+            <article>Article</article>
+            <article>Article</article>
+          </section>
+          <section>
+            Secció
+            <article>Article</article>
+            <article>Article</article>
+          </section>
+        </main>
+        <aside>Aside</aside>
+        <footer>Peu</footer>
+      </div>
+    </div>
+
+    <!-- ── 2. Caixes div ── -->
+    <div class="exemple">
+      <h2>Utilitzant caixes divs</h2>
+      <div class="grid-base ex2">
+        <div class="cap">Capçalera</div>
+        <div class="menu">Menú</div>
+        <div class="principal">
+          <div class="seccio">
+            Secció
+            <div class="article">Article</div>
+            <div class="article">Article</div>
+          </div>
+          <div class="seccio">
+            Secció
+            <div class="article">Article</div>
+            <div class="article">Article</div>
+          </div>
+        </div>
+        <div class="aside">Aside</div>
+        <div class="peu">Peu</div>
+      </div>
+    </div>
+
+    <!-- ── 3. Atributs resumits ── -->
+    <div class="exemple">
+      <h2>Distribució de grid amb atributs resumits</h2>
+      <div class="wrap-groc">
+        <div class="grid-base ex3">
+          <div class="cap">Capçalera</div>
+          <div class="menu">Menú</div>
+          <div class="principal">Principal</div>
+          <div class="aside">Aside</div>
+          <div class="peu">Peu</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── 4. Noms d'àrees ── -->
+    <div class="exemple">
+      <h2>Distribució de grid assignant noms a àrees</h2>
+      <div class="wrap-groc">
+        <div class="grid-base ex4">
+          <div class="cap">Capçalera</div>
+          <div class="menu">Menú</div>
+          <div class="princ">Principal</div>
+          <div class="aside">Aside</div>
+          <div class="peu">Peu</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
