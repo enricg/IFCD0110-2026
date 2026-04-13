@@ -16,10 +16,12 @@
                 "aside  principal  principal   principal"
                 "aside  principal  principal   principal"
                 "aside  principal  principal   principal"
-                "footer footer footer footer"
+                "peu peu peu peu"
                 ;
-                grid-template-columns: 1fr 1fr 1fr 1fr; /* és equivalent a repeat(4, 1fr) */
-                grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr ;
+                grid-template-columns: repeat(4, 1fr);
+                /* grid-template-columns: 1fr 1fr 1fr 1fr; */
+                grid-template-rows: repeat(6,1fr);
+                /* grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr ; */
             }
             main{
                 grid-area: principal;
@@ -34,7 +36,7 @@
                 background-color: blue;
             }
             footer{
-                grid-area: footer;
+                grid-area: peu;
                 background-color: pink;
             }
         </style>
