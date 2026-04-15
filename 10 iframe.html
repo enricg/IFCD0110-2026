@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>ús de iframes</title>
+        <meta charset="utf-8"/>
+        <style>
+            header, footer{
+                text-align: center;
+                background-color: black;
+                color: white;
+                height: 50px;
+                margin: 10px;
+            }
+            .fila{
+                display: flex;
+                justify-content: space-around;
+            }
+        </style>
+    </head>
+    <body>
+        <header>Pràctica per incloure iframes</header>
+        <main>
+            <div class="fila">
+                <h1>El meu primer exemple de iFrame</h1>
+                <iframe src="./09 marcs.html" frameborder="0" height="300px" width="40%" title="El meu primer iframe"></iframe>
+                <h1>Encastar una pàgina web</h1>
+                <iframe src="https://www.cetpenedes.cat" frameborder="0" height="150px" width="40%" title="El meu primer iframe"></iframe>
+            </div>
+            <h1>Inserció del mapa</h1>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2995.4824618776843!2d1.7004164765701786!3d41.3418659988167!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a4798ee28317e3%3A0x80149c66fa1200fb!2sCentre%20Ensenyaments%20T%C3%A8cnics%20Pened%C3%A8s!5e0!3m2!1ses!2ses!4v1776160474139!5m2!1ses!2ses" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>            
+            <h1>Conversor de divises</h1>
+            <iframe style="border: none;" width="251" height="348" src="https://themoneyconverter.com/CurrencyConverter?tab=0&from=USD&to=EUR&bg=ffffff" marginwidth="0" marginheight="0" scrolling="no" seamless="seamless"></iframe>
+            <h1>Inserció de video de YT</h1>
+            <iframe width="500" height="250" src="https://www.youtube.com/embed/hzR0NK32yQs" title="Vídeo presentación Club de Rugby Cervelló" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <h1>Inserció de vídeo d'Odisee</h1>
+            <iframe width="500" height="250" src="https://player.odycdn.com/v6/streams/58cb653549b4977f35ca0db114d2b2ed231c1f4e/142147.mp4"></iframe>
+        </main>
+        <footer>Desenvolupat per Enric</footer>
+    </body>
+</html>
