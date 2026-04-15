@@ -1,0 +1,49 @@
+.capçalera{
+    background-color: black;
+    text-align: center;
+    font-size: larger;
+    color: white;
+    margin-bottom: 5px;
+}
+
+.peu{
+    display: flex;
+    justify-content: space-around;
+}
+
+.mapa{
+    float: left;
+    margin: 5px;
+    height: 170px;
+}
+
+.contenidor{
+    display: flex;
+    justify-content: space-around;
+}
+
+.tarjeta{
+    background-color: yellow;
+    height: 300px;
+    width: 200px;
+    border-style: solid;
+}
+
+.titol{
+    width: 100%;
+    height: 20%;
+    background-color: green;
+}
+
+.foto{
+    width: 100%;
+    height: 50%;
+    background-color: pink;
+}
+
+.descripcio{
+    width: 100%;
+    height: 30%;
+    background-color: orange;
+
+}
