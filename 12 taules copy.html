@@ -4,20 +4,74 @@
         <meta charset="utf-8"/>
         <title>Taules</title>
         <link rel="icon" href="./imgs/rastreo.png" type="image/x-icon">
-      </head>
+        <style>
+            th,td,table{
+                border-style: solid;
+                border-width: 1px;
+                /* border-color: white; */
+                /* border-collapse: collapse; */
+            }
+            table{
+                border-color: black;
+                border-radius: 5%;
+                width: 400px;
+                text-align: center;
+                /* border-spacing: 5px; */
+            }
+            
+            th{
+                background-color: #96D4D4;
+                /* padding:10px; */
+            }
+            tr:hover{
+                background-color: greenyellow;
+            }            
+        </style>
+    </head>
     <body>
         <header>
             <h1>Pràctica d'elaboració de taules</h1>
         </header>
         <hr>
         <main>
+            <table>
+                <caption>Agenda personal</caption>
+                <tr>
+                    <th>Id</th>
+                    <th colspan="2">Nom i cognom</th>
+                    <!-- <th>Cognom</th> -->
+                    <th>telèfon</th>
+                </tr>
+                <tr>
+                    <th>1</th>
+                    <td>Enric</td>
+                    <td>Giner</td>
+                    <td>555</td>
+                </tr>
+                <tr>
+                    <th rowspan="2" colspan="2">2</th>
+                    <!-- <td>Silvia</td> -->
+                    <td>Gonzalez</td>
+                    <td>445</td>
+                </tr>
+                <tr>
+                    <!-- <th>3</th> -->
+                    <!-- <td>Manuel</td> -->
+                    <td>Fernández</td>
+                    <td>987</td>
+                </tr>
+                <tr>
+                    <th>4</th>
+                    <td>Jordi</td>
+                    <td>Giménez</td>
+                    <td>111</td>
+                </tr>
+            </table>    
             <h1>Calendari</h1>
             
             <table>
                 <colgroup>
-                    <col span="2" style="background-color:red;"/>
-                    <col span="2" style="background-color:white;"/>
-                    <col span="2" style="background-color:red;"/>
+                    <col span="2" style="color:red;"/>
                 </colgroup>
                 <tr>
                     <th>dilluns</th>
