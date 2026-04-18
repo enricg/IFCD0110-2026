@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8">
+  <title>Paisatge</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 100vw;
+      height: 100vh;
+      background-color: #8ee8e0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .sol {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 60px;
+      background-color: yellow;
+      border-radius: 50%;
+    }
+
+    .terra {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 60px;
+      background-color: #7dd84a;
+    }
+
+    /* Estils comuns a les dues cases */
+    .casa {
+      position: absolute;
+      bottom: 60px;
+      width: 280px;
+      height: 270px;
+    }
+
+    .casa-esq { left: 0; }
+    .casa-dreta { right: 0; }
+
+    .teulada {
+      position: absolute;
+      top: 0;
+      left: -10px;
+      width: 290px;
+      height: 40px;
+      background-color: #e07860;
+    }
+
+    .cos {
+      position: absolute;
+      top: 40px;
+      left: 0;
+      width: 270px;
+      height: 230px;
+      background-color: #b09090;
+    }
+
+    .finestra1 {
+      position: absolute;
+      top: 70px;
+      left: 25px;
+      width: 55px;
+      height: 55px;
+      background-color: #1a5060;
+    }
+
+    .finestra2 {
+      position: absolute;
+      top: 100px;
+      left: 195px;
+      width: 55px;
+      height: 55px;
+      background-color: #1a5060;
+    }
+
+    .porta {
+      position: absolute;
+      top: 150px;
+      left: 110px;
+      width: 55px;
+      height: 90px;
+      background-color: #9b1020;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="sol"></div>
+
+  <div class="casa casa-esq">
+    <div class="teulada"></div>
+    <div class="cos">
+      <div class="finestra1"></div>
+      <div class="finestra2"></div>
+      <div class="porta"></div>
+    </div>
+  </div>
+
+  <div class="casa casa-dreta">
+    <div class="teulada"></div>
+    <div class="cos">
+      <div class="finestra1"></div>
+      <div class="finestra2"></div>
+      <div class="porta"></div>
+    </div>
+  </div>
+
+  <div class="terra"></div>
+
+</body>
+</html>
