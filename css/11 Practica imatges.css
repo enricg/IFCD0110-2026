@@ -9,6 +9,11 @@
 .peu{
     display: flex;
     justify-content: space-around;
+    height: 150px;
+}
+
+.mapejat{
+    height: 40%;
 }
 
 .mapa{
@@ -20,6 +25,7 @@
 .contenidor{
     display: flex;
     justify-content: space-around;
+    height: 30%;
 }
 
 .tarjeta{
@@ -37,17 +43,21 @@
 
 .foto{
     width: 100%;
-    height: 50%;
+    height: 45%;
     background-color: pink;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .descripcio{
     width: 100%;
-    height: 30%;
+    height: 35%;
     background-color: orange;
 
 }
 
 .imatge{
     max-width: 100%;
+    border: 1px solid black;
 }
