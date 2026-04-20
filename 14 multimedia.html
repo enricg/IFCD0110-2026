@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Multimèdia</title>
+    <link rel="shortcut icon" href="./imgs/ico.png" type="image/x-icon" />
+    <style>
+      header,
+      footer {
+        background-color: black;
+        color: white;
+        text-align: center;
+      }
+      span {
+        color: yellow;
+        font-size: larger;
+      }
+      video {
+        width: 400px;
+      }
+
+      .contenidor {
+        display: flex;
+        justify-content: space-around;
+      }
+      .targeta {
+        width: 400px;
+        height: 400px;
+        display: flex;
+        border: 1px solid black;
+        flex-direction: column;
+        justify-items: center;
+      }
+      .titol {
+        text-align: center;
+        background-color: aquamarine;
+        font-size: larger;
+        height: 50px;
+      }
+      .descripcio {
+        height: 150px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>Exercici d'inserció de continguts <span>multimèdia</span></header>
+    <main>
+      <h2>Vídeos hospedats localment</h2>
+      <div class="contenidor">
+        <div class="targeta">
+          <div class="titol">Molins de vent</div>
+          <video controls>
+            <source src="./multimedia/282086_medium.mp4" type="video/mp4" />
+            Molins de vent
+          </video>
+          <div class="descripcio">
+            Sant Antoni e de Sant Onofre e de Santa Maria. Amor que li portava;
+            la. Felicitat no pot ésser atesa sens. Batalles dels grecs troians e
+            de. Per ço d'aquell e de. Benaventurats darrers dies Com lo comte
+            Guillem de Varoic proposà. L'exercici de les armes Fortitud corporal
+            e. Vista dels enemics La dignitat militar. E com entre los altres
+            insignes cavallers de gloriosa recordació. Primera part del llibre
+            de Tirant la qual.
+          </div>
+        </div>
+        <div class="targeta">
+          <div class="titol">títol</div>
+          <video controls>
+            <source src="./multimedia/345137_medium.mp4" type="video/mp4" />
+          </video>
+          <div class="descripcio">
+            Experimentada molt la sua noble persona en l'exercici. E trobant-se
+            lo virtuós Comte. E d'anar de peregrinació e. Lluc en lo seu
+            Evangeli Mereixedor és. Trobant-se lo virtuós Comte en edat avançada
+            de cinquanta-cinc anys. Guillem de Varoic proposà d'anar. Del
+            fortíssim Judes Macabeu E aquell egregi poeta Homero. Cara molt
+            afable féu-li principi ab. Manifestà a la Comtessa e als servidors
+            la. Sisena és dels actes e costumes que a cavaller pertanyen;.
+          </div>
+        </div>
+      </div>
+      <h2>Audios hospedats localment</h2>
+      <div class="contenidor">
+        <div class="targeta">
+          <div class="titol">títol</div>
+          <audio controls>
+            <source
+              src="./multimedia/alexzavesa-dance-playful-night-510786.mp3"
+            />
+          </audio>
+        </div>
+        <div class="targeta">
+          <div class="titol">títol</div>
+          <audio controls>
+            <source
+              src="./multimedia/lightbeatsmusic-joyful-rhythm-walk-funk-513936.mp3"
+            />
+          </audio>
+        </div>
+      </div>
+      <h2>Vídeos hospedats a plataformes</h2>
+    </main>
+    <footer>Fet per Enric</footer>
+  </body>
+</html>
