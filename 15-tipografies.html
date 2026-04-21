@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Tipografies</title>
+    <link rel="icon" href="./imgs/ico.png" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&family=Sekuya&display=swap");
+
+      @font-face{
+        font-family: prova;
+        src: url('./fonts/HennyPenny-Regular.ttf');
+      }
+
+      .fontLocal{
+        font-family: prova;
+      }
+
+      body {
+        margin: 0;
+      }
+      header,
+      footer {
+        width: 100%;
+        background-color: black;
+        color: white;
+        text-align: center;
+      }
+      main {
+        width: 80%;
+        height: 600px;
+        background-color: antiquewhite;
+      }
+      aside {
+        width: 20%;
+        background-color: burlywood;
+      }
+      .contenidor {
+        display: flex;
+      }
+      li {
+        list-style-type: none;
+        background-color: rgb(198, 165, 121);
+        border-radius: 10px;
+        margin: 3px;
+        text-align: center;
+      }
+      li:hover {
+        background-color: black;
+      }
+      ul {
+        padding-left: 0;
+      }
+      a {
+        text-decoration: none;
+      }
+      a:hover {
+        color: white;
+      }
+
+      .roboto-font {
+        font-family: "Roboto", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 100;
+        font-style: normal;
+        font-variation-settings: "wdth" 100;
+      }
+      .sekuya-regular {
+        font-family: "Sekuya", system-ui;
+        font-weight: 400;
+        font-style: normal;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="roboto-font">Exercici per veure les tipografies</header>
+    <div class="contenidor">
+      <aside>
+        <nav class="sekuya-regular">
+          Menú
+          <ul>
+            <li><a href="https:/www.google.com" target="_blank">Home</a></li>
+            <li><a href="#">Opció 1</a></li>
+            <li><a href="#">Opció 2</a></li>
+            <li><a href="#">Opció 3</a></li>
+          </ul>
+        </nav>
+      </aside>
+      <main>
+        <article class="fontLocal">El meu primer article-
+          <section>Les batalles fossen forts e animosos e no. Perill per què ara de present vull. E de la Comtessa lo qual anell era fet ab. Bé es tenia un fill de molta. La virtuosa Comtessa e ab cara molt afable féu-li. De Jerusalem com tot cristià. Sos desfalliments E aquest virtuós comte hi volgué anar havent. Cavaller pertanyen; la setena e darrera és. Principi de cavalleria; la segona serà de l'estament e ofici. Dels cavallers ha bastat aterrar les forces. En la nit manifestà a la Comtessa muller. De Marc Antoni e de molts altres Trobam escrites les. En cinc llices de camp clos u. Dant e d'altres poetes; los sants miracles e actes. Anell sancer e ab la meitat de les armes.</section>
+        </article>
+      </main>
+    </div>
+    <footer>Fet per Enric</footer>
+  </body>
+</html>
