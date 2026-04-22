@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Inputs</title>
+    <link rel="icon" href="./imgs/ico.png" type="image/x-icon" />
+    <style>
+      header,
+      footer {
+        background-color: black;
+        color: white;
+        text-align: center;
+        width: 100%;
+      }
+      main {
+        height: 400px;
+      }
+      nav {
+        background-color: bisque;
+        width: 20%;
+        height: 200px;
+        border-radius: 20px;
+      }
+      ul {
+        list-style-type: none;
+        padding-left: 25%;
+      }
+
+      .contenidor {
+        display: flex;
+      }
+
+      button {
+        border-radius: 5px;
+        padding: 12px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <header>Pràctica botons i inputs</header>
+    <div class="contenidor">
+      <nav>
+        <ul>
+          <li><a href="https://hotmail.com">Outlook</a></li>
+          <li><a href="https://www.google.com">Google</a></li>
+          <li><a href="https://www.yahoo.com">Yahoo</a></li>
+        </ul>
+      </nav>
+      <main>
+        <h2>Text</h2>
+        <label for="nom">Nom:</label>
+        <input type="text" name="nom" /><br>
+        <label for="cognom">Cognom:</label>
+        <input type="text" name="cognom" />
+        <h2>Radio button</h2>
+        <h3>Quina és la teva fruita preferida</h3>
+        <label for="rpomes">Pomes</label>
+        <input type="radio" id="rpomes" name="fruita" value="pomes">
+        <label for="rperes">Peres</label>
+        <input type="radio" id="rperes" name="fruita" value="peres">
+        <label for="rtaronges">Taronges</label>
+        <input type="radio" id="rtaronges" name="fruita" value="taronges">
+        <h3>Quin és el teu gènere</h3>
+        <label for="rvaron">Varon</label>
+        <input type="radio" id="rvaron" name="genere" value="varon">
+        <label for="rhembra">Femella</label>
+        <input type="radio" id="rhembra" name="genere" value="hembra">
+        <h2>Checkbox</h2>
+        <h3>Estils musicals que m'agraden</h3>
+        <input type="checkbox" id="cReggaeton" name="musica" value="Reggaeton">
+        <label for="cReggaeton">Reggaeton</label>
+        <input type="checkbox" id="cRock" name="musica" value="Rock">
+        <label for="cSimfònic">Simfònic</label>
+        <input type="checkbox" id="cSimfònic" name="musica" value="Simfònic">
+        <label for="cSimfònic">Simfònic</label>
+    </main>
+    </div>
+    <aside></aside>
+    <!-- <footer>Fet per EG</footer> -->
+  </body>
+</html>
