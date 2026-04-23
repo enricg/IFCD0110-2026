@@ -49,31 +49,151 @@
       <main>
         <h2>Text</h2>
         <label for="nom">Nom:</label>
-        <input type="text" name="nom" /><br>
+        <input type="text" name="nom" /><br />
         <label for="cognom">Cognom:</label>
         <input type="text" name="cognom" />
         <h2>Radio button</h2>
         <h3>Quina és la teva fruita preferida</h3>
         <label for="rpomes">Pomes</label>
-        <input type="radio" id="rpomes" name="fruita" value="pomes">
+        <input type="radio" id="rpomes" name="fruita" value="pomes" />
         <label for="rperes">Peres</label>
-        <input type="radio" id="rperes" name="fruita" value="peres">
+        <input type="radio" id="rperes" name="fruita" value="peres" />
         <label for="rtaronges">Taronges</label>
-        <input type="radio" id="rtaronges" name="fruita" value="taronges">
+        <input type="radio" id="rtaronges" name="fruita" value="taronges" />
         <h3>Quin és el teu gènere</h3>
         <label for="rvaron">Varon</label>
-        <input type="radio" id="rvaron" name="genere" value="varon">
+        <input type="radio" id="rvaron" name="genere" value="varon" />
         <label for="rhembra">Femella</label>
-        <input type="radio" id="rhembra" name="genere" value="hembra">
+        <input type="radio" id="rhembra" name="genere" value="hembra" />
         <h2>Checkbox</h2>
         <h3>Estils musicals que m'agraden</h3>
-        <input type="checkbox" id="cReggaeton" name="musica" value="Reggaeton">
+        <input
+          type="checkbox"
+          id="cReggaeton"
+          name="musica"
+          value="Reggaeton"
+        />
         <label for="cReggaeton">Reggaeton</label>
-        <input type="checkbox" id="cRock" name="musica" value="Rock">
+        <input type="checkbox" id="cRock" name="musica" value="Rock" />
         <label for="cSimfònic">Simfònic</label>
-        <input type="checkbox" id="cSimfònic" name="musica" value="Simfònic">
+        <input type="checkbox" id="cSimfònic" name="musica" value="Simfònic" />
         <label for="cSimfònic">Simfònic</label>
-    </main>
+        <h2>Contrasenya</h2>
+        <label for="usuari">Usuari:</label>
+        <input type="text" id="nomUsuari" name="usuari" /><br />
+        <label for="contrasenya">Clau de pas:</label>
+        <input type="password" id="contrasenya" name="contrasenya" />
+        <hr />
+        Formulari per provar input button
+        <form action="./03 float.html">
+          <label for="fname">Nom:</label>
+          <input type="text" name="fname" id="fname" value="John" /><br />
+          <label for="fname">Cognom:</label>
+          <input type="text" name="lname" id="lname" value="Doe" /><br />
+          <input type="submit" value="Enviar" />
+        </form>
+        <hr />
+        <br />
+        <h2>Per triar el color</h2>
+        <label for="fcolor">Tria el color que més t'agradi:</label>
+        <input type="color" name="fcolor" id="fcolor" />
+        <h2>Input de tipus date</h2>
+        <label for="aniversari">Ingressa la data de naixement:</label>
+        <input type="date" name="aniversari" id="aniversari" />
+        <h2>Input de tipus datetime-local</h2>
+        <label for="hora">Ingressa l'hora de la fi de la sessió:</label>
+        <input type="datetime" name="hora" id="hora" />
+        <h2>Input de tipus email</h2>
+        <form action="./00 webExemple.html">
+          <label for="correu">Ingressa el teu correu personal inventat:</label>
+          <input type="email" name="correu" id="correu" />
+          <input type="submit" name="submit" id="submit" value="Envia correu" />
+        </form>
+        <hr />
+        <h2>De tipus image</h2>
+        <input type="image" src="./imgs/ico.png" width="48px" />
+        <hr />
+        <h2>Input file</h2>
+        <label for="myfile">Selecciona un arxiu</label>
+        <input type="file" id="myfile" name="myfile" accept=".zip, .jpeg" />
+        <hr />
+        <h2>Type hidden</h2>
+        <label for="tamagat">type amagat</label>
+        <input type="text" id="tamagat" name="tamagat" value="hola" />
+        <input type="hidden" id="hamagat" name="hamagat" value="2984" />
+        <input
+          type="submit"
+          name="enviarr"
+          id="enviarr"
+          value="Enviar valor amagat"
+        />
+        <hr />
+        <h2>Input month</h2>
+        <label for="idmes">Ingressa el mes del teu aniversari</label>
+        <input type="month" name="idmes" id="idmes" />
+        <hr />
+        <h2>Input number</h2>
+        <label for="idnumero">Quants anys tens?</label>
+        <input
+          type="number"
+          name="idnumero"
+          id="idnumero"
+          min="1"
+          max="120"
+          step="10"
+        />
+        <hr />
+        <h2>Input range</h2>
+        <label for="rang">Gradua el volum</label>
+        <input
+          type="range"
+          name="rang"
+          id="rang"
+          min="0"
+          max="50"
+          step="1"
+          value="25"
+        />
+        <hr />
+        <h2>Cercador</h2>
+        <form action="https://www.caprabo.com/es/home/buscador/index.html">
+          <label for="q">Busca alguna cosa</label>
+          <input type="search" name="q" id="cerca" />
+        </form>
+        <hr />
+        <h2>Input tel</h2>
+        <form action="./01 positionblack.html">
+          <label for="telefon"></label>
+          <input
+            type="tel"
+            name="telefon"
+            id="telefon"
+            placeholder="+34111-22-333"
+            pattern="\+[0-9]{2}-[0-9]{3}-[0-9]{4}"
+          />
+        </form>
+        <hr />
+        <h2>Input time</h2>
+        <form>
+          <label for="hora"></label>
+          <input type="time" name="hora" id="hora" />
+        </form>
+        <hr />
+        <h2>Input URL</h2>
+        <form>
+          <label for="adreca"></label>
+          <input type="url" name="adreca" id="adreca" />
+        </form>
+        <h2>Input Week</h2>
+        <form>
+          <label for="setmana"></label>
+          <input type="week" name="setmana" id="setmana" />
+        </form>
+        
+
+        <br /><br /><br /><br />
+        <hr />
+      </main>
     </div>
     <aside></aside>
     <!-- <footer>Fet per EG</footer> -->
