@@ -1,0 +1,60 @@
+*{
+    margin: 0;
+}
+
+html{
+    font-size: 42px;
+}
+
+.capçalera, .peu{
+    background-color: #000000;
+    color: #ffffff;
+    text-align: center;
+    position: fixed;
+    width: 100%;
+}
+
+.capçalera{
+    z-index: 10;
+    height: 2em;
+}
+
+.peu{
+    bottom: 0;
+}
+
+.menu{
+    position: fixed;
+    width: 10%;
+    height: 90%;
+    top:2em;
+    background-color: beige;
+}
+
+.llista{
+    list-style-type: none;
+    padding-left: 0%;
+    text-align: center;
+}
+
+.principal{
+    position: absolute;
+    top:2em;
+    left: 10%;
+}
+
+h2{
+    scroll-margin-top: 1em;
+}
+
+.article{
+    border: 1px solid #000000;
+    padding: 0.5rem;
+    font-size: 0.75rem;
+}
+
+span{
+    color: red;
+    font-weight: bold;
+    font-size: 1.5em;
+}
