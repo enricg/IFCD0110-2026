@@ -79,13 +79,14 @@ article{
     text-align: center;
 }
 
-article:nth-child(odd) > .titol{
+/* section:nth-child(even) > article:nth-child(odd) > .titol{  */
+section:nth-child(even) .titol{ 
     background-color: yellow;
 }
 
-article:nth-child(even) > .titol{
+/* section:nth-child(even) > article:nth-child(even) > .titol{
     background-color: orange;
-}
+} */
 
 .contingut{
     box-sizing: border-box;
