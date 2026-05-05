@@ -24,7 +24,19 @@ footer {
   bottom: 0;
 }
 
-nav {
+main{
+  display: flex;
+  flex-direction: row;
+  
+}
+
+.exempleMenu{
+  width: 300px;
+  height: 300px;
+  background-color: aquamarine;
+}
+
+nav, .navegador {
   position: fixed; /* Amb fixed queda ancorat a la pantalla independentment del desplaçament, igual que el header i el footer.*/
   background-color: antiquewhite;
   /* width: 160px; */
@@ -34,16 +46,16 @@ nav {
   left: 0;
 }
 
-nav > ul {
+nav > ul, .navegador > .menu {
   display: block;
   width: 100%;
 }
 
-ul {
+ul, .menu {
   padding: 0;
 }
 
-li {
+li, .item {
   list-style-type: none;
   text-align: center;
   /* width: 160px; */
@@ -54,12 +66,12 @@ li {
   position: relative; /* Aquesta és la clau dels submenús. Quan el fill ul té position: absolute, es posiciona respecte el seu ancestre posicionat més proper. Si li no té position: relative, el submenú surt disparat cap a un lloc inesperat del document. Amb relative, cada submenú surt ancorat al seu li pare. */
 }
 
-li:hover {
+li:hover, .item:hover {
   cursor: pointer;
   background-color: burlywood;
 }
 
-li > ul {
+li > ul, .item > .menu {
   display: none;
   position: absolute;
   top: 0;
