@@ -1,5 +1,6 @@
 * {
-  font-size: 30px;
+  /* font-size: 32px; */
+  font-size: 1rem; /*  Com que 1rem per defecte als navegadors equival a 16px, tot el que ve després escala proporcionalment si l'usuari canvia la mida de lletra del navegador. */
   margin: 0;
 }
 
@@ -12,11 +13,11 @@ footer {
   height: 2rem;
   width: 100%;
   position: fixed;
+  z-index: 100;
 }
 
 header {
   top: 0;
-  z-index: 50;
 }
 
 footer {
@@ -24,24 +25,33 @@ footer {
 }
 
 nav {
-    display: block;
-  position: absolute;
+  position: fixed; /* Amb fixed queda ancorat a la pantalla independentment del desplaçament, igual que el header i el footer.*/
   background-color: antiquewhite;
-  width: 20%;
-  height: 100%;
+  /* width: 160px; */
+  width: 10rem; /* equivalent als 160px (160 ÷ 16 = 10). És important que li i nav tinguin exactament el mateix valor, perquè el left: 10rem del submenú depèn d'aquesta amplada. */
   top: 2rem;
+  bottom: 2rem; /* perquè no quedi amagat darrere el footer. */
+  left: 0;
 }
 
-ul{
-    display: inline;
+nav > ul {
+  display: block;
+  width: 100%;
+}
+
+ul {
+  padding: 0;
 }
 
 li {
   list-style-type: none;
   text-align: center;
-  width: 150px;
-  border: 1px solid #000000;
+  /* width: 160px; */
+  width: 10rem;
+  /* border: 1px solid #000000; */
+  border: 0.0625rem solid #000000; /* 1px (1 ÷ 16 = 0.0625) */
   border-radius: 5px;
+  position: relative; /* Aquesta és la clau dels submenús. Quan el fill ul té position: absolute, es posiciona respecte el seu ancestre posicionat més proper. Si li no té position: relative, el submenú surt disparat cap a un lloc inesperat del document. Amb relative, cada submenú surt ancorat al seu li pare. */
 }
 
 li:hover {
@@ -50,10 +60,13 @@ li:hover {
 }
 
 li > ul {
-    display: none;
-    position: absolute;
-    top:0px;
-    left: 110px;
+  display: none;
+  position: absolute;
+  top: 0;
+  /*left: 160px;*/ /* ajustat per coincidir amb l'amplada del li
+El valor left desplaça el submenú cap a la dreta. Ha de coincidir exactament amb l'amplada del li (160px) perquè el submenú aparegui just al costat, sense solapament ni buit. */
+  left: 10rem;
+  background-color: antiquewhite;
 }
 
 li:hover > ul {
