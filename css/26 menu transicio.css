@@ -1,6 +1,6 @@
 * {
   /* font-size: 32px; */
-  font-size: 1rem; /*  Com que 1rem per defecte als navegadors equival a 16px, tot el que ve després escala proporcionalment si l'usuari canvia la mida de lletra del navegador. */
+  font-size: 2rem; /*  Com que 1rem per defecte als navegadors equival a 16px, tot el que ve després escala proporcionalment si l'usuari canvia la mida de lletra del navegador. */
   margin: 0;
 }
 
@@ -98,4 +98,8 @@ El valor left desplaça el submenú cap a la dreta. Ha de coincidir exactament a
 li:hover > ul,
 .item:hover > .menu {
   display: block;
+}
+
+img:hover{
+  transform: rotate(45deg);
 }
