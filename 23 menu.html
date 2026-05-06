@@ -9,8 +9,38 @@
   </head>
   <body>
     <header>Pràctica de menús i submenús</header>
-    <aside>
-      <nav>
+    <nav>
+      <ul>
+        <li>
+          opció1
+          <ul>
+            <li>opció11</li>
+            <li>opció12</li>
+            <li>opció13</li>
+          </ul>
+        </li>
+        <li>opció2</li>
+        <li>
+          opció3
+          <ul>
+            <li>opció31</li>
+            <li>opció32</li>
+            <li>
+              opció33
+              <ul>
+                <li>opció331</li>
+                <li>opció332</li>
+              </ul>
+            </li>
+            <li>opció34</li>
+          </ul>
+        </li>
+        <li>opció4</li>
+      </ul>
+    </nav>
+    <main>
+      <article class="exemple">
+        Exemple etiquetes
         <ul>
           <li>
             opció1
@@ -38,44 +68,39 @@
           </li>
           <li>opció4</li>
         </ul>
-      </nav>
-    </aside>
-    <main>
-      <div class="exempleMenu">
-        <nav>
-          <ul>
-            <li>
+      </article>
+      <article class="exemple">
+        Exemple classes
+        <div class="navegador">
+          <div class="menu">
+            <div class="item">
               opció1
-              <ul>
-                <li>opció11</li>
-                <li>opció12</li>
-                <li>opció13</li>
-              </ul>
-            </li>
-            <li>opció2</li>
-            <li>
+              <div class="menu">
+                <div class="item">opció11</div>
+                <div class="item">opció12</div>
+                <div class="item">opció13</div>
+              </div>
+            </div>
+            <div class="item">opció2</div>
+            <div class="item">
               opció3
-              <ul>
-                <li>opció31</li>
-                <li>opció32</li>
-                <li>
+              <div class="menu">
+                <div class="item">opció31</div>
+                <div class="item">opció32</div>
+                <div class="item">
                   opció33
-                  <ul>
-                    <li>opció331</li>
-                    <li>opció332</li>
-                  </ul>
-                </li>
-                <li>opció34</li>
-              </ul>
-            </li>
-            <li>opció4</li>
-          </ul>
-        </nav>
-  
-      </div>
-      <div class="exempleMenu">
-      
-      </div>
+                  <div class="menu">
+                    <div class="item">opció331</div>
+                    <div class="item">opció332</div>
+                  </div>
+                </div>
+                <div class="item">opció34</div>
+              </div>
+            </div>
+            <div class="item">opció4</div>
+          </div>
+        </div>
+      </article>
     </main>
     <aside></aside>
     <footer>Fet per mi</footer>
