@@ -1,0 +1,104 @@
+/* selector universal */
+* {
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+/* propietats comunes de capçalera i peu de pàgina */
+header,
+footer {
+  background-color: #000000;
+  color: #ffffff;
+  text-align: center;
+  width: 100%;
+  height: 2rem;
+  position: fixed;
+}
+
+header {
+  top: 0; /* fent scroll es manté */
+}
+
+footer {
+  bottom: 0; /* gentscroll es manté avall */
+}
+
+main {
+  position: absolute;
+  background-color: beige;
+  top: 2rem;
+  bottom: 2rem;
+  width: 100%;
+  height: calc(100% - 4rem);
+}
+
+.caixa {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  border: 5px solid #000000;
+  background-color: rgb(255, 213, 0);
+  color: #000000;
+  text-align: center;
+}
+
+.animacio1 {
+  animation-name: canviColor1;
+  animation-duration: 5s;
+}
+.animacio2 {
+  animation-name: canviColor2;
+  animation-duration: 3s;
+}
+
+.animacio3{    
+    animation-name: canvisDiversos;
+    animation-duration: 10s;
+}
+
+/* definició d'animacions */
+@keyframes canviColor1 {
+  from {
+    background-color: yellow;
+    color: #000000;
+    left: 0;
+  }
+  to {
+    background-color: blue;
+    color: #ffffff;
+    left: 150px;
+  }
+}
+@keyframes canviColor2 {
+  from {
+    background-color: brown;
+    color: #000000;
+  }
+  to {
+    background-color: grey;
+    color: #ffffff;
+  }
+}
+
+@keyframes canvisDiversos{
+    0%{
+        background-color: aqua;
+        left:0px;
+        top:0px;
+    }
+    25%{
+        background-color: orange;
+        left:150px;
+        top:150px;
+    }
+    80%{
+        background-color: aqua;
+        transform: rotate(180deg);
+    }
+    100%{
+        background-color: orange;
+        transform: rotate(-90deg);
+        left:0;
+        top:0;
+    }
+}

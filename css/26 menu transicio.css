@@ -86,20 +86,29 @@ li:hover,
 
 li > ul,
 .item > .menu {
-  display: none;
+  /* display: none; */
+  opacity: 0;
   position: absolute;
   top: 0;
   /*left: 160px;*/ /* ajustat per coincidir amb l'amplada del li
 El valor left desplaça el submenú cap a la dreta. Ha de coincidir exactament amb l'amplada del li (160px) perquè el submenú aparegui just al costat, sense solapament ni buit. */
   left: 10rem;
   background-color: antiquewhite;
+  transition: opacity 3s;
 }
 
 li:hover > ul,
 .item:hover > .menu {
   display: block;
+  opacity: 1;
 }
 
-img:hover{
-  transform: rotate(45deg);
+img{
+  margin-top: 5%;
+  margin-right: 5%;
+  transition: transform 2s;
+}
+
+li:hover > img{
+  transform: rotate(-90deg);
 }
