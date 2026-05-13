@@ -1,0 +1,81 @@
+:root{
+    --color-principal-icones: red;
+    --color-ombres-icones: black;
+    --color-titols:#ffffff;
+}
+
+html{
+    font-size: 62.5%; /* equival a 10 px */
+}
+
+*{
+    margin: 0;
+    font-size: 2.5rem;
+}
+
+header, footer{
+    background-color: #000000;
+    color: var(--color-titols);
+    text-align: center;
+    align-content: center;
+    height: 5rem;
+}
+
+ul{
+    list-style-type: none;
+    padding: 0.5rem;
+}
+
+i{
+    padding: 10px;
+    color: var(--color-principal-icones);
+    text-shadow: 2px 2px 2px var(--color-ombres-icones);
+}
+
+li:hover{
+    background-color: burlywood;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    transform: scale(1.2);
+}
+
+li:hover > i{
+    transform: rotate(360deg);
+    transition: all 0.3s ease;
+    opacity: 0.9;
+}
+
+.contingut{
+    display: grid;
+}
+
+.menus{
+    background-color: bisque;
+}
+
+.principal{
+    background-color: aquamarine;
+}
+
+.banners{
+    background-color: cadetblue;
+}
+
+@media(min-width:350px){
+    header{grid-area:1/span 6;background-color: pink;}
+    nav{grid-area: 2/span 5;}
+    nav>ul{display: flex;flex-direction: row;}
+    main{grid-area: 2/span 4;}
+    aside{grid-area: 2/span 1;}
+    nav{grid-area: 3/span 1;}
+    footer{grid-area: 4/span 6;background-color: brown;}
+}
+
+@media(min-width:768px){
+    header{grid-area:1/span 6;background-color: #000000;}
+    nav{grid-area: 2/span 1;}
+    main{grid-area: 2/span 4;}
+    aside{grid-area: 2/span 1;}
+    footer{grid-area: 3/span 6;background-color: red;}
+}
+
