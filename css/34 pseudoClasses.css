@@ -1,0 +1,127 @@
+html {
+  font-size: 62.5%;
+}
+
+* {
+  margin: 0;
+  font-size: 2rem;
+}
+
+header,
+footer {
+  background-color: #000000;
+  color: #ffffff;
+  text-align: center;
+}
+
+main {
+  background-color: bisque;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 10px;
+}
+
+.tarjeta {
+  border: 1px solid #000000;
+  border-radius: 45px;
+  width: 200px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+.titol,
+.exemple,
+.descripcio {
+  width: 100%;
+  text-align: center;
+  align-content: center;
+  border: 1px solid #000000;
+}
+
+.titol {
+  border-radius: 45px 45px 0 0;
+  height: 15%;
+}
+.exemple {
+  height: 65%;
+}
+.descripcio {
+  height: 20%;
+  border-radius: 0 0 45px 45px;
+}
+
+/* Enllaços */
+/* Recordeu ordre: LVHA */
+a:link {
+  color: orange;
+}
+a:visited {
+  color: green;
+}
+a:hover {
+  color: yellow;
+}
+a:active {
+  color: blue;
+}
+
+/* Primer i darrer fill */
+
+.primerIDarrerChild > p:first-child {
+  background-color: aqua;
+  font-size: 1.5em;
+}
+
+.primerIDarrerChild > p:last-child {
+  background-color: blueviolet;
+  font-size: 0.75em;
+  color: yellow;
+}
+
+/* nth-child Escullo el tercer fill */
+.nChild > :nth-child(3) {
+  background-color: orange;
+}
+
+.nChild > :nth-last-child(2) {
+  background-color: green;
+}
+
+/* Primer i darrer fill d'un tipus  */
+.nType > div:first-of-type {
+  background-color: chartreuse;
+}
+
+.nType > p:last-of-type {
+  background-color: crimson;
+}
+
+/* Fills únics */
+li:only-child {
+  background-color: pink;
+}
+
+/* només del tipus */
+.onlyOfType > b:only-of-type{
+    background-color: darkgoldenrod;
+}
+
+/* Buit */
+.caixa{
+    width: 40px;
+    height: 40px;
+}
+div.caixa:empty{
+    background-color: maroon;
+}
+
+/* Llenguatge */
+p:lang(ca){
+    background-color: yellow;
+}
+p:lang(it){
+    background-color: lightblue;
+}

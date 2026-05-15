@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="ca">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="./imgs/chavo.jpg" type="image/x-icon" />
+    <title>pseudo-classes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/34 pseudoClasses.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <header>Exercici de pseudo-classes responsiu</header>
+    <main>
+      <div class="tarjeta">
+        <div class="titol"><i class="fa-solid fa-link"></i> Enllaços</div>
+        <div class="exemple">
+          <a href="https://www.google.com" target="_blank">:link </a> fons
+          taronja<br />
+          <a href="https://www.yahoo.com" target="_blank">:active</a> fons
+          blau<br />
+          <a href="https://www.linkedin.com" target="_blank">:visited</a>fons
+          verd<br />
+          <a href="https://www.w3schools.com/" target="_blank">:hover</a> fons
+          groc<br />
+        </div>
+        <div class="descripcio">:link :visited :hover :active</div>
+      </div>
+      <div class="tarjeta">
+        <div class="titol">
+          <i class="fa-solid fa-children"></i> Primer i darrer fill
+        </div>
+        <div class="exemple primerIDarrerChild">
+          <p>Primer paràgraf</p>
+          <p>Segon paràgraf</p>
+          <p>Tercer paràgraf</p>
+          <p>Quart paràgraf</p>
+        </div>
+        <div class="descripcio">:first-child :last-child</div>
+      </div>
+      <div class="tarjeta">
+        <div class="titol">
+          <i class="fa-solid fa-hands-holding-child"></i> Fill-èssim
+        </div>
+        <div class="exemple nChild">
+          <div>Primer div</div>
+          <p>Primer paràgraf</p>
+          <p>Segon paràgraf</p>
+          <div>Segon di</div>
+          <div>Tercer div</div>
+        </div>
+        <div class="descripcio">nth-child(n)</div>
+      </div>
+      <div class="tarjeta">
+        <div class="titol">
+          <i class="fa-solid fa-medal"></i> Primer i darrer <br />de tipus
+        </div>
+        <div class="exemple nType">
+          <div>Primer div</div>
+          <p>Primer paràgraf</p>
+          <p>Segon paràgraf</p>
+          <div>Segon di</div>
+          <div>Tercer div</div>
+        </div>
+        <div class="descripcio">:first-of-type :last-of-type</div>
+      </div>
+      <div class="tarjeta">
+        <div class="titol">Només fill</div>
+        <div class="exemple">
+          <ul>
+            <li>llista 1 primer</li>
+            <li>llista 1 segon</li>
+          </ul>
+          <ul>
+            <li>llista 2 únic</li>
+          </ul>
+          <ul>
+            <li>llista 3 primer</li>
+            <li>llista 3 segon</li>
+            <li>llista 3 tercer</li>
+          </ul>
+          <ul>
+            <li>llista 4 únic</li>
+          </ul>
+        </div>
+        <div class="descripcio">:only-child</div>
+      </div>
+      <div class="tarjeta">
+        <div class="titol"><i class="fa-solid fa-fingerprint"></i>
+           Només de tipus
+        </div>
+        <div class="exemple onlyOfType">
+          <div>Primer div</div>
+          <p>Primer paràgraf</p>
+          <p>Segon paràgraf</p>
+          <b>Primer bold</b>
+          <div>Segon div</div>
+          <div>Tercer div</div>
+        </div>
+        <div class="descripcio">:only-of-type</div>
+      </div>
+      <div class="tarjeta">
+        <div class="titol">Buit</div>
+        <div class="exemple">
+            <div class="caixa">A</div>
+            <div class="caixa">B</div>
+            <div class="caixa"></div>
+            <div class="caixa">D</div>
+        </div>
+        <div class="descripcio">:empty</div>
+      </div>
+      <div class="tarjeta">
+        <div class="titol">Idiomes</div>
+        <div class="exemple">
+            <p lang="it">Italià</p>
+            <p lang="ca">Català</p>
+            <p lang="ca">Català</p>
+            <p lang="es">Espanyol</p>
+            <p lang="it">Italià</p>
+        </div>
+        <div class="descripcio">:lang</div>
+      </div>
+      <div class="tarjeta">
+        <div class="titol">títol</div>
+        <div class="exemple"></div>
+        <div class="descripcio">descripció</div>
+      </div>
+    </main>
+    <footer>Fet per mi</footer>
+  </body>
+</html>
