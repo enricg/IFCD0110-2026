@@ -1,32 +1,54 @@
-/* ── :root ── */
+/* =========================
+   Variables i temes
+========================= */
 :root {
-  --color-demo: #6c63ff;
-  --color-fons-pagina: #f0f2f5;
-  --color-fons-titol: #000000;
-  --color-fons-tarjeta: #ffffff;
-  --color-fons-descripcio: #5a5a8a;
-  --color-lletra-titol: #ffffff;
+  --c-principal: #6c63ff;
+  --c-fons: #f0f2f5;
+  --c-text: #222;
+
+  --c-titol: #000;
+  --c-tarjeta: #fff;
+  --c-secundari: #5a5a8a;
+
+  --c-ok: #27ae60;
+  --c-avis: #f39c12;
+  --c-err: #e74c3c;
+  --c-hot: #ff6b6b;
+
+  --r-petit: 4px;
+  --r-mitja: 6px;
+  --r-gran: 12px;
+
+  --espai-1: 4px;
+  --espai-2: 8px;
+  --espai-3: 12px;
+  --espai-4: 16px;
+
+  --ombra: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --transicio: 0.2s;
 }
 
-/* ── Reset & base ── */
-*,
-*::before,
-*::after {
+/* =========================
+   Reset & base
+========================= */
+*{
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
 }
 
 body {
+  margin: 0;
   font-family: "Segoe UI", system-ui, sans-serif;
-  background: var(--color-fons-pagina);
-  color: #222;
+  background: var(--c-fons);
+  color: var(--c-text);
 }
 
+/* =========================
+   Layout
+========================= */
 header,
 footer {
-  background: var(--color-fons-titol);
-  color: var(--color-lletra-titol);
+  background: var(--c-titol);
+  color: #fff;
   text-align: center;
   padding: 1rem;
   font-size: 1.2rem;
@@ -42,19 +64,21 @@ main {
   margin: 0 auto;
 }
 
-/* ── Card ── */
+/* =========================
+   Card components
+========================= */
 .tarjeta {
-  background: var(--color-fons-tarjeta);
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  background: var(--c-tarjeta);
+  border-radius: var(--r-gran);
+  box-shadow: var(--ombra);
   display: flex;
   flex-direction: column;
   overflow: hidden;
 }
 
 .titol {
-  background: var(--color-fons-titol);
-  color: var(--color-lletra-titol);
+  background: var(--c-titol);
+  color: #fff;
   padding: 0.6rem 1rem;
   font-weight: 600;
   font-size: 0.95rem;
@@ -76,16 +100,57 @@ main {
   border-top: 1px solid #e8e8f0;
   padding: 0.45rem 1rem;
   font-size: 0.78rem;
-  color: var(--color-fons-descripcio);
-  font-family: monospace;
+  color: var(--c-secundari);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
-/* :link :visited :hover :active */
+/* =========================
+   Utilities (DRY)
+========================= */
+/* “pill” reutilitzable per a destacats */
+:is(
+    .primerIDarrerChild,
+    .nChild,
+    .nType,
+    .nthOfType-demo,
+    .nthLastChild-demo,
+    .nthLastOfType-demo
+  )
+  :is(p, div, li, b, span):is(
+    .u-pill,
+    :where(:first-child, :last-child, :only-child)
+  ) {
+  border-radius: var(--r-petit);
+  padding: 2px 6px;
+}
+
+/* Contenidor tipus “box” (reutilitzat a :has i :target) */
+.u-box {
+  border: 2px solid #ccc;
+  border-radius: var(--r-mitja);
+  padding: 6px;
+  transition:
+    background var(--transicio),
+    border-color var(--transicio);
+}
+
+/* Espaiat mínim */
+.u-mt-1 {
+  margin-top: var(--espai-1);
+}
+.u-m-1 {
+  margin: var(--espai-1);
+}
+
+/* =========================
+   Links (:link :visited :hover :active)
+========================= */
 .exemple a {
   display: inline-block;
   padding: 2px 6px;
-  border-radius: 4px;
+  border-radius: var(--r-petit);
 }
+
 .exemple a:link {
   background: orange;
   color: #fff;
@@ -103,59 +168,83 @@ main {
   color: #fff;
 }
 
-/* :first-child :last-child */
+/* =========================
+   Child selectors
+========================= */
 .primerIDarrerChild p:first-child {
   background: #ffd6a5;
-  border-radius: 4px;
-  padding: 2px 6px;
 }
 .primerIDarrerChild p:last-child {
   background: #a5ffd6;
-  border-radius: 4px;
-  padding: 2px 6px;
 }
 
-/* nth-child */
 .nChild div:nth-child(2) {
   background: #c9b8f5;
-  border-radius: 4px;
-  padding: 2px 6px;
 }
 .nChild p:nth-child(odd) {
   background: #b8daf5;
-  border-radius: 4px;
-  padding: 2px 6px;
 }
 
-/* :first-of-type :last-of-type */
+/* =========================
+   Type selectors
+========================= */
 .nType div:first-of-type {
   background: #ffc4c4;
-  border-radius: 4px;
-  padding: 2px 6px;
 }
 .nType p:last-of-type {
   background: #c4ffc4;
-  border-radius: 4px;
-  padding: 2px 6px;
 }
 
-/* :only-child */
+.nthOfType-demo p:nth-of-type(2n) {
+  background: #ffd6e7;
+  padding: 1px 6px;
+  border-radius: var(--r-petit);
+}
+.nthOfType-demo div:nth-of-type(1) {
+  background: #d6e4ff;
+  padding: 1px 6px;
+  border-radius: var(--r-petit);
+}
+
+.nthLastChild-demo li:nth-last-child(1) {
+  background: #ffd6a5;
+  padding: 1px 6px;
+  border-radius: var(--r-petit);
+}
+.nthLastChild-demo li:nth-last-child(2) {
+  background: #a5d6ff;
+  padding: 1px 6px;
+  border-radius: var(--r-petit);
+}
+
+.nthLastOfType-demo p:nth-last-of-type(1) {
+  background: #c4ffc4;
+  padding: 1px 6px;
+  border-radius: var(--r-petit);
+}
+.nthLastOfType-demo p:nth-last-of-type(2) {
+  background: #ffc4c4;
+  padding: 1px 6px;
+  border-radius: var(--r-petit);
+}
+
+/* =========================
+   Only / Empty / Lang
+========================= */
 li:only-child {
   background: #ffe066;
-  border-radius: 4px;
+  border-radius: var(--r-petit);
   padding: 2px 6px;
   font-weight: 700;
 }
 
-/* :only-of-type */
 .onlyOfType b:only-of-type {
   background: #ff9f43;
   color: #fff;
-  border-radius: 4px;
+  border-radius: var(--r-petit);
   padding: 2px 6px;
 }
 
-/* :empty */
 .caixa {
   display: inline-flex;
   align-items: center;
@@ -163,62 +252,61 @@ li:only-child {
   width: 36px;
   height: 36px;
   border: 2px solid #aaa;
-  border-radius: 6px;
+  border-radius: var(--r-mitja);
   margin: 2px;
   font-weight: 700;
 }
 .caixa:empty {
-  background: #ff6b6b;
-  border-color: #ff6b6b;
+  background: var(--c-hot);
+  border-color: var(--c-hot);
 }
 
-/* :lang */
-p[lang="it"] {
-  color: #27ae60;
+
+p:lang("it") {
+  color: var(--c-ok);
   font-style: italic;
 }
-p[lang="ca"] {
+p:lang("ca") {
   color: #2980b9;
   font-weight: 600;
 }
-p[lang="es"] {
-  color: #e74c3c;
+p:lang("es") {
+  color: var(--c-err);
 }
 
-/* shared input style */
-.exemple input,
-.exemple textarea,
-.exemple select,
-.exemple button {
+/* =========================
+   Form controls (shared)
+========================= */
+.exemple :is(input, textarea, select, button) {
   border: 1.5px solid #ccc;
-  border-radius: 6px;
+  border-radius: var(--r-mitja);
   padding: 4px 8px;
   font-size: 0.85rem;
   outline: none;
   transition:
-    border-color 0.2s,
-    background 0.2s,
-    box-shadow 0.2s;
+    border-color var(--transicio),
+    background var(--transicio),
+    box-shadow var(--transicio);
 }
 
-/* ── :focus ── */
+/* Focus */
 .focus-demo input:focus {
-  border-color: #6c63ff;
-  box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.25);
+  border-color: var(--c-principal);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--c-principal) 25%, transparent);
   background: #f5f4ff;
 }
 
-/* ── :focus-within ── */
+/* Focus-within */
 .focusWithin-demo fieldset {
   border: 2px solid #ccc;
   border-radius: 8px;
   padding: 8px;
   transition:
-    border-color 0.2s,
-    background 0.2s;
+    border-color var(--transicio),
+    background var(--transicio);
 }
 .focusWithin-demo fieldset:focus-within {
-  border-color: #ff6b6b;
+  border-color: var(--c-hot);
   background: #fff5f5;
 }
 .focusWithin-demo legend {
@@ -231,13 +319,13 @@ p[lang="es"] {
   margin-top: 4px;
 }
 
-/* ── :focus-visible ── */
+/* Focus-visible (botó) */
 .focusVisible-demo button {
   background: #1a1a2e;
   color: #fff;
   border: none;
   padding: 6px 14px;
-  border-radius: 6px;
+  border-radius: var(--r-mitja);
   cursor: pointer;
   margin: 2px;
 }
@@ -245,11 +333,11 @@ p[lang="es"] {
   outline: none;
 }
 .focusVisible-demo button:focus-visible {
-  outline: 3px solid #ff6b6b;
+  outline: 3px solid var(--c-hot);
   outline-offset: 3px;
 }
 
-/* ── :checked ── */
+/* Checked */
 .checked-demo label {
   display: flex;
   align-items: center;
@@ -258,18 +346,18 @@ p[lang="es"] {
   padding: 2px 0;
 }
 .checked-demo input[type="checkbox"]:checked + span {
-  color: #6c63ff;
+  color: var(--c-principal);
   font-weight: 700;
   text-decoration: line-through;
 }
 .checked-demo input[type="radio"]:checked + span {
-  color: #ff6b6b;
+  color: var(--c-hot);
   font-weight: 700;
 }
 
-/* ── :disabled / :enabled ── */
+/* Enabled / Disabled */
 .disabledEnabled-demo input:enabled {
-  border-color: #27ae60;
+  border-color: var(--c-ok);
   background: #f0fff4;
 }
 .disabledEnabled-demo input:disabled {
@@ -284,15 +372,15 @@ p[lang="es"] {
   color: #666;
 }
 
-/* ── :required / :optional ── */
+/* Required / Optional */
 .reqOpt-demo input:required {
-  border-color: #e74c3c;
+  border-color: var(--c-err);
 }
 .reqOpt-demo input:required::placeholder {
-  color: #e74c3c;
+  color: var(--c-err);
 }
 .reqOpt-demo input:optional {
-  border-color: #27ae60;
+  border-color: var(--c-ok);
 }
 .reqOpt-demo label {
   font-size: 0.78rem;
@@ -301,13 +389,13 @@ p[lang="es"] {
   margin-top: 4px;
 }
 
-/* ── :valid / :invalid ── */
+/* Valid / Invalid */
 .validInvalid-demo input:valid {
-  border-color: #27ae60;
+  border-color: var(--c-ok);
   background: #f0fff4;
 }
 .validInvalid-demo input:invalid {
-  border-color: #e74c3c;
+  border-color: var(--c-err);
   background: #fff5f5;
 }
 .validInvalid-demo label {
@@ -321,25 +409,25 @@ p[lang="es"] {
   color: #aaa;
 }
 
-/* ── :placeholder-shown ── */
+/* Placeholder-shown */
 .placeholder-demo input:placeholder-shown {
-  border-color: #f39c12;
+  border-color: var(--c-avis);
   background: #fffbf0;
   font-style: italic;
 }
 .placeholder-demo input:not(:placeholder-shown) {
-  border-color: #27ae60;
+  border-color: var(--c-ok);
   background: #f0fff4;
 }
 
-/* ── :read-only / :read-write ── */
+/* Read-only / Read-write */
 .readOnly-demo input:read-only {
   background: #f0f0f0;
   color: #888;
   border-style: dashed;
 }
 .readOnly-demo input:read-write {
-  border-color: #6c63ff;
+  border-color: var(--c-principal);
   background: #f5f4ff;
 }
 .readOnly-demo label {
@@ -349,10 +437,10 @@ p[lang="es"] {
   margin-top: 4px;
 }
 
-/* ── :not() ── */
+/* Not / is / where */
 .not-demo p:not(.excluit) {
   background: #d4f4dd;
-  border-radius: 4px;
+  border-radius: var(--r-petit);
   padding: 2px 8px;
 }
 .not-demo p.excluit {
@@ -361,32 +449,30 @@ p[lang="es"] {
   padding: 2px 8px;
 }
 
-/* ── :is() ── */
 .is-demo :is(h4, strong, em) {
-  color: #6c63ff;
+  color: var(--c-principal);
   background: #f0efff;
   border-radius: 3px;
   padding: 1px 5px;
 }
 
-/* ── :where() ── */
 .where-demo :where(h4, p, span) {
-  border-left: 3px solid #ff6b6b;
+  border-left: 3px solid var(--c-hot);
   padding-left: 6px;
   margin: 3px 0;
   display: block;
 }
 
-/* ── :has() ── */
+/* Has */
 .has-demo div {
   border: 2px solid #ccc;
-  border-radius: 6px;
+  border-radius: var(--r-mitja);
   padding: 6px;
   margin: 4px 0;
-  transition: 0.2s;
+  transition: var(--transicio);
 }
 .has-demo div:has(input:checked) {
-  border-color: #27ae60;
+  border-color: var(--c-ok);
   background: #f0fff4;
 }
 .has-demo label {
@@ -396,94 +482,59 @@ p[lang="es"] {
   cursor: pointer;
 }
 
-/* ── :nth-of-type() ── */
-.nthOfType-demo p:nth-of-type(2n) {
-  background: #ffd6e7;
-  border-radius: 4px;
-  padding: 1px 6px;
-}
-.nthOfType-demo div:nth-of-type(1) {
-  background: #d6e4ff;
-  border-radius: 4px;
-  padding: 1px 6px;
-}
-
-/* ── :nth-last-child() ── */
-.nthLastChild-demo li:nth-last-child(1) {
-  background: #ffd6a5;
-  border-radius: 4px;
-  padding: 1px 6px;
-}
-.nthLastChild-demo li:nth-last-child(2) {
-  background: #a5d6ff;
-  border-radius: 4px;
-  padding: 1px 6px;
-}
-
-/* ── :nth-last-of-type() ── */
-.nthLastOfType-demo p:nth-last-of-type(1) {
-  background: #c4ffc4;
-  border-radius: 4px;
-  padding: 1px 6px;
-}
-.nthLastOfType-demo p:nth-last-of-type(2) {
-  background: #ffc4c4;
-  border-radius: 4px;
-  padding: 1px 6px;
-}
-
+/* Root demo */
 .root-demo span {
-  color: var(--color-demo);
+  color: var(--c-principal);
   font-weight: 700;
   font-size: 1.1rem;
 }
 .root-demo code {
   display: block;
   background: #f0efff;
-  border-radius: 4px;
+  border-radius: var(--r-petit);
   padding: 4px 8px;
   font-size: 0.8rem;
   margin-top: 4px;
 }
 
-/* ── :target ── */
+/* Target */
 .target-demo a {
-  color: #6c63ff;
+  color: var(--c-principal);
   font-size: 0.85rem;
 }
 .target-demo .seccio {
   margin-top: 6px;
   padding: 6px 10px;
-  border-radius: 6px;
+  border-radius: var(--r-mitja);
   border: 2px solid #ddd;
   transition: 0.3s;
   font-size: 0.83rem;
 }
 .target-demo .seccio:target {
-  border-color: #ff6b6b;
+  border-color: var(--c-hot);
   background: #fff5f5;
   font-weight: 700;
-  color: #ff6b6b;
+  color: var(--c-hot);
 }
 
-/* ── :any-link ── */
+/* Any-link */
 .anyLink-demo :any-link {
   color: #fff;
-  background: #6c63ff;
-  border-radius: 4px;
+  background: var(--c-principal);
+  border-radius: var(--r-petit);
   padding: 2px 8px;
   text-decoration: none;
   display: inline-block;
   margin: 2px;
 }
 
-/* ── :in-range / :out-of-range ── */
+/* Range */
 .range-demo input:in-range {
-  border-color: #27ae60;
+  border-color: var(--c-ok);
   background: #f0fff4;
 }
 .range-demo input:out-of-range {
-  border-color: #e74c3c;
+  border-color: var(--c-err);
   background: #fff5f5;
 }
 .range-demo label {
@@ -493,9 +544,9 @@ p[lang="es"] {
   margin-top: 4px;
 }
 
-/* ── :default ── */
+/* Default */
 .default-demo input:default + label {
-  color: #6c63ff;
+  color: var(--c-principal);
   font-weight: 700;
 }
 .default-demo label {
@@ -507,7 +558,7 @@ p[lang="es"] {
   gap: 2px;
 }
 
-/* ── :indeterminate ── */
+/* Indeterminate */
 .indeterminate-demo label {
   display: flex;
   align-items: center;
@@ -515,6 +566,6 @@ p[lang="es"] {
   cursor: pointer;
 }
 .indeterminate-demo input:indeterminate + span {
-  color: #f39c12;
+  color: var(--c-avis);
   font-weight: 700;
 }
