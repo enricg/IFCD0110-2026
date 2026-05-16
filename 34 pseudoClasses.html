@@ -17,6 +17,7 @@
   <body>
     <header>Exercici de pseudo-classes responsiu</header>
     <main>
+      <!-- :link :visited :hover :active -->
       <div class="tarjeta">
         <div class="titol"><i class="fa-solid fa-link"></i> Enllaços</div>
         <div class="exemple">
@@ -31,6 +32,7 @@
         </div>
         <div class="descripcio">:link :visited :hover :active</div>
       </div>
+      <!-- :first-child :last-child -->
       <div class="tarjeta">
         <div class="titol">
           <i class="fa-solid fa-children"></i> Primer i darrer fill
@@ -43,6 +45,7 @@
         </div>
         <div class="descripcio">:first-child :last-child</div>
       </div>
+      <!-- :nth-child -->
       <div class="tarjeta">
         <div class="titol">
           <i class="fa-solid fa-hands-holding-child"></i> Fill-èssim
@@ -58,8 +61,9 @@
       </div>
       <div class="tarjeta">
         <div class="titol">
-          <i class="fa-solid fa-medal"></i> Primer i darrer <br />de tipus
+          <i class="fa-solid fa-medal"></i> Primer i darrer de tipus
         </div>
+        <!-- :first-of-type :last-of-type -->
         <div class="exemple nType">
           <div>Primer div</div>
           <p>Primer paràgraf</p>
@@ -69,8 +73,9 @@
         </div>
         <div class="descripcio">:first-of-type :last-of-type</div>
       </div>
+      <!-- :only-child -->
       <div class="tarjeta">
-        <div class="titol">Només fill</div>
+        <div class="titol"><i class="fa-solid fa-child"></i>Només fill</div>
         <div class="exemple">
           <ul>
             <li>llista 1 primer</li>
@@ -90,9 +95,11 @@
         </div>
         <div class="descripcio">:only-child</div>
       </div>
+      <!-- :only-of-type -->
       <div class="tarjeta">
-        <div class="titol"><i class="fa-solid fa-fingerprint"></i>
-           Només de tipus
+        <div class="titol">
+          <i class="fa-solid fa-fingerprint"></i>
+          Només de tipus
         </div>
         <div class="exemple onlyOfType">
           <div>Primer div</div>
@@ -104,31 +111,410 @@
         </div>
         <div class="descripcio">:only-of-type</div>
       </div>
+      <!-- :empty -->
       <div class="tarjeta">
-        <div class="titol">Buit</div>
+        <div class="titol"><i class="fa-regular fa-eye-slash"></i>Buit</div>
         <div class="exemple">
-            <div class="caixa">A</div>
-            <div class="caixa">B</div>
-            <div class="caixa"></div>
-            <div class="caixa">D</div>
+          <div class="caixa">A</div>
+          <div class="caixa">B</div>
+          <div class="caixa"></div>
+          <div class="caixa">D</div>
         </div>
         <div class="descripcio">:empty</div>
       </div>
+      <!-- :lang -->
       <div class="tarjeta">
-        <div class="titol">Idiomes</div>
+        <div class="titol"><i class="fa-solid fa-language"></i> Idiomes</div>
         <div class="exemple">
-            <p lang="it">Italià</p>
-            <p lang="ca">Català</p>
-            <p lang="ca">Català</p>
-            <p lang="es">Espanyol</p>
-            <p lang="it">Italià</p>
+          <p lang="it">Italià</p>
+          <p lang="ca">Català</p>
+          <p lang="ca">Català</p>
+          <p lang="es">Espanyol</p>
+          <p lang="it">Italià</p>
         </div>
         <div class="descripcio">:lang</div>
       </div>
+      <!-- :focus -->
       <div class="tarjeta">
-        <div class="titol">títol</div>
-        <div class="exemple"></div>
-        <div class="descripcio">descripció</div>
+        <div class="titol"><i class="fa-solid fa-crosshairs"></i> Focus</div>
+        <div class="exemple focus-demo">
+          Fes clic a l'input per activar el focus:<br />
+          <input
+            type="text"
+            placeholder="Escriu aquí..."
+            style="margin-top: 6px; width: 100%"
+          />
+          <br /><br />
+          Segon camp:<br />
+          <input
+            type="text"
+            placeholder="Segon input"
+            style="margin-top: 6px; width: 100%"
+          />
+        </div>
+        <div class="descripcio">:focus</div>
+      </div>
+
+      <!-- :focus-within -->
+      <div class="tarjeta">
+        <div class="titol">
+          <i class="fa-solid fa-circle-dot"></i> Focus dins
+        </div>
+        <div class="exemple focusWithin-demo">
+          El contenidor canvia quan un fill té focus:<br /><br />
+          <fieldset>
+            <legend>Formulari</legend>
+            <input type="text" placeholder="Nom" style="width: 100%" />
+            <input
+              type="text"
+              placeholder="Email"
+              style="width: 100%; margin-top: 4px"
+            />
+          </fieldset>
+        </div>
+        <div class="descripcio">:focus-within</div>
+      </div>
+
+      <!-- :focus-visible -->
+      <div class="tarjeta">
+        <div class="titol"><i class="fa-solid fa-eye"></i> Focus visible</div>
+        <div class="exemple focusVisible-demo">
+          Ressaltat amb teclat (Tab), no amb ratolí:<br /><br />
+          <button>Botó 1</button>
+          <button>Botó 2</button>
+          <button>Botó 3</button>
+        </div>
+        <div class="descripcio">:focus-visible</div>
+      </div>
+
+      <!-- :checked -->
+      <div class="tarjeta">
+        <div class="titol"><i class="fa-solid fa-square-check"></i> Marcat</div>
+        <div class="exemple checked-demo">
+          <label><input type="checkbox" /> <span>Tasca A</span></label>
+          <label><input type="checkbox" checked /> <span>Tasca B</span></label>
+          <label><input type="checkbox" /> <span>Tasca C</span></label>
+          <br />
+          <label><input type="radio" name="r" /> <span>Opció 1</span></label>
+          <label
+            ><input type="radio" name="r" checked /> <span>Opció 2</span></label
+          >
+        </div>
+        <div class="descripcio">:checked</div>
+      </div>
+
+      <!-- :disabled / :enabled -->
+      <div class="tarjeta">
+        <div class="titol">
+          <i class="fa-solid fa-toggle-on"></i> Actiu / Desactivat
+        </div>
+        <div class="exemple disabledEnabled-demo">
+          <label>Actiu</label>
+          <input type="text" placeholder="Pots escriure" style="width: 100%" />
+          <label style="margin-top: 6px">Desactivat</label>
+          <input
+            type="text"
+            placeholder="No pots escriure"
+            disabled
+            style="width: 100%"
+          />
+        </div>
+        <div class="descripcio">:enabled :disabled</div>
+      </div>
+
+      <!-- :required / :optional -->
+      <div class="tarjeta">
+        <div class="titol">
+          <i class="fa-solid fa-asterisk"></i> Requerit / Opcional
+        </div>
+        <div class="exemple reqOpt-demo">
+          <label>Obligatori (vora vermella)</label>
+          <input
+            type="text"
+            required
+            placeholder="Camp obligatori"
+            style="width: 100%"
+          />
+          <label>Opcional (vora verda)</label>
+          <input type="text" placeholder="Camp opcional" style="width: 100%" />
+        </div>
+        <div class="descripcio">:required :optional</div>
+      </div>
+
+      <!-- :valid / :invalid -->
+      <div class="tarjeta">
+        <div class="titol">
+          <i class="fa-solid fa-circle-check"></i> Vàlid / Invàlid
+        </div>
+        <div class="exemple validInvalid-demo">
+          <label>Email (comprova el format)</label>
+          <input
+            type="email"
+            placeholder="exemple@correu.com"
+            style="width: 100%"
+          />
+          <small>Escriu per veure la validació</small>
+          <label>Número (1–10)</label>
+          <input
+            type="number"
+            min="1"
+            max="10"
+            placeholder="1-10"
+            style="width: 100%"
+          />
+        </div>
+        <div class="descripcio">:valid :invalid</div>
+      </div>
+
+      <!-- :placeholder-shown -->
+      <div class="tarjeta">
+        <div class="titol">
+          <i class="fa-solid fa-font"></i> Placeholder visible
+        </div>
+        <div class="exemple placeholder-demo">
+          Groc quan el placeholder és visible, verd quan s'escriu:<br /><br />
+          <input
+            type="text"
+            placeholder="Escriu quelcom..."
+            style="width: 100%"
+          />
+        </div>
+        <div class="descripcio">:placeholder-shown</div>
+      </div>
+
+      <!-- :read-only / :read-write -->
+      <div class="tarjeta">
+        <div class="titol">
+          <i class="fa-solid fa-lock"></i> Llegir / Editar
+        </div>
+        <div class="exemple readOnly-demo">
+          <label>Només lectura</label>
+          <input
+            type="text"
+            value="No es pot editar"
+            readonly
+            style="width: 100%"
+          />
+          <label>Editable</label>
+          <input type="text" value="Es pot editar" style="width: 100%" />
+        </div>
+        <div class="descripcio">:read-only :read-write</div>
+      </div>
+
+      <!-- :not() -->
+      <div class="tarjeta">
+        <div class="titol"><i class="fa-solid fa-ban"></i> Negació</div>
+        <div class="exemple not-demo">
+          <p>Paràgraf normal</p>
+          <p class="excluit">Paràgraf exclòs</p>
+          <p>Paràgraf normal</p>
+          <p class="excluit">Paràgraf exclòs</p>
+          <p>Paràgraf normal</p>
+        </div>
+        <div class="descripcio">:not(selector)</div>
+      </div>
+
+      <!-- :is() -->
+      <div class="tarjeta">
+        <div class="titol">
+          <i class="fa-solid fa-list-check"></i> Coincidència
+        </div>
+        <div class="exemple is-demo">
+          Els elements
+          <h4>h4</h4>
+          , <strong>strong</strong> i <em>em</em> es seleccionen alhora amb
+          <code>:is()</code>. <br /><br />
+          <h4>Títol h4</h4>
+          Text amb <strong>strong</strong> i <em>cursiva</em> seleccionats.
+        </div>
+        <div class="descripcio">:is(h4, strong, em)</div>
+      </div>
+
+      <!-- :where() -->
+      <div class="tarjeta">
+        <div class="titol">
+          <i class="fa-solid fa-wand-magic-sparkles"></i> On sigui
+        </div>
+        <div class="exemple where-demo">
+          Com <code>:is()</code> però sense especificitat:<br /><br />
+          <h4>Títol h4</h4>
+          <p>Paràgraf</p>
+          <span>Span</span>
+        </div>
+        <div class="descripcio">:where(h4, p, span)</div>
+      </div>
+
+      <!-- :has() -->
+      <div class="tarjeta">
+        <div class="titol"><i class="fa-solid fa-sitemap"></i> Té fill</div>
+        <div class="exemple has-demo">
+          El contenidor canvia si el seu fill checkbox és marcat:<br /><br />
+          <div>
+            <label><input type="checkbox" /> <span>Opció A</span></label>
+          </div>
+          <div>
+            <label><input type="checkbox" /> <span>Opció B</span></label>
+          </div>
+          <div>
+            <label><input type="checkbox" /> <span>Opció C</span></label>
+          </div>
+        </div>
+        <div class="descripcio">:has(input:checked)</div>
+      </div>
+
+      <!-- :nth-of-type() -->
+      <div class="tarjeta">
+        <div class="titol">
+          <i class="fa-solid fa-sort-numeric-up"></i> N-èssim de tipus
+        </div>
+        <div class="exemple nthOfType-demo">
+          <div>Primer div (ressaltat)</div>
+          <p>Paràgraf 1</p>
+          <p>Paràgraf 2 (parell, ressaltat)</p>
+          <p>Paràgraf 3</p>
+          <p>Paràgraf 4 (parell, ressaltat)</p>
+        </div>
+        <div class="descripcio">:nth-of-type(2n) / :nth-of-type(1)</div>
+      </div>
+
+      <!-- :nth-last-child() -->
+      <div class="tarjeta">
+        <div class="titol">
+          <i class="fa-solid fa-arrow-up-short-wide"></i> N-èssim des del final
+        </div>
+        <div class="exemple nthLastChild-demo">
+          <ul>
+            <li>Element 1</li>
+            <li>Element 2</li>
+            <li>Element 3</li>
+            <li>Element 4 (penúltim)</li>
+            <li>Element 5 (darrer)</li>
+          </ul>
+        </div>
+        <div class="descripcio">:nth-last-child(1) :nth-last-child(2)</div>
+      </div>
+
+      <!-- :nth-last-of-type() -->
+      <div class="tarjeta">
+        <div class="titol">
+          <i class="fa-solid fa-arrow-up-z-a"></i> N-èssim de tipus des del
+          final
+        </div>
+        <div class="exemple nthLastOfType-demo">
+          <div>Div 1</div>
+          <p>Paràgraf 1</p>
+          <p>Paràgraf 2 (penúltim)</p>
+          <p>Paràgraf 3 (darrer)</p>
+          <div>Div 2</div>
+        </div>
+        <div class="descripcio">:nth-last-of-type(1) :nth-last-of-type(2)</div>
+      </div>
+
+      <!-- :root -->
+      <div class="tarjeta">
+        <div class="titol"><i class="fa-solid fa-tree"></i> Arrel</div>
+        <div class="exemple root-demo">
+          <code>:root { --color-demo: #6c63ff; }</code>
+          <br /><br />
+          La variable definida a <code>:root</code> és accessible a tota la
+          pàgina:<br /><br />
+          <span>Color de la variable CSS</span>
+        </div>
+        <div class="descripcio">:root</div>
+      </div>
+
+      <!-- :target -->
+      <div class="tarjeta">
+        <div class="titol"><i class="fa-solid fa-bullseye"></i> Objectiu</div>
+        <div class="exemple target-demo">
+          Fes clic a un enllaç per ressaltar la secció:
+          <br />
+          <a href="#seccio1">→ Secció 1</a>
+          <a href="#seccio2">→ Secció 2</a>
+          <div class="seccio" id="seccio1">Secció 1</div>
+          <div class="seccio" id="seccio2">Secció 2</div>
+        </div>
+        <div class="descripcio">:target</div>
+      </div>
+
+      <!-- :any-link -->
+      <div class="tarjeta">
+        <div class="titol">
+          <i class="fa-solid fa-link"></i> Qualsevol enllaç
+        </div>
+        <div class="exemple anyLink-demo">
+          Selecciona tant :link com :visited:<br /><br />
+          <a href="https://www.google.com" target="_blank">Google</a>
+          <a href="https://www.wikipedia.org" target="_blank">Wikipedia</a>
+          <a href="https://developer.mozilla.org" target="_blank">MDN</a>
+        </div>
+        <div class="descripcio">:any-link</div>
+      </div>
+
+      <!-- :in-range / :out-of-range -->
+      <div class="tarjeta">
+        <div class="titol">
+          <i class="fa-solid fa-sliders"></i> Rang vàlid / invàlid
+        </div>
+        <div class="exemple range-demo">
+          <label>Edat (entre 18 i 65)</label>
+          <input
+            type="number"
+            min="18"
+            max="65"
+            value="25"
+            style="width: 100%"
+          />
+          <label style="margin-top: 8px">Temperatura (entre 0 i 40)</label>
+          <input
+            type="number"
+            min="0"
+            max="40"
+            value="50"
+            style="width: 100%"
+          />
+        </div>
+        <div class="descripcio">:in-range :out-of-range</div>
+      </div>
+
+      <!-- :default -->
+      <div class="tarjeta">
+        <div class="titol"><i class="fa-solid fa-star"></i> Per defecte</div>
+        <div class="exemple default-demo">
+          El botó/opció predeterminada del formulari:<br /><br />
+          <div class="grup">
+            <label><input type="radio" name="def" /> Opció 1</label>
+            <label
+              ><input type="radio" name="def" checked /> Opció 2 (per
+              defecte)</label
+            >
+            <label><input type="radio" name="def" /> Opció 3</label>
+          </div>
+        </div>
+        <div class="descripcio">:default</div>
+      </div>
+
+      <!-- :indeterminate -->
+      <div class="tarjeta">
+        <div class="titol">
+          <i class="fa-solid fa-question"></i> Indeterminat
+        </div>
+        <div class="exemple indeterminate-demo">
+          Estat ni marcat ni desmarcat:<br /><br />
+          <label
+            ><input type="checkbox" id="indet" />
+            <span>Checkbox indeterminat</span></label
+          >
+          <br />
+          <label
+            ><input type="radio" name="indet2" />
+            <span>Radio (cap seleccionat)</span></label
+          >
+          <label
+            ><input type="radio" name="indet2" /> <span>Opció B</span></label
+          >
+        </div>
+        <div class="descripcio">:indeterminate</div>
       </div>
     </main>
     <footer>Fet per mi</footer>
