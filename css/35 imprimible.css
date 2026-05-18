@@ -1,0 +1,70 @@
+*{
+
+}
+
+header, footer{
+    background:#000000;
+    color: #ffffff;
+    text-align: center;
+}
+
+
+section{
+    display: flex;
+    justify-content: space-around;
+}
+
+article{
+    width: 300px;
+    height: 300px;
+    border: 1px solid #000000;
+    margin: 5px;
+    overflow: hidden;
+    background:burlywood;
+}
+
+@media only screen and (max-width:500px){
+    body{
+        background: orange;
+    }
+
+    .amagat{
+        display: none;
+    }
+}
+
+@media print and (max-width:500px) {
+    body{
+        background: beige;
+    }   
+
+    .amagat{
+        display: none;
+    }
+}
+
+
+
+/* @media screen {
+    .amagat{
+        display: block;
+    }
+
+    *{
+
+    }
+    div{
+
+    }
+    .classe{
+
+    }
+
+    #main{
+
+    }
+
+    a[target]{
+        background: orange;
+    }
+} */
