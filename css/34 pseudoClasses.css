@@ -1,127 +1,571 @@
-html {
-  font-size: 62.5%;
+/* =========================
+   Variables i temes
+========================= */
+:root {
+  --c-principal: #6c63ff;
+  --c-fons: #f0f2f5;
+  --c-text: #222;
+
+  --c-titol: #000;
+  --c-tarjeta: #fff;
+  --c-secundari: #5a5a8a;
+
+  --c-ok: #27ae60;
+  --c-avis: #f39c12;
+  --c-err: #e74c3c;
+  --c-hot: #ff6b6b;
+
+  --r-petit: 4px;
+  --r-mitja: 6px;
+  --r-gran: 12px;
+
+  --espai-1: 4px;
+  --espai-2: 8px;
+  --espai-3: 12px;
+  --espai-4: 16px;
+
+  --ombra: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --transicio: 0.2s;
 }
 
-* {
+/* =========================
+   Reset & base
+========================= */
+*{
+  box-sizing: border-box;
+}
+
+body {
   margin: 0;
-  font-size: 2rem;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  background: var(--c-fons);
+  color: var(--c-text);
 }
 
+/* =========================
+   Layout
+========================= */
 header,
 footer {
-  background-color: #000000;
-  color: #ffffff;
+  background: var(--c-titol);
+  color: #fff;
   text-align: center;
+  padding: 1rem;
+  font-size: 1.2rem;
+  letter-spacing: 0.05em;
 }
 
 main {
-  background-color: bisque;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 10px;
-  padding: 10px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.2rem;
+  padding: 1.5rem;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
+/* =========================
+   Card components
+========================= */
 .tarjeta {
-  border: 1px solid #000000;
-  border-radius: 45px;
-  width: 200px;
-  height: 300px;
+  background: var(--c-tarjeta);
+  border-radius: var(--r-gran);
+  box-shadow: var(--ombra);
   display: flex;
   flex-direction: column;
-}
-
-.titol,
-.exemple,
-.descripcio {
-  width: 100%;
-  text-align: center;
-  align-content: center;
-  border: 1px solid #000000;
+  overflow: hidden;
 }
 
 .titol {
-  border-radius: 45px 45px 0 0;
-  height: 15%;
+  background: var(--c-titol);
+  color: #fff;
+  padding: 0.6rem 1rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
 }
+
 .exemple {
-  height: 65%;
+  padding: 0.8rem 1rem;
+  flex: 1;
+  font-size: 0.88rem;
+  line-height: 1.9;
 }
+
 .descripcio {
-  height: 20%;
-  border-radius: 0 0 45px 45px;
+  background: #f7f7fb;
+  border-top: 1px solid #e8e8f0;
+  padding: 0.45rem 1rem;
+  font-size: 0.78rem;
+  color: var(--c-secundari);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
-/* Enllaços */
-/* Recordeu ordre: LVHA */
-a:link {
-  color: orange;
-}
-a:visited {
-  color: green;
-}
-a:hover {
-  color: yellow;
-}
-a:active {
-  color: blue;
-}
-
-/* Primer i darrer fill */
-
-.primerIDarrerChild > p:first-child {
-  background-color: aqua;
-  font-size: 1.5em;
+/* =========================
+   Utilities (DRY)
+========================= */
+/* “pill” reutilitzable per a destacats */
+:is(
+    .primerIDarrerChild,
+    .nChild,
+    .nType,
+    .nthOfType-demo,
+    .nthLastChild-demo,
+    .nthLastOfType-demo
+  )
+  :is(p, div, li, b, span):is(
+    .u-pill,
+    :where(:first-child, :last-child, :only-child)
+  ) {
+  border-radius: var(--r-petit);
+  padding: 2px 6px;
 }
 
-.primerIDarrerChild > p:last-child {
-  background-color: blueviolet;
-  font-size: 0.75em;
-  color: yellow;
+/* Contenidor tipus “box” (reutilitzat a :has i :target) */
+.u-box {
+  border: 2px solid #ccc;
+  border-radius: var(--r-mitja);
+  padding: 6px;
+  transition:
+    background var(--transicio),
+    border-color var(--transicio);
 }
 
-/* nth-child Escullo el tercer fill */
-.nChild > :nth-child(3) {
-  background-color: orange;
+/* Espaiat mínim */
+.u-mt-1 {
+  margin-top: var(--espai-1);
+}
+.u-m-1 {
+  margin: var(--espai-1);
 }
 
-.nChild > :nth-last-child(2) {
-  background-color: green;
+/* =========================
+   Links (:link :visited :hover :active)
+========================= */
+.exemple a {
+  display: inline-block;
+  padding: 2px 6px;
+  border-radius: var(--r-petit);
 }
 
-/* Primer i darrer fill d'un tipus  */
-.nType > div:first-of-type {
-  background-color: chartreuse;
+.exemple a:link {
+  background: orange;
+  color: #fff;
+}
+.exemple a:visited {
+  background: green;
+  color: #fff;
+}
+.exemple a:hover {
+  background: gold;
+  color: #333;
+}
+.exemple a:active {
+  background: royalblue;
+  color: #fff;
 }
 
-.nType > p:last-of-type {
-  background-color: crimson;
+/* =========================
+   Child selectors
+========================= */
+.primerIDarrerChild p:first-child {
+  background: #ffd6a5;
+}
+.primerIDarrerChild p:last-child {
+  background: #a5ffd6;
 }
 
-/* Fills únics */
+.nChild div:nth-child(2) {
+  background: #c9b8f5;
+}
+.nChild p:nth-child(odd) {
+  background: #b8daf5;
+}
+
+/* =========================
+   Type selectors
+========================= */
+.nType div:first-of-type {
+  background: #ffc4c4;
+}
+.nType p:last-of-type {
+  background: #c4ffc4;
+}
+
+.nthOfType-demo p:nth-of-type(2n) {
+  background: #ffd6e7;
+  padding: 1px 6px;
+  border-radius: var(--r-petit);
+}
+.nthOfType-demo div:nth-of-type(1) {
+  background: #d6e4ff;
+  padding: 1px 6px;
+  border-radius: var(--r-petit);
+}
+
+.nthLastChild-demo li:nth-last-child(1) {
+  background: #ffd6a5;
+  padding: 1px 6px;
+  border-radius: var(--r-petit);
+}
+.nthLastChild-demo li:nth-last-child(2) {
+  background: #a5d6ff;
+  padding: 1px 6px;
+  border-radius: var(--r-petit);
+}
+
+.nthLastOfType-demo p:nth-last-of-type(1) {
+  background: #c4ffc4;
+  padding: 1px 6px;
+  border-radius: var(--r-petit);
+}
+.nthLastOfType-demo p:nth-last-of-type(2) {
+  background: #ffc4c4;
+  padding: 1px 6px;
+  border-radius: var(--r-petit);
+}
+
+/* =========================
+   Only / Empty / Lang
+========================= */
 li:only-child {
-  background-color: pink;
+  background: #ffe066;
+  border-radius: var(--r-petit);
+  padding: 2px 6px;
+  font-weight: 700;
 }
 
-/* només del tipus */
-.onlyOfType > b:only-of-type{
-    background-color: darkgoldenrod;
+.onlyOfType b:only-of-type {
+  background: #ff9f43;
+  color: #fff;
+  border-radius: var(--r-petit);
+  padding: 2px 6px;
 }
 
-/* Buit */
-.caixa{
-    width: 40px;
-    height: 40px;
+.caixa {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 2px solid #aaa;
+  border-radius: var(--r-mitja);
+  margin: 2px;
+  font-weight: 700;
 }
-div.caixa:empty{
-    background-color: maroon;
+.caixa:empty {
+  background: var(--c-hot);
+  border-color: var(--c-hot);
 }
 
-/* Llenguatge */
-p:lang(ca){
-    background-color: yellow;
+
+p:lang("it") {
+  color: var(--c-ok);
+  font-style: italic;
 }
-p:lang(it){
-    background-color: lightblue;
+p:lang("ca") {
+  color: #2980b9;
+  font-weight: 600;
+}
+p:lang("es") {
+  color: var(--c-err);
+}
+
+/* =========================
+   Form controls (shared)
+========================= */
+.exemple :is(input, textarea, select, button) {
+  border: 1.5px solid #ccc;
+  border-radius: var(--r-mitja);
+  padding: 4px 8px;
+  font-size: 0.85rem;
+  outline: none;
+  transition:
+    border-color var(--transicio),
+    background var(--transicio),
+    box-shadow var(--transicio);
+}
+
+/* Focus */
+.focus-demo input:focus {
+  border-color: var(--c-principal);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--c-principal) 25%, transparent);
+  background: #f5f4ff;
+}
+
+/* Focus-within */
+.focusWithin-demo fieldset {
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  padding: 8px;
+  transition:
+    border-color var(--transicio),
+    background var(--transicio);
+}
+.focusWithin-demo fieldset:focus-within {
+  border-color: var(--c-hot);
+  background: #fff5f5;
+}
+.focusWithin-demo legend {
+  font-size: 0.78rem;
+  color: #888;
+  padding: 0 4px;
+}
+.focusWithin-demo input {
+  width: 100%;
+  margin-top: 4px;
+}
+
+/* Focus-visible (botó) */
+.focusVisible-demo button {
+  background: #1a1a2e;
+  color: #fff;
+  border: none;
+  padding: 6px 14px;
+  border-radius: var(--r-mitja);
+  cursor: pointer;
+  margin: 2px;
+}
+.focusVisible-demo button:focus {
+  outline: none;
+}
+.focusVisible-demo button:focus-visible {
+  outline: 3px solid var(--c-hot);
+  outline-offset: 3px;
+}
+
+/* Checked */
+.checked-demo label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  padding: 2px 0;
+}
+.checked-demo input[type="checkbox"]:checked + span {
+  color: var(--c-principal);
+  font-weight: 700;
+  text-decoration: line-through;
+}
+.checked-demo input[type="radio"]:checked + span {
+  color: var(--c-hot);
+  font-weight: 700;
+}
+
+/* Enabled / Disabled */
+.disabledEnabled-demo input:enabled {
+  border-color: var(--c-ok);
+  background: #f0fff4;
+}
+.disabledEnabled-demo input:disabled {
+  background: #e0e0e0;
+  color: #999;
+  cursor: not-allowed;
+  border-color: #ccc;
+}
+.disabledEnabled-demo label {
+  display: block;
+  font-size: 0.8rem;
+  color: #666;
+}
+
+/* Required / Optional */
+.reqOpt-demo input:required {
+  border-color: var(--c-err);
+}
+.reqOpt-demo input:required::placeholder {
+  color: var(--c-err);
+}
+.reqOpt-demo input:optional {
+  border-color: var(--c-ok);
+}
+.reqOpt-demo label {
+  font-size: 0.78rem;
+  color: #888;
+  display: block;
+  margin-top: 4px;
+}
+
+/* Valid / Invalid */
+.validInvalid-demo input:valid {
+  border-color: var(--c-ok);
+  background: #f0fff4;
+}
+.validInvalid-demo input:invalid {
+  border-color: var(--c-err);
+  background: #fff5f5;
+}
+.validInvalid-demo label {
+  font-size: 0.78rem;
+  color: #888;
+  display: block;
+  margin-top: 4px;
+}
+.validInvalid-demo small {
+  font-size: 0.72rem;
+  color: #aaa;
+}
+
+/* Placeholder-shown */
+.placeholder-demo input:placeholder-shown {
+  border-color: var(--c-avis);
+  background: #fffbf0;
+  font-style: italic;
+}
+.placeholder-demo input:not(:placeholder-shown) {
+  border-color: var(--c-ok);
+  background: #f0fff4;
+}
+
+/* Read-only / Read-write */
+.readOnly-demo input:read-only {
+  background: #f0f0f0;
+  color: #888;
+  border-style: dashed;
+}
+.readOnly-demo input:read-write {
+  border-color: var(--c-principal);
+  background: #f5f4ff;
+}
+.readOnly-demo label {
+  font-size: 0.78rem;
+  color: #888;
+  display: block;
+  margin-top: 4px;
+}
+
+/* Not / is / where */
+.not-demo p:not(.excluit) {
+  background: #d4f4dd;
+  border-radius: var(--r-petit);
+  padding: 2px 8px;
+}
+.not-demo p.excluit {
+  color: #aaa;
+  text-decoration: line-through;
+  padding: 2px 8px;
+}
+
+.is-demo :is(h4, strong, em) {
+  color: var(--c-principal);
+  background: #f0efff;
+  border-radius: 3px;
+  padding: 1px 5px;
+}
+
+.where-demo :where(h4, p, span) {
+  border-left: 3px solid var(--c-hot);
+  padding-left: 6px;
+  margin: 3px 0;
+  display: block;
+}
+
+/* Has */
+.has-demo div {
+  border: 2px solid #ccc;
+  border-radius: var(--r-mitja);
+  padding: 6px;
+  margin: 4px 0;
+  transition: var(--transicio);
+}
+.has-demo div:has(input:checked) {
+  border-color: var(--c-ok);
+  background: #f0fff4;
+}
+.has-demo label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+/* Root demo */
+.root-demo span {
+  color: var(--c-principal);
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+.root-demo code {
+  display: block;
+  background: #f0efff;
+  border-radius: var(--r-petit);
+  padding: 4px 8px;
+  font-size: 0.8rem;
+  margin-top: 4px;
+}
+
+/* Target */
+.target-demo a {
+  color: var(--c-principal);
+  font-size: 0.85rem;
+}
+.target-demo .seccio {
+  margin-top: 6px;
+  padding: 6px 10px;
+  border-radius: var(--r-mitja);
+  border: 2px solid #ddd;
+  transition: 0.3s;
+  font-size: 0.83rem;
+}
+.target-demo .seccio:target {
+  border-color: var(--c-hot);
+  background: #fff5f5;
+  font-weight: 700;
+  color: var(--c-hot);
+}
+
+/* Any-link */
+.anyLink-demo :any-link {
+  color: #fff;
+  background: var(--c-principal);
+  border-radius: var(--r-petit);
+  padding: 2px 8px;
+  text-decoration: none;
+  display: inline-block;
+  margin: 2px;
+}
+
+/* Range */
+.range-demo input:in-range {
+  border-color: var(--c-ok);
+  background: #f0fff4;
+}
+.range-demo input:out-of-range {
+  border-color: var(--c-err);
+  background: #fff5f5;
+}
+.range-demo label {
+  font-size: 0.78rem;
+  color: #888;
+  display: block;
+  margin-top: 4px;
+}
+
+/* Default */
+.default-demo input:default + label {
+  color: var(--c-principal);
+  font-weight: 700;
+}
+.default-demo label {
+  font-size: 0.85rem;
+}
+.default-demo .grup {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* Indeterminate */
+.indeterminate-demo label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+.indeterminate-demo input:indeterminate + span {
+  color: var(--c-avis);
+  font-weight: 700;
 }
