@@ -1,0 +1,98 @@
+:root {
+  --fonsTitol: #000;
+  --colorTitol: #fff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+header,
+footer {
+  text-align: center;
+  align-content: center;
+  background: var(--fonsTitol);
+  color: var(--colorTitol);
+  font-size: 3rem;
+}
+
+header {
+  grid-area: cap;
+}
+
+footer {
+  grid-area: peu;
+}
+
+nav {
+  grid-area: llista;
+  background: red;
+}
+
+aside {
+  grid-area: banner;
+  background: yellow;
+}
+
+main {
+  grid-area: contingut;
+  background: green;
+}
+
+ul {
+  text-align: center;
+}
+
+figure {
+  margin: 4px;
+}
+
+figcaption {
+  text-align: center;
+}
+
+.banner,
+.principal {
+  max-width: 100%;
+}
+
+article:nth-child(even) > figure {
+  float: left;
+}
+
+article:nth-child(odd) > figure {
+  float: right;
+}
+
+article > figure {
+  width: 20%;
+  margin: 10px;
+}
+
+.contenidor {
+  display: grid;
+  grid-template-columns: 15% auto 15%;
+  grid-template-rows: 4rem auto 4rem;
+  grid-template-areas:
+  "cap cap cap"
+  "llista contingut banner"
+  "peu peu peu";
+}
+
+/* per mòbil */
+
+@media (max-width:375px){
+    main{
+        background: brown;
+    }
+    
+    .contenidor{
+        display: block;
+    }
+}
