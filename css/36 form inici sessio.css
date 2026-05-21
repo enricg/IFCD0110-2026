@@ -1,6 +1,8 @@
 :root {
   --fonsTitol: #000;
   --colorTitol: #fff;
+  --fonsMenu: #deb887 ;
+  --fonsPrincipal: #deb666;
 }
 
 * {
@@ -11,6 +13,11 @@
 
 html {
   font-size: 62.5%;
+  scroll-behavior: smooth;
+}
+
+nav, main,aside{
+  font-size: 2rem;
 }
 
 header,
@@ -32,7 +39,16 @@ footer {
 
 nav {
   grid-area: llista;
-  background: red;
+  background: var(--fonsMenu);
+}
+.menu{
+  position: sticky;
+  top: 3rem;
+}
+
+.menu::before{
+  content: "MENU";
+  font-weight: bolder;
 }
 
 aside {
@@ -42,7 +58,7 @@ aside {
 
 main {
   grid-area: contingut;
-  background: green;
+  background: var(--fonsPrincipal)
 }
 
 ul {
@@ -84,6 +100,22 @@ article > figure {
   "llista contingut banner"
   "peu peu peu";
 }
+
+section{
+  border: 1px solid #000;
+  padding: 20px;
+  min-height: 1vw;
+}
+
+fieldset{
+  height: 50rem;
+}
+
+.imatge{
+  float: left;
+}
+
+
 
 /* per mòbil */
 

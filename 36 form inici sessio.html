@@ -10,16 +10,15 @@
   <body class="contenidor">
     <header>Exercici per practicar formularis</header>
     <nav>
-      Menu
-      <ul>
-        <li>Opció 1</li>
-        <li>Opció 2</li>
-        <li>Opció 3</li>
+      <ul class="menu">
+        <li><a href="#inici">Inici</a></li>
+        <li><a href="#registre">Registre d'usuari</a></li>
+        <li><a href="#perfil">Editar perfil</a></li>
       </ul>
     </nav>
     <main>
-      <h1>Articles</h1>
-      <section>
+      <section id="inici">
+        <h2>Articles</h2>
         <article>
           <figure>
             <img
@@ -40,7 +39,6 @@
             espills molt clars exemples. E llegim que honor sens exercici de
             molts. De cavalleria; la segona serà de.
           </p>
-
           <p>
             Servidors donà molt més que no devia que tots ne. És dels actes e
             costumes que. Sostenir en pau segons que diu lo gloriós Sant Lluc. E
@@ -75,7 +73,6 @@
             natura donat-los diverses inclinacions de pecar e viciosament. Del
             principi de cavalleria; la segona serà de l'estament.
           </p>
-
           <p>
             De virtuts lo que per la sua gran saviesa e. Illa d'Anglaterra
             habitava un cavaller valentíssim noble de llinatge e. M'haveu E
@@ -91,8 +88,6 @@
             qual fa especial. Guillem de Varoic en els. Dels Reis de Job e.
           </p>
         </article>
-      </section>
-      <section>
         <article>
           <figure>
             <img
@@ -114,7 +109,6 @@
             dona Judic. L'exercici de les armes Fortitud corporal. En set
             batalles campals on.
           </p>
-
           <p>
             Seus benaventurats darrers dies En tan alt greu excel·leix. Estament
             que deuria ésser molt reverit si. Sobre la humana natura donat-los
@@ -153,7 +147,6 @@
             aquest virtuós comte hi volgué anar havent. Pares del noble Josuè e
             dels Reis de Job e. De les amazones; Titus Lívius dels.
           </p>
-
           <p>
             E de Sant Pau ermità e de. Nomenat lo comte Guillem de Varoic Aquest
             era. Ab la meitat de les armes de cascú. Lo principi se tractarà de
@@ -171,14 +164,80 @@
           </p>
         </article>
       </section>
+      <section id="registre" class="registre">
+        <h2>Registre d'usuari</h2>
+
+        <div class="imatge">
+          <img src="./imgs/registre.jpg" alt="Imatge de registre" />
+        </div>
+        <div
+          style="height: 50rem; display: flex; justify-content: center"
+          class="registreUsuari"
+        >
+          <form action="./03 float.html" method="get" target="_blank">
+            <fieldset>
+              <legend>Formulari</legend>
+              <table>
+                <tr>
+                  <td>
+                    <label for="iNom" hidden>Nom:</label>
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      name="iNom"
+                      id="iNom"
+                      placeholder="Escriu el teu nom"
+                    /><br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <label for="iUsuari" hidden>Usuari</label>
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      name="iUsuari"
+                      id="iUsuari"
+                      placeholder="Usuari"
+                    /><br />
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <label for="iPassword" hidden>Password:</label>
+                  </td>
+                  <td>
+                    <input
+                      type="password"
+                      name="iPassword"
+                      id="iPassword"
+                    /><br />
+                  </td>
+                </tr>
+              </table>
+              <input type="submit" value="Envia Dades" />
+              <input type="reset" value="Neteja Camps" />
+            </fieldset>
+          </form>
+        </div>
+      </section>
+      <section id="perfil">
+        <h2>Edició del perfil</h2>
+        <label for="nom">Nom:</label>
+        <input type="text" name="nom" id="nom">
+        <label for="cognom">Cognom:</label>
+        <input type="text" name="cognom" id="cognom">
+      </section>
     </main>
     <aside>
       Banners
       <figure>
         <img class="banner" src="./imgs/frenchfood.jpg" alt="croissant" />
         <figcaption>croissant</figcaption>
-    </figure>
-    <figure>
+      </figure>
+      <figure>
         <img
           class="banner"
           src="./imgs/katerinavulcova-bear-7598582_1920.jpg"
