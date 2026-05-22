@@ -8,6 +8,7 @@
     <link rel="icon" href="./imgs/chavo.jpg" type="image/x-icon" />
   </head>
   <body class="contenidor">
+
     <header>Exercici per practicar formularis</header>
     <nav>
       <ul class="menu">
@@ -18,6 +19,7 @@
     </nav>
     <main>
       <section id="inici">
+        <button onclick="javascript:alert('Avui es divendres')">Hola</button>
         <h2>Articles</h2>
         <article>
           <figure>
@@ -176,11 +178,13 @@
         >
           <form action="./03 float.html" method="get" target="_blank">
             <fieldset>
+              <!-- <div class="fieldset"> -->
+
               <legend>Formulari</legend>
               <table>
                 <tr>
                   <td>
-                    <label for="iNom" hidden>Nom:</label>
+                    <label for="iNom">Nom:</label>
                   </td>
                   <td>
                     <input
@@ -193,7 +197,7 @@
                 </tr>
                 <tr>
                   <td>
-                    <label for="iUsuari" hidden>Usuari</label>
+                    <label for="iUsuari">Usuari</label>
                   </td>
                   <td>
                     <input
@@ -206,7 +210,7 @@
                 </tr>
                 <tr>
                   <td>
-                    <label for="iPassword" hidden>Password:</label>
+                    <label for="iPassword">Password:</label>
                   </td>
                   <td>
                     <input
@@ -220,15 +224,29 @@
               <input type="submit" value="Envia Dades" />
               <input type="reset" value="Neteja Camps" />
             </fieldset>
+            <!-- </div> -->
           </form>
         </div>
       </section>
       <section id="perfil">
         <h2>Edició del perfil</h2>
         <label for="nom">Nom:</label>
-        <input type="text" name="nom" id="nom">
-        <label for="cognom">Cognom:</label>
-        <input type="text" name="cognom" id="cognom">
+        <input type="text" name="nom" id="nom" />
+        <label for="cognoms">Cognoms:</label>
+        <input type="text" name="cognoms" id="cognoms" />
+        <label for="sexe">Sexe:</label>
+        <input type="radio" name="sexe" id="rHome" />
+        <label for="cars">Choose a car:</label>
+        <form action="./00 webExemple.html" method="get">
+          
+          <select name="cars" id="cars">
+            <option value="volvo">Volvo</option>
+            <option value="saab" selected>Saab</option>
+            <option value="mercedes">Mercedes</option>
+            <option value="audi">Audi</option>
+          </select>
+          <input type="submit" value="Envia Dades" />
+        </form>
       </section>
     </main>
     <aside>

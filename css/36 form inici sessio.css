@@ -108,14 +108,14 @@ section{
 }
 
 fieldset{
-  height: 50rem;
+  /* border: 1px solid #000; */
+  height: 100%;
+  width: 100%;
 }
 
 .imatge{
   float: left;
 }
-
-
 
 /* per mòbil */
 
