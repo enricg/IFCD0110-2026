@@ -1,0 +1,11 @@
+:root{
+    --fons-titol:#008000;
+}
+
+.alert-primary{
+    background-color: brown;
+}
+
+header,footer{
+    background-color: var(--fons-titol);
+}
