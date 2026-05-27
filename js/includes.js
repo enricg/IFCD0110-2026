@@ -4,7 +4,7 @@ async function carregarComponent(id, fitxer) {
   document.getElementById(id).innerHTML = contingut;
 }
 
-carregarComponent("previa","./components/previa.html");
+// carregarComponent("previa","./components/previa.html");
 carregarComponent("header","./components/header.html");
 carregarComponent("nav","./components/nav.html");
 carregarComponent("footer","./components/footer.html");
