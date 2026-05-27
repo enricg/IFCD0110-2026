@@ -1,0 +1,16 @@
+*{
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+html{
+    font-size: 62.5%;
+    scroll-behavior: smooth;
+}
+
+header,footer{
+    background: #000;
+    color: #fff;
+    text-align: center;
+}

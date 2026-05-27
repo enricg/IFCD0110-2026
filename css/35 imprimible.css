@@ -23,7 +23,7 @@ article{
     background:burlywood;
 }
 
-@media only screen and (max-width:500px){
+@media screen and (max-width:500px){
     body{
         background: orange;
     }
