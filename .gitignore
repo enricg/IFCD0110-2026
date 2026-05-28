@@ -18,3 +18,5 @@ BS/**
 !BS/**/*.html
 !BS/**/*.css
 !BS/**/*.js
+
+BS/**/vendor/**
