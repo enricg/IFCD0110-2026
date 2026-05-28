@@ -5,3 +5,16 @@
 *.ttf
 *prova*
 alumnes/
+
+
+# Configuració de seguiment d'arxius de les plantilles BS
+# Ignora tots els fitxers dins subcarpeta
+BS/**
+
+# No ignoris els directoris, per poder recórrer-los
+!BS/**/
+
+# Torna a incloure només html, css i js
+!BS/**/*.html
+!BS/**/*.css
+!BS/**/*.js
