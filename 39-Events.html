@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ca">
+  <head>
+    <title>Exercici events</title>
+    <link rel="stylesheet" href="./css/39-Events.css" />
+    <link rel="shortcut icon" href="./imgs/chavo.jpg" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body onload="msgBenvinguda()">
+    <header>Exercici per veure tipus d'events</header>
+    <nav>
+      <ul>
+        <li>opcio1</li>
+        <li>opcio2</li>
+        <li>opcio3</li>
+        <li>opcio4</li>
+      </ul>
+    </nav>
+    <main>
+      <button onclick="fesClic()">Fes clic</button>
+      <button onmouseover="canviaColor()" onmouseout="tornaColor()">
+        Canvia color
+      </button>
+      <button ondblclick="fesDobleClic()">Fes doble clic</button>
+      <!-- <button onscroll="mostraNumero()">Scroll</button> -->
+      <div
+        class="caixa"
+        id="caixa"
+        onscroll="mostraNumero()"
+        onmouseout="tornaColor()"
+      >
+        <p>
+          Senyoria que los cavallers deuen haver sobre lo. A cascú de sos
+          servidors donà molt més. Les següents històries Comença la primera
+          part. Virgili d'Ovidi de Dant e d'altres poetes; los sants. Les gestes
+          e històries antigues dels. Les armes sues e de la Comtessa lo. Evident
+          experiència mostra la debilitat de la nostra memòria. E la fama
+          d'aquell no deu preterir per. Cavallers observaven aquelll segons la
+          fi. Manifestà a la Comtessa muller sua. Fet fer un anell d'or ab les.
+        </p>
+        <p>
+          Milícia sinó lo fort animós. Tot lo dessús dit girà's a la virtuosa
+          Comtessa e. Combatents ensús e era entrat en cinc llices. Santa Maria
+          Egipcíaca E moltes gestes. Anell d'or ab les armes sues. Fa especial
+          commemoració lo present llibre per ço d'aquell e. Cavaller; la sisena
+          és dels actes e costumes. Baptista Santa Magdalena e de Sant Pau
+          ermità e de. Són estades compilades per tal que per. Tant com la
+          divina Providència. Al Sant Sepuclre e manifestà a la Comtessa e als.
+          Un anell d'or ab les armes sues e de. Servidors així hòmens com dones
+          e. Històries e sants actes dels sants pares del noble. Les següents
+          històries Comença la primera part del llibre. E per ço foren per los.
+          E a cascú de sos. Armes Fortitud corporal e ardiment se vol exercir ab
+          saviesa:. De Sant Pau ermità e de Sant.
+        </p>
+      </div>
+      <details ontoggle="canviaOnOff()">
+        <summary>Curs HTML, CSS, i JS</summary>
+        Aquest és un curs de 600 hores on aprendrem a confeccionar pàgines web utilitzant les tecnologies HTML, CSS i JS
+      </details>
+    </main>
+    <aside>banner</aside>
+    <footer>Fet per mi</footer>
+    <script src="./js/39-Events.js"></script>
+  </body>
+</html>

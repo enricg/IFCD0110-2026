@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="ca">
+  <head>
+    <title>Exercici patrons</title>
+    <link rel="stylesheet" href="./css/40-Patrons.css" />
+    <link rel="shortcut icon" href="./imgs/chavo.jpg" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <header>Exercici per veure tipus de patrons</header>
+    <nav>
+      <ul>
+        <li>opcio1</li>
+        <li>opcio2</li>
+        <li>opcio3</li>
+        <li>opcio4</li>
+      </ul>
+    </nav>
+    <main>
+      <form action="./00 webExemple.html" method="get" target="_blank">
+        <label for="telefon">Telèfon</label>
+        <input type="tel" list="tel-list" id="telefon" name="telefon" minlength="10" maxlength="10" placeholder="999-555544"
+        pattern="[0-9]{3}-[0-9]{6}"
+        />
+        <datalist id="tel-list">
+          <option value="555-0100"></option>
+          <option value="555-0101"></option>
+        </datalist>
+        <input type="submit">
+      </form>
+    </main>
+    <aside>banner</aside>
+    <footer>Fet per mi</footer>
+  </body>
+</html>
