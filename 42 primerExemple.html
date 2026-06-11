@@ -1,17 +1,27 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
-    <button onclick="onClick()">afegir text</button>
+  </head>
+  <body onload="salutacio()">
+    <button onclick="salutacio()">afegir text</button>
     <div id="example"></div>
     <script>
-        function onClick(){
-            document.getElementById("example").innerHTML = "Ja és hora de marxar"
-        }
+        /* connexió amb BBDD */
+        /*
+      document.write("Text escrit amb funció write");
+      console.log("hola bon dia");
+      window.alert("Aquest és un missatge d'alerta");
+    */
+        document.write("La versió del navegador és " + navigator.appVersion);
+        document.write(" del <b>" + navigator.appName + "<b>.");
     </script>
-</body>
+    <script>
+      function salutacio() {
+        document.getElementById("example").innerHTML = "<div>Bon dia</div>";
+      }
+    </script>
+  </body>
 </html>

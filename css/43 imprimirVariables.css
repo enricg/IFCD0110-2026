@@ -1,0 +1,45 @@
+* {
+  margin: 0;
+}
+
+html {
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+}
+
+:root {
+  --lletraTitol: #fff;
+  --fonsTitol: #000;
+}
+
+header,
+footer {
+  font-size: 5rem;
+  text-align: center;
+  background: var(--fonsTitol);
+  color: var(--lletraTitol);
+}
+
+body {
+  min-height: 100vh;
+  font-size: 4rem;
+  display: grid;
+  grid-template-areas:
+    "cap    cap     cap "
+    "princ  princ   princ"
+    "peu    peu     peu";
+  grid-template-columns: repeat(1fr, 3);
+  grid-template-rows: 6rem auto 6rem;
+}
+
+header {
+  grid-area: cap;
+}
+
+main {
+  grid-area: princ;
+}
+
+footer {
+  grid-area: peu;
+}
