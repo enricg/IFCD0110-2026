@@ -519,11 +519,11 @@ function posicions(numeros) {
 function duplicar(llista) {
   let duplicats = [];
   // for (nomquevulguis of llista) {
-  for(i=0;i<llista.length;i++){
+  for (i = 0; i < llista.length; i++) {
     // duplicats.push(nomquevulguis * 2);
     duplicats.push(llista[i] * 2);
   }
-  return(duplicats);
+  return duplicats;
 }
 
 // console.log(duplicar([1, 2, 3])); // [2, 4, 6]
@@ -532,10 +532,10 @@ function duplicar(llista) {
 // ## 24. Trobeu paraules que comencin per "a"
 // Escriu una funció anomenada `comencenPerA` que rebi un array d'strings i retorna un nou array amb totes les paraules que comencin per "a" (majúscula o minúscula).
 
-function comencenPerA(llista){
-  let paraulesAmbA=[];
-  for(paraula of llista){
-    if(paraula[0].toLowerCase()=="a"){
+function comencenPerA(llista) {
+  let paraulesAmbA = [];
+  for (paraula of llista) {
+    if (paraula[0].toLowerCase() == "a") {
       paraulesAmbA.push(paraula);
     }
   }
@@ -549,30 +549,45 @@ function comencenPerA(llista){
 // ## 25. Trobeu paraules que acabin en "s"
 
 // Escriu una funció anomenada `acabenAmbS` que rep un array d'strings i retorna un nou array amb totes les paraules que acaben amb "s" (majúscula o minúscula).
-function acabenAmbS(paraules){
-  let novaLlista=[];
-  for(paraula of paraules){
+function acabenAmbS(paraules) {
+  let novaLlista = [];
+  for (paraula of paraules) {
     //if(paraula.at(-1).toLowerCase()=="s"){
-    if(paraula[paraula.length-1].toLowerCase()=="s"){
+    if (paraula[paraula.length - 1].toLowerCase() == "s") {
       novaLlista.push(paraula);
     }
   }
   return novaLlista;
 }
 
-console.log(acabenAmbS(["pruebas", "arroz", "árbol", "tokens"])) // ["pruebas", "tokens"]
-console.log(acabenAmbS(["beta", "delta", "gama"])) // []
-console.log(acabenAmbS([])) // []
+// console.log(acabenAmbS(["pruebas", "arroz", "árbol", "tokens"])); // ["pruebas", "tokens"]
+// console.log(acabenAmbS(["beta", "delta", "gama"])); // []
+// console.log(acabenAmbS([])); // []
 
 // ## 26. Imprimir una matriu
 
 // Escriu una funció anomenada `imprimirMatriu` que rep una matriu (un array d'arrays) i imprimeixi tots els elements de l'array.
 
-// console.log(imprimirMatriu([
+function imprimirMatriu(matriu) {
+  console.log("Recorrent per col·leccions d'elements");
+  for (fila of matriu) {
+    for (columna of fila) {
+      console.log(columna);
+    }
+  }
+  console.log("Recorrent utilitzant índexs");
+  for (i = 0; i < matriu.length; i++) {
+    for (j = 0; j < matriu[i].length; j++) {
+      console.log(matriu[i][j]);
+    }
+  }
+}
+
+// imprimirMatriu([
 //   [1, 2, 3],
 //   [4, 5, 6],
 //   [7, 8, 9]
-// ]))
+// ]);
 
 // 1
 // 2
@@ -586,21 +601,154 @@ console.log(acabenAmbS([])) // []
 
 // ## 27. Traduir números a paraules
 
-// Escriu una funció llamada `numerosAParaules` que rep un array de números (cada número en el rang de 0 a 9) i retorna un nou array convertint cada número a la seva versió en paraules.
+// Escriu una funció anomenada `numerosAParaules` que rep un array de números (cada número en el rang de 0 a 9) i retorna un nou array convertint cada número a la seva versió en paraules.
 
-// console.log(numerosAParaules([0, 1, 2, 3, 4])) // ["cero", "uno", "dos", "tres", "cuatro"]
-// console.log(numerosAParaules([5, 6, 7, 8, 9])) // ["cinco", "seis", "siete", "ocho", "nueve"]
+function numerosAParaules(llista) {
+  let paraules = [];
+  for (numero of llista) {
+    switch (numero) {
+      case 0:
+        paraules.push("zero");
+        break;
+      case 1:
+        paraules.push("un");
+        break;
+      case 2:
+        paraules.push("dos");
+        break;
+      case 3:
+        paraules.push("tres");
+        break;
+      case 4:
+        paraules.push("quatre");
+        break;
+      case 5:
+        paraules.push("cinc");
+        break;
+      case 6:
+        paraules.push("sis");
+        break;
+      case 7:
+        paraules.push("set");
+        break;
+      case 8:
+        paraules.push("vuit");
+        break;
+      case 9:
+        paraules.push("nou");
+        break;
+    }
+  }
+  // for (let i = 0; i < llista.length; i++) {
+  //   switch (llista[i]) {
+  //     case 0:
+  //       paraules.push("zero");
+  //       break;
+  //     case 1:
+  //       paraules.push("un");
+  //       break;
+  //     case 2:
+  //       paraules.push("dos");
+  //       break;
+  //     case 3:
+  //       paraules.push("tres");
+  //       break;
+  //     case 4:
+  //       paraules.push("quatre");
+  //       break;
+  //     case 5:
+  //       paraules.push("cinc");
+  //       break;
+  //     case 6:
+  //       paraules.push("sis");
+  //       break;
+  //     case 7:
+  //       paraules.push("set");
+  //       break;
+  //     case 8:
+  //       paraules.push("vuit");
+  //       break;
+  //     case 9:
+  //       paraules.push("nou");
+  //       break;
+  //   }
+  // }
+  // let i = 0;
+  // while (i < llista.length) {
+  //   i++;
+  // }
+
+  return paraules; // retorna la llista amb els números com a paraules
+}
+
+// console.log(numerosAParaules([0, 1, 2, 3, 4])); // ["cero", "uno", "dos", "tres", "cuatro"]
+// console.log(numerosAParaules([5, 6, 7, 8, 9])); // ["cinco", "seis", "siete", "ocho", "nueve"]
 
 // ## 28. Traduir paraules a números
 
-// Escriu una funció llamada `paraulesANumeros` que rep un array de strings i retorna un nou array traduïnt cada paraula a la seva versió numèrica (del 0 al 9). Si la paraula no és un nombre traduir a -1.
+// Escriu una funció anomenada `paraulesANumeros` que rep un array de strings i retorna un nou array traduïnt cada paraula a la seva versió numèrica (del 0 al 9). Si la paraula no és un nombre traduir a -1.
 
-// console.log(["cero", "uno", "dos", "tres", "what?", "cuatro"]) // [0, 1, 2, 3, -1, 4]
-// console.log(["cinco", "seis", "siete", "ocho", "nueve"]) // [5, 6, 7, 8, 9]
+function paraulesANumeros(llista) {
+  let novaLlista = [];
+  let i = 0;
+  while (i < llista.length) {
+    switch (llista[i]) {
+      case "zero":
+        novaLlista.push(0);
+        break;
+      case "un":
+        novaLlista.push(1);
+        break;
+      case "dos":
+        novaLlista.push(2);
+        break;
+      case "tres":
+        novaLlista.push(3);
+        break;
+      case "quatre":
+        novaLlista.push(4);
+        break;
+      case "cinc":
+        novaLlista.push(5);
+        break;
+      case "sis":
+        novaLlista.push(6);
+        break;
+      case "set":
+        novaLlista.push(7);
+        break;
+      case "vuit":
+        novaLlista.push(8);
+        break;
+      case "nou":
+        novaLlista.push(9);
+        break;
+      default:
+        novaLlista.push(-1);
+    }
+    i++;
+  }
+  return novaLlista;
+}
+
+// console.log(paraulesANumeros(["zero", "un", "dos", "tres", "what?", "quatre"])); // [0, 1, 2, 3, -1, 4]
+// console.log(paraulesANumeros(["cinc", "sis", "set", "vuit", "nou"])); // [5, 6, 7, 8, 9]
 
 // ## 29. Número d'asteriscs en un array
 
 // Escriviu una funció de anomenada `numAsteriscs` que rep un array i retorneu el nombre d'asteriscs:
+
+function numAsteriscs(llista) {
+  let resposta = 0;
+  let i = 0;
+  while (i < llista.length) {
+    if (llista[i] == "*") {
+      resposta++;
+    }
+    i++;
+  }
+  return "Hi ha " + resposta + " asteriscs.";
+}
 
 // console.log(numAsteriscs(['', '*', '', '*'])) // 2
 // console.log(numAsteriscs(['*', '*', '*'])) // 3
@@ -608,21 +756,56 @@ console.log(acabenAmbS([])) // []
 
 // ## 30. Número d'asteriscs en una matriu
 
-// Escriviu una funció anomenada `numAsteriscs` que rep una matriz (un array de arrays) i retorneu el nombre d'asteriscs:
+// Escriviu una funció anomenada `numAsteriscs` que rep una matriu (un array de arrays) i retorneu el nombre d'asteriscs:
 
-// console.log(numAsteriscs([
-//   ['*', '', '*'],
-//   ['', '*', ''],
-//   ['*', '', '*']
-// ])) // 5
+function numAsteriscs(matriu) {
+  comptador = 0;
+  for (fila of matriu) {
+    for (columna of fila) {
+    }
+  }
+  let fila = 0; let columna = 0;
+  while (fila < matriu.length) {
+    while (columna < matriu[fila].length) {
+      comptador++;
+      columna++;
+    }
+    fila++;
+  }
+  return("Hi ha "+comptador+" asteriscs");
+}
+
+// console.log(
+//   numAsteriscs([
+//     ["*", "", "*"],
+//     ["", "*", ""],
+//     ["*", "", "*"],
+//   ]),
+// ); // 5
 
 // ## 31. Distància entre dos strings
 
-// Escriviu una funció de anomenada `distància` que rebi dos strings i retorni el nombre de caràcters diferents (comparant la posició per posició).
+// Escriviu una funció de anomenada `distància` que rebi dos strings i retorni el nombre de caràcters diferents (comparant-la posició per posició).
 
 // **Nota:** Podeu assumir que els strings sempre tenen la mateixa longitud. En canvi, si voleu afegir més dificultat podeu pensar cómo solucionar-ho si una cadena és més llarga que l'atra (la diferència entre les longituds s'afegiria al resultat).
 
-// codi de prova
-// console.log(distancia("hola", "hola")) // 0
-// console.log(distancia("sol", "tol")) // 1
-// console.log(distancia("carro", "correr")) // 3
+function distancia(cadena1, cadena2){
+  let numCarDiferents=Math.abs(cadena1.length-cadena2.length);
+  let limit=0;
+  // Cerquem el límit de caracters per recòrrer
+  if(cadena1.length<cadena2.length){
+    limit=cadena1.length;
+  }else{
+    limit=cadena2.length;
+  }
+  for(let i=0;i<limit;i++){
+    if(cadena1[i]!=cadena2[i]){
+      numCarDiferents++;
+    }
+  }
+  return numCarDiferents;
+}
+
+console.log(distancia("hola", "hola")) // 0
+console.log(distancia("sol", "tol")) // 1
+console.log(distancia("carro", "correr")) // 3
