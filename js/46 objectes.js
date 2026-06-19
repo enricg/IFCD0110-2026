@@ -62,4 +62,28 @@ const myMother = new Person("Sally", "Rally", 48, "green");
 const mySister = new Person("Anna", "Rally", 18, "green");
 const mySelf = new Person("Johnny", "Rally", 22, "green");
 
-console.log(myFather);
+// console.log(myFather);
+
+// // Inici Sessió 19/06
+
+// const cotxe2 = {marca:"Audi", model:"A5"};
+// console.log(cotxe2);
+
+// Object.assign(cotxe,{marca:"SEAT",model:"nou"})
+// cotxe.marca="SEAT";
+
+// console.log("Cotxe objectiu");
+// console.log(cotxe2);
+// console.log("Cotxe original");
+// console.log(cotxe);
+
+console.log(Object.entries(cotxe));
+
+for([element,valor] of Object.entries(cotxe)){
+    console.log(valor +" --> "+element);
+}
+
+// Mapejar les entrades
+
+const elMeuMapa = new Map(Object.entries(cotxe));
+console.log(elMeuMapa);
