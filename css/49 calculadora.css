@@ -1,0 +1,87 @@
+*{
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html{
+    /* font-size: 62.5%; */
+    scroll-behavior: smooth;
+}
+
+header, footer{
+    background: #000;
+    color:#fff;
+    text-align: center;
+    align-content: center;
+    height: 3rem;
+}
+
+body{
+    display: grid;
+    min-height: 100vh;
+    grid-template-areas: 
+    "cap"
+    "contingut"
+    "peu";
+    grid-template-columns: 1fr;
+    grid-template-rows: 3rem auto 3rem;
+}
+
+header{
+    grid-area: cap;
+}
+
+main{
+    grid-area: contingut;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+footer{
+    grid-area: peu;
+}
+
+.calculadora{
+    background: red;
+    height: 50%;
+    width: 50%;
+    display: grid;
+    grid-template-areas: 
+    "resultat resultat resultat resultat resultat "
+    "numeros numeros numeros operadors operadors"
+    "numeros numeros numeros operadors operadors"
+    "numeros numeros numeros operadors operadors"
+    "numeros numeros numeros operadors operadors";
+    grid-template-columns: repeat(4 1fr) 10fr;
+    grid-template-rows: 3fr repeat(3 1fr);
+}
+
+.resultat{
+    grid-area: resultat;
+    background: #2acf05;
+}
+
+.botons{
+    grid-area: numeros;
+    background: #f3e006;
+    display:flex;
+    flex-wrap: wrap;
+
+}
+
+.boto{
+    /* background: green;
+    border: 1px #000 solid;
+    border-radius: 5px;
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    align-content: center;
+    */
+}
+
+.operadors{
+    grid-area: operadors;
+    background: #093afd;
+}

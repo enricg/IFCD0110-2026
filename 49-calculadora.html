@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ca">
+  <head>
+    <title>Calculadora</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="./imgs/chavo.jpg" type="image/x-icon" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- Llibreries bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="./css/49 calculadora.css" />
+  </head>
+  <body>
+    <header>Exercici calculadora</header>
+    <main>
+      <div class="calculadora">
+        <div class="resultat" id="resultat"></div>
+        <div class="botons">
+            <button type="button" class="btn btn-primary" onclick="afegir(0)">0</button>
+            <button type="button" class="btn btn-primary" onclick="afegir(1)">1</button>
+            <button type="button" class="btn btn-primary" onclick="afegir(2)">2</button>
+            <button type="button" class="btn btn-primary" onclick="afegir(3)">3</button>
+            <button type="button" class="btn btn-primary" onclick="afegir(4)">4</button>
+            <button type="button" class="btn btn-primary" onclick="afegir(5)">5</button>
+            <button type="button" class="btn btn-primary" onclick="afegir(6)">6</button>
+            <button type="button" class="btn btn-primary" onclick="afegir(7)">7</button>
+            <button type="button" class="btn btn-primary" onclick="afegir(8)">8</button>
+            <button type="button" class="btn btn-primary" onclick="afegir(9)">9</button>
+        </div>
+        <div class="operadors">
+            <button type="button" class="btn btn-secondary" onclick="afegir('+')"><i class="fa-solid fa-add"></i></button>
+            <button type="button" class="btn btn-secondary" onclick="afegir('-')"><i class="fa-solid fa-minus"></i></button>
+            <button type="button" class="btn btn-secondary" onclick="afegir('x')"><i class="fa-solid fa-xmark"></i></button>
+            <button type="button" class="btn btn-secondary" onclick="afegir('/')"><i class="fa-solid fa-divide"></i></button>
+        </div>
+      </div>
+    </main>
+    <footer>Fet per mi &copy;</footer>
+    <script src="./js/49 calculadora.js"></script>
+  </body>
+</html>
