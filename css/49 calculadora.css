@@ -1,10 +1,11 @@
-*{
+/*
+ *{
     margin: 0;
     box-sizing: border-box;
 }
 
 html{
-    /* font-size: 62.5%; */
+    font-size: 62.5%;
     scroll-behavior: smooth;
 }
 
@@ -15,73 +16,52 @@ header, footer{
     align-content: center;
     height: 3rem;
 }
+*/
 
-body{
+/* GRID GENERAL DE LA PÀGINA */
+.contenidor {
     display: grid;
+    grid-template-rows: 100px 1fr 70px;
     min-height: 100vh;
-    grid-template-areas: 
-    "cap"
-    "contingut"
-    "peu";
-    grid-template-columns: 1fr;
-    grid-template-rows: 3rem auto 3rem;
 }
 
-header{
-    grid-area: cap;
+/* MAIN */
+main {
+    background-color: #f8f9fa;
+    padding: 20px;
 }
 
-main{
-    grid-area: contingut;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+/* CALCULADORA */
+.calculadora {
+    background-color: white;
+    padding: 20px;
+    border-radius: 15px;
+    width: 320px;
+    height: 600px;
 }
 
-footer{
-    grid-area: peu;
+/* PANTALLA */
+.pantalla {
+    height: 70px;
+    font-size: 2rem;
+    text-align: right;
 }
 
-.calculadora{
-    background: red;
-    height: 50%;
-    width: 50%;
+/* GRID DE BOTONS */
+.tecles {
     display: grid;
-    grid-template-areas: 
-    "resultat resultat resultat resultat resultat "
-    "numeros numeros numeros operadors operadors"
-    "numeros numeros numeros operadors operadors"
-    "numeros numeros numeros operadors operadors"
-    "numeros numeros numeros operadors operadors";
-    grid-template-columns: repeat(4 1fr) 10fr;
-    grid-template-rows: 3fr repeat(3 1fr);
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    gap: 10px;
 }
 
-.resultat{
-    grid-area: resultat;
-    background: #2acf05;
+/* BOTONS */
+.tecles button {
+    height: 60px;
+    font-size: 1.3rem;
 }
 
-.botons{
-    grid-area: numeros;
-    background: #f3e006;
-    display:flex;
-    flex-wrap: wrap;
-
-}
-
-.boto{
-    /* background: green;
-    border: 1px #000 solid;
-    border-radius: 5px;
-    width: 100px;
-    height: 100px;
-    text-align: center;
-    align-content: center;
-    */
-}
-
-.operadors{
-    grid-area: operadors;
-    background: #093afd;
+/* BOTÓ 0 OCUPA DUES COLUMNES */
+.zero {
+    grid-column: span 2;
 }
