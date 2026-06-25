@@ -10,23 +10,39 @@ function afegir(caracter) {
   document.getElementById("display").value = cadena;
 }
 
-// function calcular(){
-//     try{
-//         let cadena = sessionStorage.getItem("resultat");
-//     document.getElementById("display").value=eval(cadena);
-//     }catch(e){
-//         alert("Alguna cosa no ha anat bé");
-//     }
-// }
+function canviaSigne() {
+  if (cadena.length > 0) {
+    if (cadena[0] === "-") {
+      cadena = cadena.substring(1);
+    } else {
+      cadena = "-" + cadena;
+    }
+    document.getElementById("display").value = cadena;
+  }
+}
 
 alerta = (missatge) => alert(missatge);
+
+function mostrarError(missatge) {
+  const display = document.getElementById("display");
+
+  display.value = missatge;
+  display.classList.add("is-invalid");
+  display.style.fontSize = "0.8rem";
+
+  setTimeout(() => {
+    display.value = "";
+    display.classList.remove("is-invalid");
+    display.style.fontSize = "";
+  }, 2000);
+}
 
 calcular = () => {
   try {
     document.getElementById("display").value = eval(cadena);
   } catch (e) {
-    //alert("Alguna cosa no ha anat bé");
-    alerta("Hola bon dia");
+    mostrarError("Alguna cosa no ha anat bé");
+    cadena="";
   }
 };
 
@@ -37,27 +53,22 @@ function netejar(opcio) {
       break;
     case "CE":
       //console.log("CE");
-      esborraOperador();
+      // esborraOperador();
       break;
     case "<":
-      //console.log("<");
       esborraCaracter();
       break;
   }
 }
 
 function esborraTot() {
-    console.log("Valor de la cadena abans de esborrar: "+cadena);
   cadena = "";
-  console.log("Valor de la cadena després de esborrar: "+cadena);
   document.getElementById("display").value = "";
 }
 
 function esborraCaracter() {
-  let cadena = sessionStorage.getItem("resultat");
-  console.log("valor de la cadena abans del if: "+cadena);
   if (cadena.length > 0) {
-    cadena=cadena.substring(0, cadena.length - 1);
+    cadena = cadena.substring(0, cadena.length - 1);
     document.getElementById("display").value = cadena;
   } else {
     alert("No hi ha més digits per esborrar!");
