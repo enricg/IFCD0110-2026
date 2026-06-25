@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Catàleg de selectors del DOM — JavaScript</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* =========================================================
+     TOKENS DE DISSENY
+     Paleta i mides reutilitzades a tota la pàgina (estètica
+     "plànol tècnic": paper blau pàl·lid, tinta marina, taronja
+     de seguretat per marcar coincidències dels selectors).
+     ========================================================= */
+  :root{
+    --paper:#EAF1F5;
+    --paper-deep:#DCE7ED;
+    --grid-line:#C3D5DF;
+    --ink:#152C40;
+    --ink-soft:#4F6B7D;
+    --blue:#1B4F72;
+    --blue-deep:#0E3650;
+    --accent:#FF6B35;
+    --accent-soft:#FFE0CF;
+    --teal:#147A70;
+    --card-bg:#FDFEFE;
+    --line-w:1px;
+    --radius:2px;
+  }
+
+  /* Reset bàsic: sense marges per defecte i box-sizing previsible */
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+
+  /* Fons de "paper de quadres" fet amb gradients repetits (sense imatges) */
+  body{
+    background-color:var(--paper);
+    background-image:
+      repeating-linear-gradient(0deg, var(--grid-line) 0 1px, transparent 1px 28px),
+      repeating-linear-gradient(90deg, var(--grid-line) 0 1px, transparent 1px 28px);
+    color:var(--ink);
+    font-family:'Space Grotesk', sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{color:var(--blue-deep);}
+
+  /* Focus visible i accessible per a navegació amb teclat */
+  :focus-visible{
+    outline:2px dashed var(--accent);
+    outline-offset:3px;
+  }
+
+  /* Contenidor central amb amplada màxima */
+  .wrap{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 24px 80px;
+  }
+
+  /* ---------- registration marks (blueprint corner crosses) ---------- */
+  .reg-mark{position:relative;}
+  .reg-mark::before,
+  .reg-mark::after{
+    content:"";
+    position:absolute;
+    width:18px; height:18px;
+    border:1px solid var(--blue);
+    border-radius:50%;
+    opacity:.55;
+  }
+  .reg-mark::before{top:-9px; left:-9px;}
+  .reg-mark::after{bottom:-9px; right:-9px;}
+  .reg-mark .crosshair{
+    position:absolute; top:-9px; left:-9px;
+    width:18px; height:18px;
+  }
+
+  /* ---------- hero (capçalera introductòria de la pàgina) ---------- */
+  .hero{
+    padding:56px 0 36px;
+    border-bottom:2px solid var(--blue);
+    margin-bottom:40px;
+  }
+  .hero .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12.5px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--blue);
+    border:1px solid var(--blue);
+    display:inline-block;
+    padding:4px 10px;
+    border-radius:var(--radius);
+    background:rgba(255,255,255,.5);
+  }
+  .hero h1{
+    font-size:clamp(32px, 5vw, 52px);
+    line-height:1.05;
+    margin:18px 0 14px;
+    font-weight:700;
+    letter-spacing:-.01em;
+    max-width:820px;
+  }
+  .hero h1 em{
+    font-style:normal;
+    color:var(--accent);
+  }
+  .hero p{
+    max-width:620px;
+    color:var(--ink-soft);
+    font-size:16px;
+  }
+  .hero .legend{
+    margin-top:26px;
+    display:flex;
+    gap:22px;
+    flex-wrap:wrap;
+    font-family:'JetBrains Mono', monospace;
+    font-size:12.5px;
+    color:var(--ink-soft);
+  }
+  .hero .legend span{display:flex; align-items:center; gap:7px;}
+  /* Quadrats de llegenda: contorn discontinu = element marcat; sòlid = codi */
+  .swatch{width:13px;height:13px;border:1.5px dashed var(--accent);display:inline-block;}
+  .swatch.solid{border-style:solid;background:var(--blue); border-color:var(--blue);}
+
+  /* ---------- layout: graella de dues columnes (plafó + catàleg) ---------- */
+  .layout{
+    display:grid;
+    grid-template-columns: 360px 1fr;
+    gap:32px;
+    align-items:start;
+  }
+  @media (max-width: 880px){
+    .layout{grid-template-columns:1fr;}
+  }
+
+  /* ---------- board panel: targeta fixa amb el plafó d'especímens ---------- */
+  .board-panel{
+    position:sticky;
+    top:24px;
+    background:var(--card-bg);
+    border:2px solid var(--blue);
+    border-radius:var(--radius);
+    padding:22px 20px 24px;
+  }
+  /* En mòbil no fixem el plafó: l'espai vertical no ho permet còmodament */
+  @media (max-width: 880px){ .board-panel{position:static;} }
+
+  .board-panel .panel-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    margin-bottom:16px;
+    padding-bottom:12px;
+    border-bottom:1px dashed var(--grid-line);
+  }
+  .board-panel .panel-head h2{
+    font-size:14px;
+    text-transform:uppercase;
+    letter-spacing:.1em;
+    margin:0;
+    color:var(--blue-deep);
+  }
+  .board-panel .panel-head .stamp{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    color:var(--ink-soft);
+  }
+
+  /* Caixa interior amb vora discontinua que conté els elements "especimen" reals */
+  .board{
+    border:1px dashed var(--grid-line);
+    padding:18px 16px;
+    border-radius:var(--radius);
+    background:
+      linear-gradient(0deg, transparent 24px, transparent 24px);
+  }
+
+  .board-row{display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;}
+  .board-title{font-size:16px; margin:0; font-weight:600;}
+  .tag{
+    font-family:'JetBrains Mono', monospace;
+    font-size:10.5px;
+    text-transform:uppercase;
+    padding:2px 7px;
+    border-radius:2px;
+    letter-spacing:.06em;
+  }
+  .tag-new{background:var(--teal); color:#fff;}
+
+  .item-list{list-style:none; margin:0 0 14px; padding:0; display:flex; gap:8px; flex-wrap:wrap;}
+  .item{
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    border:1px solid var(--blue);
+    padding:5px 10px;
+    border-radius:2px;
+    background:#fff;
+  }
+
+  .note{font-size:13.5px; color:var(--ink-soft); margin:0 0 14px;}
+
+  .link, .btn{
+    font-family:'Space Grotesk', sans-serif;
+    font-size:13.5px;
+    display:inline-block;
+    margin:0 8px 14px 0;
+    text-decoration:none;
+  }
+  .btn{
+    background:var(--blue-deep);
+    color:#fff;
+    border:none;
+    padding:7px 13px;
+    border-radius:2px;
+    cursor:default;
+  }
+
+  .radios{border:1px dashed var(--grid-line); border-radius:2px; padding:10px 12px; margin:0;}
+  .radios legend{font-size:12px; color:var(--ink-soft); padding:0 4px;}
+  .radios label{font-size:13px; display:inline-flex; align-items:center; gap:5px; margin-right:14px;}
+
+  /* ---------- estat "trobat": aplicat per JS quan un selector el localitza ---------- */
+  .matched{
+    outline:2.5px dashed var(--accent) !important;
+    outline-offset:3px;
+    background:var(--accent-soft) !important;
+    position:relative;
+    border-radius:2px;
+    animation:pulse .5s ease;
+  }
+  /* Petita animació d'entrada del contorn taronja */
+  @keyframes pulse{ from{outline-offset:0px;} to{outline-offset:3px;} }
+  /* Respecta la preferència de moviment reduït del sistema */
+  @media (prefers-reduced-motion: reduce){ .matched{animation:none;} }
+
+  /* Etiqueta numerada que s'afegeix sobre cada element coincident quan n'hi ha més d'un */
+  .badge{
+    position:absolute;
+    top:-9px; right:-9px;
+    background:var(--accent);
+    color:#fff;
+    font-family:'JetBrains Mono', monospace;
+    font-size:10px;
+    line-height:1;
+    padding:2px 5px;
+    border-radius:50%;
+    min-width:16px;
+    text-align:center;
+  }
+
+  /* ---------- catalog: capçalera i graella de fitxes de selectors ---------- */
+  .catalog-head{margin-bottom:18px;}
+  .catalog-head h2{
+    font-size:14px;
+    text-transform:uppercase;
+    letter-spacing:.1em;
+    color:var(--blue-deep);
+    margin:0 0 4px;
+  }
+  .catalog-head p{margin:0; color:var(--ink-soft); font-size:13.5px;}
+
+  .catalog{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:18px;
+  }
+  @media (max-width: 720px){ .catalog{grid-template-columns:1fr;} }
+
+  /* Targeta individual d'un mètode de selecció */
+  .card{
+    background:var(--card-bg);
+    border:1.5px solid var(--blue);
+    border-radius:var(--radius);
+    padding:18px 18px 16px;
+    display:flex;
+    flex-direction:column;
+  }
+  .card-top{display:flex; align-items:center; gap:10px; margin-bottom:8px;}
+  .card-num{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    background:var(--blue-deep);
+    color:#fff;
+    padding:2px 7px;
+    border-radius:2px;
+    letter-spacing:.05em;
+  }
+  .card-title{
+    font-family:'JetBrains Mono', monospace;
+    font-size:14.5px;
+    font-weight:600;
+    color:var(--blue-deep);
+  }
+  .card-desc{font-size:13.3px; color:var(--ink-soft); margin:0 0 12px;}
+
+  /* Bloc de codi: fons fosc tipus editor, amb classes tok-* per acolorir tokens */
+  .codeblock{
+    background:#0E2233;
+    color:#E8F0F4;
+    font-family:'JetBrains Mono', monospace;
+    font-size:12.6px;
+    padding:10px 12px;
+    border-radius:2px;
+    margin:0 0 12px;
+    overflow-x:auto;
+    white-space:pre;
+  }
+  .tok-k{color:#7FB8E0;} /* paraula clau: document, etc. */
+  .tok-m{color:#FF9466;} /* nom del mètode cridat */
+  .tok-s{color:#8FE3B8;} /* cadena de text (selector) */
+  .tok-c{color:#7E94A3;} /* comentari dins el bloc de codi */
+
+  /* Fila amb el botó "Executa" de cada fitxa */
+  .run-row{display:flex; align-items:center; gap:10px; margin-bottom:10px;}
+  .run-btn{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12.5px;
+    letter-spacing:.04em;
+    background:var(--accent);
+    border:none;
+    color:#fff;
+    padding:7px 14px;
+    border-radius:2px;
+    cursor:pointer;
+    transition:filter .15s ease;
+  }
+  .run-btn:hover{filter:brightness(1.08);}
+  .run-btn:active{filter:brightness(.95);}
+
+  /* Panell de "consola" on s'imprimeix el resultat de cada selector */
+  .output{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12.5px;
+    color:var(--blue-deep);
+    background:var(--paper-deep);
+    border:1px dashed var(--grid-line);
+    border-radius:2px;
+    padding:8px 10px;
+    min-height:20px;
+    flex-grow:1;
+  }
+  .output .line{margin:0; padding:2px 0;}
+  .output .line.empty{color:var(--ink-soft);}
+  .output .line.bool-true{color:var(--teal);}  /* resultat booleà true (matches) */
+  .output .line.bool-false{color:var(--accent);} /* resultat booleà false (matches) */
+
+  /* ---------- footer ---------- */
+  footer{
+    margin-top:50px;
+    padding-top:18px;
+    border-top:1px dashed var(--grid-line);
+    font-family:'JetBrains Mono', monospace;
+    font-size:11.5px;
+    color:var(--ink-soft);
+    text-align:center;
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <!-- ===================== CAPÇALERA / HERO ===================== -->
+  <header class="hero">
+    <span class="eyebrow">Catàleg tècnic · DOM API</span>
+    <h1>Cada manera de <em>seleccionar</em> un element del DOM, provada en directe.</h1>
+    <p>Vuit fitxes, vuit mètodes. Cada fitxa mostra el codi exacte i, en prémer "Executa", marca al plafó d'especímens (a l'esquerra) quins elements reals ha trobat el selector.</p>
+    <div class="legend">
+      <span><span class="swatch"></span> element trobat pel selector</span>
+      <span><span class="swatch solid"></span> contorn de l'element al codi</span>
+    </div>
+  </header>
+
+  <div class="layout">
+
+    <!-- ===================== BOARD ===================== -->
+    <aside class="board-panel reg-mark">
+      <div class="panel-head">
+        <h2>Plafó d'especímens</h2>
+        <span class="stamp">HTML real · DOM viu</span>
+      </div>
+
+      <div class="board" id="specimenBoard">
+        <!-- Element amb id únic: objectiu de getElementById() -->
+        <div class="board-row">
+          <h3 id="board-title" class="board-title">Plafó d'especímens</h3>
+          <span class="tag tag-new">nou</span>
+        </div>
+
+        <!-- Tres <li> amb classe compartida "item" (getElementsByClassName /
+             getElementsByTagName) i atribut data-type (querySelector[All]) -->
+        <ul class="item-list">
+          <li class="item" data-type="fruit">Poma</li>
+          <li class="item" data-type="fruit">Pera</li>
+          <li class="item" data-type="veg">Pastanaga</li>
+        </ul>
+
+        <p class="note">Aquest paràgraf és només una nota d'exemple dins del plafó.</p>
+
+        <a href="#" class="link" id="sample-link">Un enllaç</a>
+        <button class="btn" id="action-btn" type="button">Una acció</button>
+
+        <!-- Tres radio buttons amb el mateix name: objectiu de getElementsByName() -->
+        <fieldset class="radios">
+          <legend>Tria una fruita</legend>
+          <label><input type="radio" name="fruita" value="poma"> Poma</label>
+          <label><input type="radio" name="fruita" value="pera"> Pera</label>
+          <label><input type="radio" name="fruita" value="kiwi"> Kiwi</label>
+        </fieldset>
+      </div>
+    </aside>
+
+    <!-- ===================== CATÀLEG DE FITXES ===================== -->
+    <main>
+      <div class="catalog-head">
+        <h2>Fitxes de selectors</h2>
+        <p>Prem "Executa" a cada fitxa per veure el resultat real sobre el plafó.</p>
+      </div>
+
+      <!-- Contenidor buit: les 8 fitxes es generen dinàmicament des del <script> final -->
+      <div class="catalog" id="catalog"><!-- les fitxes s'omplen amb JS --></div>
+    </main>
+
+  </div>
+
+  <footer>
+    Pàgina autocontinguda · cap dada surt del navegador · construïda sobre el DOM real de la pàgina
+  </footer>
+
+</div>
+
+<script>
+/* =========================================================
+   LÒGICA DE LA PÀGINA
+   1) Funcions d'ajuda per marcar/desmarcar elements al plafó.
+   2) Array "cards": una entrada per cada mètode de selecció,
+      amb el seu codi, descripció i la funció run() que l'executa
+      de veritat sobre el DOM i retorna el resultat a mostrar.
+   3) Bucle final que pinta les fitxes i hi enganxa els botons.
+   Tot queda tancat dins una IIFE per no deixar variables globals.
+   ========================================================= */
+(function(){
+  // Element contenidor on viuen tots els "especímens" de prova
+  const board = document.getElementById('specimenBoard');
+  // Referències a les etiquetes numerades (badges) actives, per poder-les netejar
+  let activeBadges = [];
+
+  // Treu el contorn taronja i les etiquetes numerades de la tirada anterior
+  function clearHighlights(){
+    board.querySelectorAll('.matched').forEach(el => el.classList.remove('matched'));
+    activeBadges.forEach(b => b.remove());
+    activeBadges = [];
+  }
+
+  // Marca visualment els elements rebuts (array, NodeList o HTMLCollection).
+  // Si n'hi ha més d'un, afegeix una etiqueta numerada (1, 2, 3...) a cada un.
+  function highlight(elements){
+    clearHighlights();
+    const list = Array.isArray(elements) ? elements : Array.from(elements || []);
+    list.forEach((el, i) => {
+      if(!el) return;
+      el.classList.add('matched');
+      if(list.length > 1){
+        const badge = document.createElement('span');
+        badge.className = 'badge';
+        badge.textContent = i + 1;
+        // L'etiqueta es posiciona en absolut, així que l'element pare
+        // necessita position:relative perquè quedi ben ancorada
+        const cs = getComputedStyle(el);
+        if(cs.position === 'static') el.style.position = 'relative';
+        el.appendChild(badge);
+        activeBadges.push(badge);
+      }
+    });
+    return list;
+  }
+
+  // Construeix una representació curta tipus "<tag#id.classe>" d'un element,
+  // per mostrar als resultats de text de cada fitxa
+  function describe(el){
+    if(!el) return null;
+    const id = el.id ? '#' + el.id : '';
+    const cls = el.className && typeof el.className === 'string'
+      ? '.' + el.className.trim().split(/\s+/).join('.')
+      : '';
+    return '<' + el.tagName.toLowerCase() + id + cls + '>';
+  }
+
+  // Definició de les 8 fitxes. Cada objecte conté:
+  //  - num/title/code/desc: contingut visible de la fitxa
+  //  - run(): la funció que executa el selector REAL i retorna les línies
+  //    de text que s'imprimiran al panell de sortida
+  const cards = [
+    // 01 — selecciona per id: sempre un únic element (o null)
+    {
+      num: '01',
+      title: 'getElementById()',
+      code: `<span class="tok-k">document</span>.<span class="tok-m">getElementById</span>(<span class="tok-s">'board-title'</span>)`,
+      desc: "Retorna un únic element pel seu atribut id (únic a tota la pàgina). Si no en troba cap, retorna null.",
+      run(){
+        const el = document.getElementById('board-title');
+        highlight([el]);
+        return [`→ ${describe(el)}`];
+      }
+    },
+    // 02 — selecciona per classe: HTMLCollection viva amb totes les coincidències
+    {
+      num: '02',
+      title: 'getElementsByClassName()',
+      code: `<span class="tok-k">document</span>.<span class="tok-m">getElementsByClassName</span>(<span class="tok-s">'item'</span>)`,
+      desc: "Retorna una HTMLCollection (viva) amb tots els elements que tenen aquesta classe.",
+      run(){
+        const els = document.getElementsByClassName('item');
+        highlight(els);
+        return [`→ ${els.length} elements trobats`];
+      }
+    },
+    // 03 — selecciona per nom d'etiqueta HTML
+    {
+      num: '03',
+      title: 'getElementsByTagName()',
+      code: `<span class="tok-k">document</span>.<span class="tok-m">getElementsByTagName</span>(<span class="tok-s">'li'</span>)`,
+      desc: "Retorna una HTMLCollection (viva) amb tots els elements d'una etiqueta concreta.",
+      run(){
+        const els = document.getElementsByTagName('li');
+        highlight(els);
+        return [`→ ${els.length} elements <li> trobats`];
+      }
+    },
+    // 04 — selecciona per atribut name: útil sobretot en grups de formulari
+    {
+      num: '04',
+      title: 'getElementsByName()',
+      code: `<span class="tok-k">document</span>.<span class="tok-m">getElementsByName</span>(<span class="tok-s">'fruita'</span>)`,
+      desc: "Retorna els elements de formulari que compartixen el mateix atribut name (típic en grups de radio buttons).",
+      run(){
+        const els = document.getElementsByName('fruita');
+        highlight(els);
+        return [`→ ${els.length} inputs amb name="fruita"`];
+      }
+    },
+    // 05 — selector CSS qualsevol, retorna només la primera coincidència
+    {
+      num: '05',
+      title: 'querySelector()',
+      code: `<span class="tok-k">document</span>.<span class="tok-m">querySelector</span>(<span class="tok-s">'.item[data-type="fruit"]'</span>)`,
+      desc: "Retorna el primer element que coincideix amb un selector CSS qualsevol (combinacions, atributs, pseudo-classes...).",
+      run(){
+        const el = document.querySelector('.item[data-type="fruit"]');
+        highlight([el]);
+        return [`→ ${describe(el)} (el primer dels dos)`];
+      }
+    },
+    // 06 — selector CSS qualsevol, retorna TOTES les coincidències (NodeList estàtica)
+    {
+      num: '06',
+      title: 'querySelectorAll()',
+      code: `<span class="tok-k">document</span>.<span class="tok-m">querySelectorAll</span>(<span class="tok-s">'.item[data-type="fruit"]'</span>)`,
+      desc: "Com querySelector, però retorna una NodeList estàtica amb totes les coincidències.",
+      run(){
+        const els = document.querySelectorAll('.item[data-type="fruit"]');
+        highlight(els);
+        return [`→ ${els.length} elements amb data-type="fruit"`];
+      }
+    },
+    // 07 — puja per la cadena d'ancestres; mostrem tant un cas amb èxit (ul.item-list)
+    // com un cas sense èxit (null) per il·lustrar el comportament complet
+    {
+      num: '07',
+      title: 'element.closest()',
+      code: `pastanaga.<span class="tok-m">closest</span>(<span class="tok-s">'.item-list'</span>)\npastanaga.<span class="tok-m">closest</span>(<span class="tok-s">'.board-row'</span>)`,
+      desc: "Des d'un element, puja per la cadena d'ancestres (inclòs ell mateix) fins trobar el primer que coincideix amb el selector. Si no en troba cap, retorna null.",
+      run(){
+        const start = document.querySelector('.item[data-type="veg"]');
+        const upToList = start.closest('.item-list');
+        const upToRow = start.closest('.board-row');
+        highlight([start, upToList].filter(Boolean));
+        return [
+          `→ .closest('.item-list') = ${describe(upToList)}`,
+          `→ .closest('.board-row') = ${upToRow ? describe(upToRow) : 'null (no és cap ancestre)'}`
+        ];
+      }
+    },
+    // 08 — comprova si UN element concret compliria un selector, sense buscar-lo;
+    // mostrem un cas true i un cas false amb el mateix element de partida
+    {
+      num: '08',
+      title: 'element.matches()',
+      code: `poma.<span class="tok-m">matches</span>(<span class="tok-s">'.item[data-type="fruit"]'</span>)\npoma.<span class="tok-m">matches</span>(<span class="tok-s">'.item[data-type="veg"]'</span>)`,
+      desc: "Comprova si un element concret compliria un selector CSS donat, sense buscar-lo enlloc. Retorna true o false.",
+      run(){
+        const poma = document.querySelector('.item[data-type="fruit"]');
+        const a = poma.matches('.item[data-type="fruit"]');
+        const b = poma.matches('.item[data-type="veg"]');
+        highlight([poma]);
+        return [
+          `<span class="${a ? 'bool-true' : 'bool-false'}">→ .matches('[data-type="fruit"]') = ${a}</span>`,
+          `<span class="${b ? 'bool-true' : 'bool-false'}">→ .matches('[data-type="veg"]') = ${b}</span>`
+        ];
+      }
+    }
+  ];
+
+  // Contenidor on s'injectaran les 8 fitxes generades dinàmicament
+  const catalog = document.getElementById('catalog');
+
+  // Per cada definició de "cards", crea la targeta HTML corresponent,
+  // l'afegeix al catàleg i connecta el botó "Executa" amb la seva funció run()
+  cards.forEach((card, idx) => {
+    // Crea la targeta <article> i hi injecta el contingut de la fitxa
+    const el = document.createElement('article');
+    el.className = 'card';
+    el.innerHTML = `
+      <div class="card-top">
+        <span class="card-num">FITXA ${card.num}</span>
+        <span class="card-title">${card.title}</span>
+      </div>
+      <p class="card-desc">${card.desc}</p>
+      <pre class="codeblock">${card.code}</pre>
+      <div class="run-row">
+        <button class="run-btn" type="button" data-idx="${idx}">Executa ▶</button>
+      </div>
+      <div class="output"><span class="line empty">→ encara no s'ha executat</span></div>
+    `;
+    catalog.appendChild(el);
+
+    const btn = el.querySelector('.run-btn');
+    const output = el.querySelector('.output');
+
+    // En clicar "Executa": corre el selector real, escriu el resultat
+    // al panell de sortida i desplaça la fitxa a la vista si calia
+    btn.addEventListener('click', () => {
+      const lines = card.run();
+      output.innerHTML = lines.map(l => `<p class="line">${l}</p>`).join('');
+      el.scrollIntoView({behavior: 'smooth', block: 'nearest'});
+    });
+  });
+
+})();
+</script>
+
+</body>
+</html>
