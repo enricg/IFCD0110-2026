@@ -14,3 +14,28 @@ header,footer{
     color: #fff;
     text-align: center;
 }
+
+/* prova*/
+.btn-stretch:hover{
+    transform:stretch();
+}
+
+.btn-peel:hover{
+    clip-path:peel(x);
+}
+
+.btn-frost:hover{
+    filter:frost();
+}
+
+.btn-sand:hover{
+    animation:pour();
+}
+
+.btn-gravity:hover{
+    gravity:cursor;
+}
+
+.btn-primary:hover{
+    transform:bulge(z);
+}
