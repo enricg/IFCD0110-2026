@@ -23,31 +23,31 @@
         <main class="d-flex justify-content-center align-items-center">
             <div class="calculadora shadow">
 
-                <input type="text" class="pantalla form-control mb-3" id="resultat" readonly>
+                <input type="text" class="pantalla form-control mb-3" id="display" readonly>
 
                 <div class="tecles">
-                    <button class="btn btn-secondary" id="btnC" onclick="afegirCaracter('C')">C</button>
-                    <button class="btn btn-secondary" id="btnMM" onclick="afegirCaracter('±')">±</button>
-                    <button class="btn btn-secondary" onclick="afegirCaracter('%')">%</button>
-                    <button class="btn btn-warning" onclick="afegirCaracter('÷')">÷</button>
+                    <button class="btn btn-secondary" id="btnC" onclick="netejar('C')">C</button>
+                    <button class="btn btn-secondary" id="btnMM" onclick="afegir('±')">±</button>
+                    <button class="btn btn-secondary" onclick="afegir('%')">%</button>
+                    <button class="btn btn-warning" onclick="afegir('÷')">÷</button>
 
-                    <button class="btn btn-light" onclick="afegirCaracter('7')">7</button>
-                    <button class="btn btn-light" onclick="afegirCaracter('8')">8</button>
-                    <button class="btn btn-light" onclick="afegirCaracter('9')">9</button>
-                    <button class="btn btn-warning" onclick="afegirCaracter('*')">×</button>
+                    <button class="btn btn-light" onclick="afegir('7')">7</button>
+                    <button class="btn btn-light" onclick="afegir('8')">8</button>
+                    <button class="btn btn-light" onclick="afegir('9')">9</button>
+                    <button class="btn btn-warning" onclick="afegir('*')">×</button>
 
-                    <button class="btn btn-light" onclick="afegirCaracter('4')">4</button>
-                    <button class="btn btn-light" onclick="afegirCaracter('5')">5</button>
-                    <button class="btn btn-light" onclick="afegirCaracter('6')">6</button>
-                    <button class="btn btn-warning" onclick="afegirCaracter('-')">−</button>
+                    <button class="btn btn-light" onclick="afegir('4')">4</button>
+                    <button class="btn btn-light" onclick="afegir('5')">5</button>
+                    <button class="btn btn-light" onclick="afegir('6')">6</button>
+                    <button class="btn btn-warning" onclick="afegir('-')">−</button>
 
-                    <button class="btn btn-light" onclick="afegirCaracter('1')">1</button>
-                    <button class="btn btn-light" onclick="afegirCaracter('2')">2</button>
-                    <button class="btn btn-light" onclick="afegirCaracter('3')">3</button>
-                    <button class="btn btn-warning" onclick="afegirCaracter('+')">+</button>
+                    <button class="btn btn-light" onclick="afegir('1')">1</button>
+                    <button class="btn btn-light" onclick="afegir('2')">2</button>
+                    <button class="btn btn-light" onclick="afegir('3')">3</button>
+                    <button class="btn btn-warning" onclick="afegir('+')">+</button>
 
-                    <button class="btn btn-light zero" onclick="afegirCaracter('0')">0</button>
-                    <button class="btn btn-light" onclick="afegirCaracter('.')">,</button>
+                    <button class="btn btn-light zero" onclick="afegir('0')">0</button>
+                    <button class="btn btn-light" onclick="afegir('.')">,</button>
                     <button class="btn btn-success" onclick="calcular()">=</button>
                 </div>
 

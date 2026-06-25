@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="ca">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Funcions fletxa</title>
+    <link rel="shortcut icon" href="./imgs/chavo.jpg" type="image/x-icon" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="./css/50 funcions fletxa.css" />
+  </head>
+  <body>
+    <header>
+      <i class="fa-solid fa-cube"></i> Exercicis sobre les funcions fletxa
+      <i class="fa-solid fa-object-group"></i>
+    </header>
+    <main>
+      <div>El resultat de la suma dels dos valors és:</div>
+      <div id="resultat"></div>
+      <script>
+        let numero1 = parseInt(prompt("Escriu el primer número"));
+        let numero2 = parseInt(prompt("Escriu el segon número"));
+
+        // function sumar(numero1,numero2){
+        //   return numero1+numero2;
+        // }
+        sumar = (numero1,numero2) => {
+          return numero1+numero2;
+        };
+
+        resta = (numero1,numero2) => {return numero1-numero2;};
+        
+
+        document.write("Resultat de la suma: "+sumar(numero1, numero2));
+        document.write("Resultat de la resta: "+resta(numero1, numero2));
+      </script>
+    </main>
+    <footer>&copy; Fet per mi</footer>
+  </body>
+  <script src="./js/50 funcions fletxa.js"></script>
+</html>
