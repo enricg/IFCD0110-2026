@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Catàleg de gestió d'errors — JavaScript</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* =========================================================
+     TOKENS DE DISSENY (mateixa paleta "plànol tècnic" que el
+     catàleg de selectors, per mantenir la mateixa identitat
+     visual a tota la sèrie de pàgines de referència).
+     ========================================================= */
+  :root{
+    --paper:#EAF1F5;
+    --paper-deep:#DCE7ED;
+    --grid-line:#C3D5DF;
+    --ink:#152C40;
+    --ink-soft:#4F6B7D;
+    --blue:#1B4F72;
+    --blue-deep:#0E3650;
+    --accent:#FF6B35;
+    --accent-soft:#FFE0CF;
+    --teal:#147A70;
+    --teal-soft:#D9F1EC;
+    --card-bg:#FDFEFE;
+    --radius:2px;
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+
+  /* Fons de "paper de quadres" fet amb gradients repetits */
+  body{
+    background-color:var(--paper);
+    background-image:
+      repeating-linear-gradient(0deg, var(--grid-line) 0 1px, transparent 1px 28px),
+      repeating-linear-gradient(90deg, var(--grid-line) 0 1px, transparent 1px 28px);
+    color:var(--ink);
+    font-family:'Space Grotesk', sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  a{color:var(--blue-deep);}
+
+  :focus-visible{
+    outline:2px dashed var(--accent);
+    outline-offset:3px;
+  }
+
+  .wrap{
+    max-width:1180px;
+    margin:0 auto;
+    padding:0 24px 80px;
+  }
+
+  /* ---------- marques de registre (cantonades de plànol) ---------- */
+  .reg-mark{position:relative;}
+  .reg-mark::before,
+  .reg-mark::after{
+    content:"";
+    position:absolute;
+    width:18px; height:18px;
+    border:1px solid var(--blue);
+    border-radius:50%;
+    opacity:.55;
+  }
+  .reg-mark::before{top:-9px; left:-9px;}
+  .reg-mark::after{bottom:-9px; right:-9px;}
+
+  /* ---------- hero ---------- */
+  .hero{
+    padding:56px 0 36px;
+    border-bottom:2px solid var(--blue);
+    margin-bottom:40px;
+  }
+  .hero .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12.5px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--blue);
+    border:1px solid var(--blue);
+    display:inline-block;
+    padding:4px 10px;
+    border-radius:var(--radius);
+    background:rgba(255,255,255,.5);
+  }
+  .hero h1{
+    font-size:clamp(32px, 5vw, 52px);
+    line-height:1.05;
+    margin:18px 0 14px;
+    font-weight:700;
+    letter-spacing:-.01em;
+    max-width:820px;
+  }
+  .hero h1 em{
+    font-style:normal;
+    color:var(--accent);
+  }
+  .hero p{
+    max-width:640px;
+    color:var(--ink-soft);
+    font-size:16px;
+  }
+  .hero .legend{
+    margin-top:26px;
+    display:flex;
+    gap:22px;
+    flex-wrap:wrap;
+    font-family:'JetBrains Mono', monospace;
+    font-size:12.5px;
+    color:var(--ink-soft);
+  }
+  .hero .legend span{display:flex; align-items:center; gap:7px;}
+  /* Quadrats de llegenda per severitat: controlat / no controlat / finally */
+  .swatch{width:13px;height:13px;display:inline-block; border-radius:2px;}
+  .swatch.ok{background:var(--teal); border:1px solid var(--teal);}
+  .swatch.err{background:transparent; border:1.5px dashed var(--accent);}
+  .swatch.fin{background:var(--blue); border:1px solid var(--blue);}
+
+  /* ---------- layout: registre d'incidències + catàleg ---------- */
+  .layout{
+    display:grid;
+    grid-template-columns: 340px 1fr;
+    gap:32px;
+    align-items:start;
+  }
+  @media (max-width: 880px){
+    .layout{grid-template-columns:1fr;}
+  }
+
+  /* ---------- panell del registre d'incidències ---------- */
+  .log-panel{
+    position:sticky;
+    top:24px;
+    background:var(--card-bg);
+    border:2px solid var(--blue);
+    border-radius:var(--radius);
+    padding:22px 20px 24px;
+  }
+  @media (max-width: 880px){ .log-panel{position:static;} }
+
+  .log-panel .panel-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    margin-bottom:16px;
+    padding-bottom:12px;
+    border-bottom:1px dashed var(--grid-line);
+  }
+  .log-panel .panel-head h2{
+    font-size:14px;
+    text-transform:uppercase;
+    letter-spacing:.1em;
+    margin:0;
+    color:var(--blue-deep);
+  }
+  .log-panel .panel-head .stamp{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    color:var(--ink-soft);
+  }
+
+  .log-list{
+    list-style:none;
+    margin:0;
+    padding:0;
+    display:flex;
+    flex-direction:column;
+    gap:9px;
+    max-height:560px;
+    overflow-y:auto;
+  }
+  .log-entry{
+    display:flex;
+    align-items:flex-start;
+    gap:9px;
+    border:1px dashed var(--grid-line);
+    border-left:3px solid var(--ink-soft);
+    padding:7px 9px;
+    border-radius:2px;
+    background:#fff;
+    font-family:'JetBrains Mono', monospace;
+    font-size:11.7px;
+  }
+  .log-entry.empty-state{color:var(--ink-soft); font-style:italic;}
+  /* Color del cantó esquerre segons severitat de la incidència */
+  .log-entry.sev-ok{border-left-color:var(--teal);}
+  .log-entry.sev-error{border-left-color:var(--accent);}
+  .log-entry.sev-finally{border-left-color:var(--blue);}
+  .log-num{font-weight:600; color:var(--ink-soft); flex-shrink:0;}
+  .log-body{display:flex; flex-direction:column; min-width:0;}
+  .log-title{font-weight:600;}
+  .log-msg{color:var(--ink-soft); word-break:break-word;}
+  .log-time{margin-left:auto; color:var(--ink-soft); font-size:10px; flex-shrink:0;}
+
+  /* ---------- catàleg de fitxes ---------- */
+  .catalog-head{margin-bottom:18px;}
+  .catalog-head h2{
+    font-size:14px;
+    text-transform:uppercase;
+    letter-spacing:.1em;
+    color:var(--blue-deep);
+    margin:0 0 4px;
+  }
+  .catalog-head p{margin:0; color:var(--ink-soft); font-size:13.5px;}
+
+  .catalog{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:18px;
+  }
+  @media (max-width: 720px){ .catalog{grid-template-columns:1fr;} }
+
+  .card{
+    background:var(--card-bg);
+    border:1.5px solid var(--blue);
+    border-radius:var(--radius);
+    padding:18px 18px 16px;
+    display:flex;
+    flex-direction:column;
+  }
+  .card-top{display:flex; align-items:center; gap:10px; margin-bottom:8px;}
+  .card-num{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    background:var(--blue-deep);
+    color:#fff;
+    padding:2px 7px;
+    border-radius:2px;
+    letter-spacing:.05em;
+  }
+  .card-title{
+    font-family:'JetBrains Mono', monospace;
+    font-size:14.5px;
+    font-weight:600;
+    color:var(--blue-deep);
+  }
+  .card-desc{font-size:13.3px; color:var(--ink-soft); margin:0 0 12px;}
+
+  /* Bloc de codi: fons fosc tipus editor, classes tok-* per acolorir tokens */
+  .codeblock{
+    background:#0E2233;
+    color:#E8F0F4;
+    font-family:'JetBrains Mono', monospace;
+    font-size:12.3px;
+    padding:10px 12px;
+    border-radius:2px;
+    margin:0 0 12px;
+    overflow-x:auto;
+    white-space:pre;
+  }
+  .tok-k{color:#7FB8E0;} /* paraules clau: try, catch, throw, async, await... */
+  .tok-m{color:#FF9466;} /* mètodes / noms de funció cridats */
+  .tok-s{color:#8FE3B8;} /* cadenes de text */
+  .tok-c{color:#7E94A3;} /* comentaris dins el bloc de codi */
+
+  .run-row{display:flex; align-items:center; gap:10px; margin-bottom:10px;}
+  .run-btn{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12.5px;
+    letter-spacing:.04em;
+    background:var(--accent);
+    border:none;
+    color:#fff;
+    padding:7px 14px;
+    border-radius:2px;
+    cursor:pointer;
+    transition:filter .15s ease;
+  }
+  .run-btn:hover{filter:brightness(1.08);}
+  .run-btn:active{filter:brightness(.95);}
+
+  /* Panell de "consola" on s'imprimeix el resultat de cada fitxa */
+  .output{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12.3px;
+    color:var(--blue-deep);
+    background:var(--paper-deep);
+    border:1px dashed var(--grid-line);
+    border-radius:2px;
+    padding:8px 10px;
+    min-height:20px;
+    flex-grow:1;
+  }
+  .output.pending{color:var(--ink-soft); font-style:italic;}
+  .output .line{margin:0; padding:2px 0;}
+  .output .line.empty{color:var(--ink-soft);}
+  .output .line.ok{color:var(--teal);}
+  .output .line.err{color:var(--accent);}
+
+  footer{
+    margin-top:50px;
+    padding-top:18px;
+    border-top:1px dashed var(--grid-line);
+    font-family:'JetBrains Mono', monospace;
+    font-size:11.5px;
+    color:var(--ink-soft);
+    text-align:center;
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <!-- ===================== CAPÇALERA / HERO ===================== -->
+  <header class="hero">
+    <span class="eyebrow">Catàleg tècnic · Error handling</span>
+    <h1>Cada manera de <em>gestionar un error</em> en JavaScript, provada en directe.</h1>
+    <p>Vuit fitxes, vuit tècniques. Cada fitxa executa codi real (no una simulació) i registra el resultat al "registre d'incidències" de l'esquerra, igual que faria una aplicació de veritat.</p>
+    <div class="legend">
+      <span><span class="swatch ok"></span> error controlat (capturat)</span>
+      <span><span class="swatch err"></span> error no controlat / llançat</span>
+      <span><span class="swatch fin"></span> bloc finally / sempre s'executa</span>
+    </div>
+  </header>
+
+  <div class="layout">
+
+    <!-- ===================== REGISTRE D'INCIDÈNCIES ===================== -->
+    <aside class="log-panel reg-mark">
+      <div class="panel-head">
+        <h2>Registre d'incidències</h2>
+        <span class="stamp">en directe</span>
+      </div>
+      <ul class="log-list" id="logList">
+        <li class="log-entry empty-state">Encara no hi ha incidències — prem "Executa" en qualsevol fitxa.</li>
+      </ul>
+    </aside>
+
+    <!-- ===================== CATÀLEG DE FITXES ===================== -->
+    <main>
+      <div class="catalog-head">
+        <h2>Fitxes de gestió d'errors</h2>
+        <p>Prem "Executa" a cada fitxa per veure el resultat real al seu panell i al registre.</p>
+      </div>
+
+      <!-- Contenidor buit: les 8 fitxes es generen dinàmicament des del <script> final -->
+      <div class="catalog" id="catalog"><!-- les fitxes s'omplen amb JS --></div>
+    </main>
+
+  </div>
+
+  <footer>
+    Pàgina autocontinguda · cap dada surt del navegador · els errors globals (fitxa 08) també es poden veure a la consola del navegador (F12)
+  </footer>
+
+</div>
+
+<script>
+/* =========================================================
+   LÒGICA DE LA PÀGINA
+   1) Registre d'incidències compartit: cada fitxa hi afegeix
+      una entrada quan s'executa.
+   2) Funció auxiliar "carregaUsuari" que simula una operació
+      asíncrona (com un fetch) que pot fallar, reutilitzada
+      per les fitxes d'async/await i de Promise encadenada.
+   3) Array "cards": una entrada per cada tècnica de gestió
+      d'errors, amb el seu codi, descripció i la funció run()
+      que l'executa de veritat (de manera síncrona o asíncrona).
+   4) Bucle final que pinta les fitxes i hi enganxa els botons.
+   ========================================================= */
+(function(){
+  const logList = document.getElementById('logList');
+  let incidentCounter = 0;
+
+  // Afegeix una entrada nova al registre d'incidències (la més recent a dalt)
+  function logEvent(title, severity, message){
+    const placeholder = logList.querySelector('.empty-state');
+    if(placeholder) placeholder.remove();
+
+    incidentCounter++;
+    const entry = document.createElement('li');
+    entry.className = 'log-entry sev-' + severity;
+    const time = new Date().toLocaleTimeString('ca-ES', {hour12:false});
+    entry.innerHTML = `
+      <span class="log-num">#${String(incidentCounter).padStart(2,'0')}</span>
+      <span class="log-body">
+        <span class="log-title">${title}</span>
+        <span class="log-msg">${message}</span>
+      </span>
+      <span class="log-time">${time}</span>
+    `;
+    logList.prepend(entry);
+
+    // Evita que el registre creixi sense límit: ens quedem amb les 14 darreres
+    while(logList.children.length > 14){
+      logList.removeChild(logList.lastChild);
+    }
+  }
+
+  // Simula una crida asíncrona (com fetch) que pot resoldre's o rebutjar-se
+  function carregaUsuari(id){
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        if (id > 0) resolve({ id, nom: 'Anna' });
+        else reject(new Error('ID invàlid: ha de ser un número positiu'));
+      }, 500);
+    });
+  }
+
+  // Definició de les 8 fitxes. Cada objecte conté:
+  //  - num/title/code/desc: contingut visible
+  //  - run(): executa la tècnica real. Pot retornar un array de línies
+  //    (resultat immediat) o una Promise que resol amb un array de línies
+  //    (resultat asíncron, gestionat més avall pel motor de renderitzat)
+  const cards = [
+
+    // 01 — try/catch bàsic: atrapa una excepció real de JSON.parse
+    {
+      num: '01',
+      title: 'try / catch',
+      code: `<span class="tok-k">try</span> {
+  <span class="tok-k">JSON</span>.<span class="tok-m">parse</span>(<span class="tok-s">'{ "nom": invàlid }'</span>)
+} <span class="tok-k">catch</span> (err) {
+  console.log(err.message)
+}`,
+      desc: "El bloc try s'intenta executar; si llança un error, l'execució salta immediatament al catch sense aturar tota la pàgina.",
+      run(){
+        try {
+          JSON.parse('{ "nom": invàlid }');
+          return ["→ parse correcte (no hauria de passar)"];
+        } catch(err){
+          logEvent('JSON.parse invàlid', 'ok', err.message);
+          return [`<span class="line ok">→ error capturat: ${err.message}</span>`];
+        }
+      }
+    },
+
+    // 02 — try/catch/finally: demostra l'ordre exacte d'execució
+    {
+      num: '02',
+      title: 'try / catch / finally',
+      code: `<span class="tok-k">try</span> {
+  <span class="tok-k">throw</span> <span class="tok-k">new</span> Error(<span class="tok-s">'error simulat'</span>)
+} <span class="tok-k">catch</span> (err) {
+  <span class="tok-c">// gestiona l'error</span>
+} <span class="tok-k">finally</span> {
+  <span class="tok-c">// s'executa sempre, hi hagi error o no</span>
+}`,
+      desc: "El bloc finally s'executa sempre — tant si hi ha hagut error com si no — i és ideal per alliberar recursos (tancar connexions, aturar un loader...).",
+      run(){
+        const ordre = [];
+        try {
+          ordre.push('try');
+          throw new Error('error simulat');
+        } catch(err){
+          ordre.push('catch');
+        } finally {
+          ordre.push('finally');
+        }
+        logEvent('Ordre try/catch/finally', 'finally', ordre.join(' → '));
+        return [`→ ordre d'execució real: <strong>${ordre.join(' → ')}</strong>`];
+      }
+    },
+
+    // 03 — throw d'un error personalitzat des d'una funció pròpia
+    {
+      num: '03',
+      title: 'throw (error personalitzat)',
+      code: `<span class="tok-k">function</span> <span class="tok-m">comprovaEdat</span>(edat) {
+  <span class="tok-k">if</span> (edat < 0) <span class="tok-k">throw</span> <span class="tok-k">new</span> Error(<span class="tok-s">"L'edat no pot ser negativa"</span>)
+  <span class="tok-k">return</span> edat
+}
+comprovaEdat(-5)`,
+      desc: "Amb throw, qualsevol funció pot interrompre's i avisar de seguida que les dades no són vàlides, en lloc de continuar amb un valor incorrecte.",
+      run(){
+        function comprovaEdat(edat){
+          if (edat < 0) throw new Error("L'edat no pot ser negativa");
+          return edat;
+        }
+        try {
+          comprovaEdat(-5);
+          return ["→ cap error (no hauria de passar)"];
+        } catch(err){
+          logEvent('comprovaEdat(-5)', 'ok', err.message);
+          return [`<span class="line ok">→ error llançat i capturat: ${err.message}</span>`];
+        }
+      }
+    },
+
+    // 04 — classe d'error pròpia que extén Error
+    {
+      num: '04',
+      title: 'classe Error personalitzada',
+      code: `<span class="tok-k">class</span> ValidationError <span class="tok-k">extends</span> Error {
+  constructor(missatge) {
+    <span class="tok-k">super</span>(missatge)
+    <span class="tok-k">this</span>.name = <span class="tok-s">'ValidationError'</span>
+  }
+}
+<span class="tok-k">throw</span> <span class="tok-k">new</span> ValidationError(<span class="tok-s">'Camp obligatori'</span>)`,
+      desc: "Estendre Error permet crear tipus d'error propis amb nom i propietats pròpies, mantenint tot el comportament estàndard (stack, message, instanceof Error...).",
+      run(){
+        class ValidationError extends Error {
+          constructor(missatge){
+            super(missatge);
+            this.name = 'ValidationError';
+          }
+        }
+        try {
+          throw new ValidationError('El camp "correu" és obligatori');
+        } catch(err){
+          logEvent(err.name, 'ok', err.message);
+          return [
+            `→ err.name = "${err.name}"`,
+            `→ err.message = "${err.message}"`,
+            `<span class="line ok">→ err instanceof Error = ${err instanceof Error}</span>`
+          ];
+        }
+      }
+    },
+
+    // 05 — distingir tipus d'error amb instanceof (com JS no té múltiples
+    // blocs catch, aquest és el patró habitual per "ramificar" la gestió)
+    {
+      num: '05',
+      title: 'instanceof (distingir tipus d\'error)',
+      code: `<span class="tok-k">try</span> { processa(valor) }
+<span class="tok-k">catch</span> (err) {
+  <span class="tok-k">if</span> (err <span class="tok-k">instanceof</span> TypeError) { <span class="tok-c">/* ... */</span> }
+  <span class="tok-k">else if</span> (err <span class="tok-k">instanceof</span> RangeError) { <span class="tok-c">/* ... */</span> }
+}`,
+      desc: "JavaScript només permet un bloc catch, però dins seu es pot comprovar amb instanceof de quin tipus és l'error per respondre-hi de manera diferent.",
+      run(){
+        function processa(valor){
+          if (typeof valor !== 'number') throw new TypeError('Cal un número');
+          if (valor < 0 || valor > 100) throw new RangeError('Fora de rang (0–100)');
+          return valor;
+        }
+        const entrades = ['text', 150, 42];
+        const lines = [];
+        entrades.forEach(valor => {
+          const etiqueta = JSON.stringify(valor);
+          try {
+            const resultat = processa(valor);
+            lines.push(`→ processa(${etiqueta}) = ${resultat} (sense error)`);
+            logEvent(`processa(${etiqueta})`, 'ok', 'sense error');
+          } catch(err){
+            if (err instanceof TypeError){
+              lines.push(`<span class="line err">→ processa(${etiqueta}) → TypeError: ${err.message}</span>`);
+              logEvent(`processa(${etiqueta})`, 'error', 'TypeError: ' + err.message);
+            } else if (err instanceof RangeError){
+              lines.push(`<span class="line err">→ processa(${etiqueta}) → RangeError: ${err.message}</span>`);
+              logEvent(`processa(${etiqueta})`, 'error', 'RangeError: ' + err.message);
+            }
+          }
+        });
+        return lines;
+      }
+    },
+
+    // 06 — async/await amb try/catch (asíncron real, amb retard de 0.5s)
+    {
+      num: '06',
+      title: 'async / await + try/catch',
+      code: `<span class="tok-k">async function</span> <span class="tok-m">obtenUsuari</span>(id) {
+  <span class="tok-k">try</span> {
+    <span class="tok-k">const</span> usuari = <span class="tok-k">await</span> carregaUsuari(id)
+    <span class="tok-k">return</span> usuari
+  } <span class="tok-k">catch</span> (err) {
+    console.error(err.message)
+  }
+}`,
+      desc: "await fa que el codi asíncron es llegeixi com a síncron; el try/catch que l'envolta atrapa tant els errors immediats com els que arriben més tard, quan la promesa es rebutja.",
+      async run(){
+        try {
+          const usuari = await carregaUsuari(-1);
+          return [`→ usuari carregat: ${JSON.stringify(usuari)}`];
+        } catch(err){
+          logEvent('await carregaUsuari(-1)', 'ok', err.message);
+          return [`<span class="line ok">→ error capturat amb await: ${err.message}</span>`];
+        }
+      }
+    },
+
+    // 07 — Promise encadenada amb .catch() i .finally() (sense async/await)
+    {
+      num: '07',
+      title: 'Promise.catch() / .finally()',
+      code: `carregaUsuari(id)
+  .<span class="tok-m">then</span>(usuari => mostra(usuari))
+  .<span class="tok-m">catch</span>(err => mostra(err.message))
+  .<span class="tok-m">finally</span>(() => amaga(<span class="tok-s">'carregant...'</span>))`,
+      desc: "L'estil clàssic abans d'async/await: then() gestiona l'èxit, catch() l'error, i finally() s'executa igualment en ambdós casos.",
+      run(){
+        const lines = [];
+        return carregaUsuari(-1)
+          .then(usuari => {
+            lines.push(`→ then: ${JSON.stringify(usuari)}`);
+          })
+          .catch(err => {
+            lines.push(`<span class="line ok">→ catch: ${err.message}</span>`);
+            logEvent('carregaUsuari(-1) encadenat', 'ok', err.message);
+          })
+          .finally(() => {
+            lines.push('→ finally: petició acabada (èxit o error)');
+            logEvent('Promise finally', 'finally', 'petició encadenada acabada');
+          })
+          .then(() => lines);
+      }
+    },
+
+    // 08 — gestió global: errors no capturats per cap try/catch local
+    {
+      num: '08',
+      title: "window 'error' + 'unhandledrejection'",
+      code: `window.addEventListener(<span class="tok-s">'error'</span>, (e) => {
+  <span class="tok-c">// captura errors no controlats per cap try/catch</span>
+})
+window.addEventListener(<span class="tok-s">'unhandledrejection'</span>, (e) => {
+  <span class="tok-c">// captura promeses rebutjades sense .catch()</span>
+})`,
+      desc: "Com a últim recurs, aquests dos esdeveniments globals capturen els errors i les promeses rebutjades que s'han escapat de qualsevol try/catch local. Útils per registrar errors inesperats en producció.",
+      run(){
+        // Aquests dos listeners globals ja estan registrats una sola vegada
+        // a l'inici de la pàgina (vegeu més avall). Aquí només disparem
+        // un error i una promesa rebutjada SENSE capturar-los localment,
+        // perquè es vegi com el navegador i els listeners globals els atrapen.
+        setTimeout(() => {
+          throw new Error('Error asíncron no controlat (disparat per setTimeout)');
+        }, 50);
+        Promise.reject(new Error('Promesa rebutjada sense .catch()'));
+
+        return [
+          "→ s'han disparat un error global i una promesa rebutjada.",
+          "→ mira el registre d'incidències (esquerra) i la consola del navegador (F12)."
+        ];
+      }
+    }
+
+  ];
+
+  // ---- Listeners globals: registrats una sola vegada per a tota la pàgina ----
+  window.addEventListener('error', (event) => {
+    logEvent("window 'error'", 'error', event.message);
+  });
+  window.addEventListener('unhandledrejection', (event) => {
+    const msg = event.reason && event.reason.message ? event.reason.message : String(event.reason);
+    logEvent("unhandledrejection", 'error', msg);
+  });
+
+  // Contenidor on s'injectaran les 8 fitxes generades dinàmicament
+  const catalog = document.getElementById('catalog');
+
+  // Per cada definició de "cards", crea la targeta HTML, l'afegeix al
+  // catàleg i connecta el botó "Executa" amb la seva funció run(), que
+  // pot ser síncrona (retorna un array) o asíncrona (retorna una Promise)
+  cards.forEach((card) => {
+    const el = document.createElement('article');
+    el.className = 'card';
+    el.innerHTML = `
+      <div class="card-top">
+        <span class="card-num">FITXA ${card.num}</span>
+        <span class="card-title">${card.title}</span>
+      </div>
+      <p class="card-desc">${card.desc}</p>
+      <pre class="codeblock">${card.code}</pre>
+      <div class="run-row">
+        <button class="run-btn" type="button">Executa ▶</button>
+      </div>
+      <div class="output"><span class="line empty">→ encara no s'ha executat</span></div>
+    `;
+    catalog.appendChild(el);
+
+    const btn = el.querySelector('.run-btn');
+    const output = el.querySelector('.output');
+
+    function render(lines){
+      output.classList.remove('pending');
+      output.innerHTML = lines.map(l => `<p class="line">${l}</p>`).join('');
+    }
+
+    btn.addEventListener('click', () => {
+      const resultat = card.run();
+      if (resultat instanceof Promise){
+        output.classList.add('pending');
+        output.innerHTML = `<p class="line empty">→ esperant resposta asíncrona...</p>`;
+        resultat.then(render);
+      } else {
+        render(resultat);
+      }
+      el.scrollIntoView({behavior: 'smooth', block: 'nearest'});
+    });
+  });
+
+})();
+</script>
+
+</body>
+</html>
