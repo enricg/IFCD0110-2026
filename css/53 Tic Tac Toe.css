@@ -1,0 +1,36 @@
+/* GRID GENERAL DE LA PÀGINA */
+.contenidor {
+  display: grid;
+  grid-template-rows: 100px 1fr 70px;
+  min-height: 100vh;
+}
+
+/* MAIN */
+main {
+  background-color: #f8f9fa;
+  padding: 20px;
+}
+
+.tauler {
+  border: 1px #000 solid;
+  width: 600px;
+  height: 600px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-content: space-around;
+}
+
+.casella {
+  border: 1px #000 solid;
+  width: 190px;
+  height: 190px;
+}
+
+.vermell{
+  background: red;
+}
+
+.verd{
+  background: green;
+}
