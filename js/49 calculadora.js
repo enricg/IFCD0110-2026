@@ -37,11 +37,11 @@ function mostrarError(missatge) {
   }, 2000);
 }
 
-calcular = () => {
+calcular = () => { // function calcular(){
   try {
     document.getElementById("display").value = eval(cadena);
   } catch (e) {
-    mostrarError("Alguna cosa no ha anat bé");
+    //mostrarError("Alguna cosa no ha anat bé");
     cadena="";
   }
 };

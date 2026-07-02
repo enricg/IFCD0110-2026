@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="ca">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pràctica</title>
+    <link rel="stylesheet" href="./css/52 Errors.css" />
+    <link rel="shortcut icon" href="./imgs/chavo.jpg" type="image/x-icon" />
+    <script src="./js/52 Errors.js" defer></script>
+  </head>
+  <body>
+    <header>Pràctica de gestió d'errors</header>
+    <nav>Menú</nav>
+    <main id="principal">
+      Principal
+      <div id="resultat"></div>
+      <!-- <p>Error de referència</p>
+      <script>
+        let x = 5;
+        try {
+          x = y + 1;
+          document.write(x);
+        } catch (e) {
+          x = 999;
+          document.write(e);
+        }
+      </script>
+      <p>Errors de tipus</p>
+      <script>
+        let anna = 5;
+        try {
+          anna(5);
+        } catch (e) {
+          document.write(e);
+        }
+      </script>
+      <p>Errors de rang</p>
+      <script>
+        let num = 1;
+        try {
+          num.toPrecision(500);
+        } catch (e) {
+          document.write(e);
+        }
+      </script>
+      <p>Errors d'URI</p>
+      <script>
+        let adreça = "www.g%oogle.com";
+        try {
+          decodeURI(adreça);
+        } catch (e) {
+          document.write(e);
+        }
+      </script>
+      <p>Errors de sintaxi</p>
+      <script>
+        let nom="Jordi);
+      </script>
+      <p>Error silenciós</p>
+      <script>
+        let resultat = "No actiu";
+        let esActiu = false;
+        if(esActiu=true){
+          resultat="Actiu";
+        }
+        document.write(resultat);
+      </script> -->
+      <!-- <p>Entra un número entre 5 i 10</p>
+      <input type="text" id="numero" />
+      <button id="submit" onclick="validar()">Prova input</button>
+      <div id="missatge"></div>
+      <script>
+        function validar() {
+          const missatge = document.getElementById("missatge");
+          missatge.innerHTML = "";
+          console.error("Hola, això és un error");
+          let x = document.getElementById("numero").value;
+          try {
+            if (x.trim() == "") {
+              throw "és buit";
+            }
+            if (isNaN(x)) {
+              throw "no és un número";
+            }
+            x = Number(x);
+            if (x < 5) {
+              throw "és petit";
+            }
+            if (x > 10) {
+              throw "és gran";
+            }
+          } catch (e) {
+            missatge.innerHTML = "El valor entrat " + e;
+          } finally {
+            document.getElementById("numero").value = "";
+          }
+        }
+
+        let users = [
+          { name: "John", age: 25 },
+          { name: "Anna", age: 30 },
+        ];
+
+        console.table(users);
+        console.log(users); -->
+      <script>
+        function suma(numero1, numero2) {
+          let resultat = numero1 + numero2;
+          return resultat;
+        }
+
+        document.getElementById("resultat").innerHTML=suma(10,5);
+        document.getElementById("resultat").innerHTML=suma(10,50);
+        document.getElementById("resultat").innerHTML=suma(10,500);
+        document.getElementById("resultat").innerHTML=suma(10,5000);
+      </script>
+    </main>
+    <footer>Fet per mi &copy;</footer>
+  </body>
+</html>

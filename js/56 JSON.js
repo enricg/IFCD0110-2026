@@ -63,4 +63,6 @@ function afegeixRegistre(element){
   taula.appendChild(registre);
 }
 
-carregaDades();
+const cos=document.getElementById("cos");
+cos.addEventListener("load",carregadades);
+//carregaDades();
