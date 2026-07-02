@@ -43,6 +43,9 @@ footer {
   grid-area: peu;
 }
 
+table{
+  font-size: 0.5em;
+}
 /* Proves */
 
 #loader {
