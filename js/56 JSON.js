@@ -31,26 +31,36 @@ async function carregaDades() {
 
     //recorrem els elements del json
     persones.forEach((element) => {
-        const registre = document.createElement("tr");
-        const camp1=document.createElement("td").innerText=element.Nom_Districte;
-        registre.appendChild(camp1);        
-        camp2.innerText=element.Valor;
-        registre.appendChild(camp1);
-        taula.appendChild(registre);
-    //   taula.innerHTML += "<tr>";
-    //   taula.innerHTML +=
-    //     "<td>" + element.Nom_Districte + "</td><td>" + element.Valor + "</td>";
-      // taula.innerHTML+=`<td>${element.Nom_Districte}</td><td>${element.Valor}</td>`;
-    //   taula.innerHTML += "</tr>";
+      /*
+      const registre = document.createElement("tr");
+      const camp1 = document.createElement("td");
+      camp1.innerText = element.Nom_Districte;
+      const camp2 = document.createElement("td");
+      camp2.innerText = element.Valor;
+      registre.appendChild(camp1);
+      registre.appendChild(camp2);
+      taula.appendChild(registre);
+      */
+     afegeixRegistre(element.Nom_Districte);
+     /*
+      taula.innerHTML += "<tr>";
+      taula.innerHTML +=
+        "<td>" + element.Nom_Districte + "</td><td>" + element.Valor + "</td>";
+      taula.innerHTML += `<td>${element.Nom_Districte}</td><td>${element.Valor}</td>`;
+      taula.innerHTML += "</tr>";
+      */
     });
   } catch (e) {
     console.error("Error de càrrega ", e);
   }
 }
-function afegeixRegistre(){
-    
+
+function afegeixRegistre(element){
+  const registre = document.createElement("tr");
+  const camp = document.createElement("td");
+  camp.innerText = element;
+  registre.appendChild(camp);
+  taula.appendChild(registre);
 }
-
-
 
 carregaDades();

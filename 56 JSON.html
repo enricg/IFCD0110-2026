@@ -5,15 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pràctica</title>
     <link rel="stylesheet" href="./css/56 JSON.css" />
+    <link rel="shortcut icon" href="./imgs/rugby_r.jpg" type="image/x-icon">
     <script src="./js/56 JSON.js" defer></script>
   </head>
   <body>
     <header>Pràctica de JSON</header>
     <nav>Menú</nav>
+    <div id="loader"><div class="spinner"></div></div>
     <main id="principal">
       Principal
       <table id="taula"></table>
     </main>
     <footer>Fet per mi &copy;</footer>
+    <script>
+      window.addEventListener("load", function () {
+        document.getElementById("loader").style.display = "none";
+      });
+    </script>
   </body>
 </html>
