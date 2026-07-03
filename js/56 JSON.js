@@ -9,8 +9,8 @@
 // const obj = JSON.parse(text);
 // console.log(obj);
 
-document.getElementById("taula").addEventListener("load", carregaDades);
-// document.getElementById("demo").innerHTML="Nom: <b>"+obj.empleats[1].nom+"</b> Cognom: "+obj.empleats[1].cognom;
+// document.getElementById("taula").addEventListener("load", carregaDades);
+
 const taula = document.getElementById("taula");
 let capcalera = [];
 
@@ -20,7 +20,6 @@ async function carregaDades() {
     const persones = await resposta.json();
     //recorrer el camps per a la capçalera
     Object.keys(persones[0]).forEach((clau) => {
-      console.log(clau);
       const camp = document.createElement("th");
       camp.innerText = clau;
       taula.appendChild(camp);
