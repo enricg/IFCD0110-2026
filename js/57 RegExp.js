@@ -170,35 +170,92 @@ function llistaNegra() {
 }
 llistaNegra();
 
-function iniciParaula(){
-    let text="HELLO, LOOK AT YOU!";
-    const patro=/\bLO/;
-    let resultat=text.search(patro);
-    console.log(resultat);
+function iniciParaula() {
+  let text = "HELLO, LOOK AT YOU!";
+  const patro = /\bLO/;
+  let resultat = text.search(patro);
+  console.log(resultat);
 }
 iniciParaula();
 
-function paraula(){
-    let text="Hello, what is your name? My name is Iris.  Ah ok, I thougth your name was Laquisha";
-    const patro=/\bis\b/g;
-    let resultat=text.match(patro);
-    console.log(resultat);
+function paraula() {
+  let text =
+    "Hello, what is your name? My name is Iris.  Ah ok, I thougth your name was Laquisha";
+  const patro = /\bis\b/g;
+  let resultat = text.match(patro);
+  console.log(resultat);
 }
 paraula();
 
-function coinciCondi(){
-    let text="CET Penedès no és dels mateixos que els del CET Garraf, i no sé si existeix CET Barcelonés. CET Penedès és l'original.";
-    const patro=/CET(?!= Penedès)/g;
-    let resultat=text.match(patro);
-    console.log(resultat);
+function coinciCondi() {
+  let text =
+    "CET Penedès no és dels mateixos que els del CET Garraf, i no sé si existeix CET Barcelonés. CET Penedès és l'original.";
+  const patro = /CET(?!= Penedès)/g;
+  let resultat = text.match(patro);
+  console.log(resultat);
 }
 coinciCondi();
 
-function jcoinciCondi(){
-let text = "CET Penedès no és dels mateixos que els del CET Garraf, i no sé si existeix CET Barcelona. CET Penedès és l'original";
-// const patro = /CET(?=Penedès)/g;
-const patro = /CET(?= Penedès)/g;
-let resultat = text.match(patro);
-console.log(resultat);
+function jcoinciCondi() {
+  let text =
+    "CET Penedès no és dels mateixos que els del CET Garraf, i no sé si existeix CET Barcelona. CET Penedès és l'original";
+  // const patro = /CET(?=Penedès)/g;
+  const patro = /CET(?= Penedès)/g;
+  let resultat = text.match(patro);
+  console.log(resultat);
 }
 jcoinciCondi();
+
+function grups() {
+  let text = "L'Anna estima en Jofre";
+  const patro = /(\w+) estima (\w+)/;
+  let resultat = text.match(patro);
+  console.log(resultat);
+}
+grups();
+
+function data() {
+  const patro = /(\d{4})-(\d{2})-(\d{2})/;
+  const text = "2026-05-21";
+  const resultat = text.match(patro);
+  console.log(resultat);
+}
+data();
+
+// Quantificadors
+// mes (+)
+
+function mes() {
+  let text =
+    "Hola bon dia! Hola CET Penedès. Al futbol la gent canta looolololololo lololo lololo lololoooo";
+  const patro = /lo+/g;
+  let resultat = text.match(patro);
+  console.log(resultat);
+}
+mes();
+
+function asterisc() {
+  let text = "Hola bon dia. El futbol canten loooolololo la le li lo lo llll";
+  const patro = /lo*/g;
+  let resultat = text.match(patro);
+  console.log(resultat);
+}
+asterisc();
+
+function interrogant() {
+  let text = "1, 100 o 1000?";
+  const patro = /10?/g;
+  let resultat = text.match(patro);
+  console.log(resultat);
+}
+interrogant();
+
+function nOcurrencies() {
+  let text = "100, 1000 o 10000?";
+  //const patro = /\d{4}/;
+  //const patro = /\d{3,4}/g;
+  const patro = /\d{3,}/g;
+  let resultat = text.match(patro);
+  console.log(resultat);
+}
+nOcurrencies();
