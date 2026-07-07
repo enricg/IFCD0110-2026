@@ -41,7 +41,6 @@ function creaExercicis() {
 function exercici(numExercici, txtPatro) {
   const solucio = document.getElementById("sol" + numExercici);
   let text = document.getElementById("txt" + numExercici).value;
-  let resultat = text.match(txtPatro);
 
   switch (exercicis[numExercici - 1].tipusResposta) {
     case "boolea":
@@ -50,7 +49,8 @@ function exercici(numExercici, txtPatro) {
     case "llista":
       resultat = text.match(txtPatro);
       break;
-    case "cadena":
+      case "cadena":
+      resultat = text.match(txtPatro);
       resultat = resultat ? resultat[0] : null;
       break;
     default:
@@ -73,11 +73,40 @@ document
   .addEventListener("DOMContentLoaded", creaExercicis());
 
 // Exercici 1
+// test@example.com // true
+// test.example.com // false
 document.getElementById("btn1").addEventListener("click", function () {
-  exercici(1, /\w+@\w+\.\w{2,6}/);
+  exercici(1, /\w+@\w+\.\w{2,}/);
 });
 
 // Exercici 2
+// Call me at (123) 456-7890 or (987) 654-3210 // ["(123) 456-7890", "(987) 654-3210"]
 document.getElementById("btn2").addEventListener("click", function () {
-  exercici(2, /\(\d{3}\)\d{3}-\d{4}/g);
+  exercici(2, /\(\d{3}\)\s?\d{3}-\d{4}/g);
 });
+
+// Exercici 3
+document.getElementById("btn3").addEventListener("click", function () {
+  exercici(3, /^\d{5}$/);
+});
+
+// Exercici 4
+//test@example.com // "example.com"
+document.getElementById("btn4").addEventListener("click", function () {
+  exercici(4, /(?<=\w+@)\w+\.\w+/);
+});
+
+// Exercici 5
+// 1234 5678 9012 3456 // true
+// 1234567890123456 // true
+// 1234-5678-9012-3456 // false
+document.getElementById("btn5").addEventListener("click", function () {
+  exercici(5, /^(\d{16}|\d{4}\s\d{4}\s\d{4}\s\d{4})$/);
+});
+
+// Exercici 6
+//Loving the new #JavaScript features in #ECMAScript2021! // ["#JavaScript", "#ECMAScript2021"]
+document.getElementById("btn6").addEventListener("click", function () {
+  exercici(6, /#\w+/g);
+});
+
