@@ -1,0 +1,28 @@
+{
+  "idiomes": [
+    {
+      "idioma": "ca",
+      "titol": "Pràctica MultiIdioma",
+      "menu": ["Principal", "Qui som", "Història", "Productes", "Registra't"],
+      "peu": "Fet per mi &copy;"
+    },
+    {
+      "idioma": "es",
+      "titol": "Práctica MultiIdioma",
+      "menu": [
+        "Principal",
+        "Quien somos",
+        "Historia",
+        "Productos",
+        "Registrate"
+      ],
+      "peu": "Desarrolado por mí &copy;"
+    },
+    {
+      "idioma": "en",
+      "titol": "MultiLanguage Practice",
+      "menu": ["Home", "About us", "History", "Products", "Sign Up"],
+      "peu": "Developed by me &copy;"
+    }
+  ]
+}
