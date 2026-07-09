@@ -1,0 +1,54 @@
+* {
+  margin: 0;
+}
+
+html {
+  font-size: 2rem;
+  scroll-behavior: smooth;
+}
+
+body {
+  display: grid;
+  grid-template-columns: 1fr 10fr;
+  grid-template-rows: 3rem auto 3rem;
+  height: 100vh;
+  grid-template-areas:
+    "idi cap cap cap"
+    "nav prin prin prin"
+    "peu peu peu peu";
+}
+
+header,
+footer {
+  background: #000;
+  color: #fff;
+  text-align: center;
+}
+
+header {
+  grid-area: cap;
+}
+
+nav {
+  grid-area: nav;
+  background: burlywood;
+  padding: 5px;
+}
+
+main {
+  grid-area: prin;
+}
+
+footer {
+  grid-area: peu;
+}
+
+ul{
+  list-style-type: none;
+  padding-left: 0;
+}
+
+li:hover{
+  cursor: pointer;
+  background: rgb(179, 149, 109);
+}
