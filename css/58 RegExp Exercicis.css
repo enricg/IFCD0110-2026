@@ -3,7 +3,7 @@
 }
 
 html {
-  font-size: 2rem;
+  font-size: 1rem;
   scroll-behavior: smooth;
 }
 
@@ -53,12 +53,4 @@ table{
 
 .enunciat{
   background: rgba(128, 128, 128, 0.128);
-}
-
-.missatgeOK{
-  color:#008000;
-}
-
-.missatgeNOK{
-  color: #ff0000;
 }
