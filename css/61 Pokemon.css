@@ -3,7 +3,7 @@
 }
 
 html {
-  font-size: 2rem;
+  /* font-size: 2rem; */
   scroll-behavior: smooth;
 }
 
@@ -37,6 +37,11 @@ nav {
 
 main {
   grid-area: prin;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+
 }
 
 footer {
