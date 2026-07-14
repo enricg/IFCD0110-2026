@@ -1,0 +1,63 @@
+.clar{
+  --fons-lletres-clar: #fff;
+  --fons-titol: #000;
+}
+
+.fosc{
+  --fons-titol: #fff;
+  --fons-lletres-fosc: #000;
+}
+/* :root{
+    --fons-titol: #000;
+    --fons-titol-fosc: #fff;
+    --fons-menu:#deb887;
+} */
+
+* {
+  margin: 0;
+}
+
+html {
+  font-size: 2rem;
+  scroll-behavior: smooth;
+}
+
+body {
+  display: grid;
+  grid-template-columns: 1fr 10fr;
+  grid-template-rows: 3rem auto 3rem;
+  height: 100vh;
+  grid-template-areas:
+    "mod cap cap"
+    "nav prin prin"
+    "peu peu peu";
+}
+
+header,
+footer {
+  background: var(--fons-titol);
+  color: var(--fons-lletres-clar);
+  text-align: center;
+}
+
+header {
+  grid-area: cap;
+}
+
+.btnMode{
+  grid-area: mod;
+}
+
+nav {
+  grid-area: nav;
+  background: var(--fons-menu);
+  padding: 5px;
+}
+
+main {
+  grid-area: prin;
+}
+
+footer {
+  grid-area: peu;
+}
