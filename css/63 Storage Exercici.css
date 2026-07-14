@@ -1,17 +1,12 @@
-.clar{
-  --fons-lletres-clar: #fff;
-  --fons-titol: #000;
+:root {
+    --fons: #fff;
+    --text-principal: #000;
+    --text-secundari: gray;
+    --color-primari: blue;
+    --boto-primari: blue;
+    --capcalera-fons:#000;
+    --capcalera-text:#fff;
 }
-
-.fosc{
-  --fons-titol: #fff;
-  --fons-lletres-fosc: #000;
-}
-/* :root{
-    --fons-titol: #000;
-    --fons-titol-fosc: #fff;
-    --fons-menu:#deb887;
-} */
 
 * {
   margin: 0;
@@ -23,6 +18,8 @@ html {
 }
 
 body {
+  background: var(--fons);
+  color: var(--text-principal);
   display: grid;
   grid-template-columns: 1fr 10fr;
   grid-template-rows: 3rem auto 3rem;
@@ -35,8 +32,8 @@ body {
 
 header,
 footer {
-  background: var(--fons-titol);
-  color: var(--fons-lletres-clar);
+  background: var(--capcalera-fons);
+  color: var(--capcalera-text);
   text-align: center;
 }
 
@@ -60,4 +57,9 @@ main {
 
 footer {
   grid-area: peu;
+}
+
+button{
+  background: var(--boto-primari);
+  color: #fff;
 }

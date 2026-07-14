@@ -1,0 +1,208 @@
+{
+  "clar": {
+    "fons": "#FFFFFF",
+    "fonsSecundari": "#F8F9FA",
+    "superficie": "#FFFFFF",
+    "superficieHover": "#F3F4F6",
+    "superficieActiva": "#E5E7EB",
+
+    "vora": "#D1D5DB",
+    "voraSuau": "#E5E7EB",
+    "separador": "#E5E7EB",
+    "capcalera":{
+      "fons":"#000",
+      "text":"#fff"
+    },
+    "text": {
+      "principal": "#111827",
+      "secundari": "#4B5563",
+      "suau": "#6B7280",
+      "desactivat": "#9CA3AF",
+      "invers": "#FFFFFF"
+    },
+
+    "primari": {
+      "50": "#EFF6FF",
+      "100": "#DBEAFE",
+      "200": "#BFDBFE",
+      "300": "#93C5FD",
+      "400": "#60A5FA",
+      "500": "#3B82F6",
+      "600": "#2563EB",
+      "700": "#1D4ED8",
+      "800": "#1E40AF",
+      "900": "#1E3A8A"
+    },
+    
+    "exit": {
+      "principal": "#22C55E",
+      "fons": "#DCFCE7",
+      "vora": "#86EFAC",
+      "text": "#166534"
+    },
+    
+    "avis": {
+      "principal": "#F59E0B",
+      "fons": "#FEF3C7",
+      "vora": "#FCD34D",
+      "text": "#92400E"
+    },
+
+    "error": {
+      "principal": "#EF4444",
+      "fons": "#FEE2E2",
+      "vora": "#FCA5A5",
+      "text": "#991B1B"
+    },
+    
+    "informacio": {
+      "principal": "#0EA5E9",
+      "fons": "#E0F2FE",
+      "vora": "#7DD3FC",
+      "text": "#075985"
+    },
+
+    "boto": {
+      "primari": "#2563EB",
+      "primariHover": "#1D4ED8",
+      "primariActiu": "#1E40AF",
+      "secundari": "#E5E7EB",
+      "secundariHover": "#D1D5DB",
+      "desactivat": "#CBD5E1"
+    },
+    
+    "camp": {
+      "fons": "#FFFFFF",
+      "vora": "#D1D5DB",
+      "focus": "#2563EB",
+      "placeholder": "#9CA3AF",
+      "text": "#111827"
+    },
+
+    "accent": {
+      "lila": "#8B5CF6",
+      "rosa": "#EC4899",
+      "taronja": "#F97316",
+      "cia": "#06B6D4",
+      "llima": "#84CC16",
+      "indigo": "#6366F1"
+    },
+
+    "grisos": {
+      "50": "#F9FAFB",
+      "100": "#F3F4F6",
+      "200": "#E5E7EB",
+      "300": "#D1D5DB",
+      "400": "#9CA3AF",
+      "500": "#6B7280",
+      "600": "#4B5563",
+      "700": "#374151",
+      "800": "#1F2937",
+      "900": "#111827"
+    }
+  },
+  
+  "fosc": {
+    "fons": "#121212",
+    "fonsSecundari": "#1A1A1A",
+    "superficie": "#202124",
+    "superficieHover": "#2A2A2A",
+    "superficieActiva": "#333333",
+    
+    "vora": "#404040",
+    "voraSuau": "#2C2C2C",
+    "separador": "#303030",
+    "capcalera":{
+      "fons":"#fff",
+      "text":"#000"
+    },
+    
+    "text": {
+      "principal": "#F9FAFB",
+      "secundari": "#D1D5DB",
+      "suau": "#9CA3AF",
+      "desactivat": "#6B7280",
+      "invers": "#000000"
+    },
+
+    "primari": {
+      "50": "#172554",
+      "100": "#1E3A8A",
+      "200": "#1D4ED8",
+      "300": "#2563EB",
+      "400": "#3B82F6",
+      "500": "#60A5FA",
+      "600": "#93C5FD",
+      "700": "#BFDBFE",
+      "800": "#DBEAFE",
+      "900": "#EFF6FF"
+    },
+
+    "exit": {
+      "principal": "#4ADE80",
+      "fons": "#052E16",
+      "vora": "#166534",
+      "text": "#BBF7D0"
+    },
+
+    "avis": {
+      "principal": "#FBBF24",
+      "fons": "#451A03",
+      "vora": "#92400E",
+      "text": "#FDE68A"
+    },
+
+    "error": {
+      "principal": "#F87171",
+      "fons": "#450A0A",
+      "vora": "#991B1B",
+      "text": "#FECACA"
+    },
+
+    "informacio": {
+      "principal": "#38BDF8",
+      "fons": "#082F49",
+      "vora": "#075985",
+      "text": "#BAE6FD"
+    },
+
+    "boto": {
+      "primari": "#3B82F6",
+      "primariHover": "#60A5FA",
+      "primariActiu": "#93C5FD",
+      "secundari": "#374151",
+      "secundariHover": "#4B5563",
+      "desactivat": "#4B5563"
+    },
+
+    "camp": {
+      "fons": "#1F1F1F",
+      "vora": "#404040",
+      "focus": "#60A5FA",
+      "placeholder": "#6B7280",
+      "text": "#F9FAFB"
+    },
+
+    "accent": {
+      "lila": "#A78BFA",
+      "rosa": "#F472B6",
+      "taronja": "#FB923C",
+      "cia": "#22D3EE",
+      "llima": "#A3E635",
+      "indigo": "#818CF8"
+    },
+
+    "grisos": {
+      "50": "#18181B",
+      "100": "#27272A",
+      "200": "#3F3F46",
+      "300": "#52525B",
+      "400": "#71717A",
+      "500": "#A1A1AA",
+      "600": "#D4D4D8",
+      "700": "#E4E4E7",
+      "800": "#F4F4F5",
+      "900": "#FAFAFA"
+    }
+  }
+}
