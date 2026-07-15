@@ -1,11 +1,14 @@
+/* Colors inicials al carregar la pàgina */
 :root {
     --fons: #fff;
     --text-principal: #000;
     --text-secundari: gray;
     --color-primari: blue;
-    --boto-primari: blue;
+    --boto-primari: #2563EB;
     --capcalera-fons:#000;
     --capcalera-text:#fff;
+    --menu-fons:#d8a600;
+    --menu-text:#fff;
 }
 
 * {
@@ -18,8 +21,6 @@ html {
 }
 
 body {
-  background: var(--fons);
-  color: var(--text-principal);
   display: grid;
   grid-template-columns: 1fr 10fr;
   grid-template-rows: 3rem auto 3rem;
@@ -47,12 +48,15 @@ header {
 
 nav {
   grid-area: nav;
-  background: var(--fons-menu);
+  background: var(--menu-fons);
+  color: var(--menu-text);
   padding: 5px;
 }
 
 main {
   grid-area: prin;
+  background: var(--fons);
+  color: var(--text-principal);
 }
 
 footer {

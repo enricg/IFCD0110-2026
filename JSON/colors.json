@@ -1,8 +1,8 @@
 {
   "clar": {
-    "fons": "#FFFFFF",
+    "fons": "#fff",
     "fonsSecundari": "#F8F9FA",
-    "superficie": "#FFFFFF",
+    "superficie": "#fff",
     "superficieHover": "#F3F4F6",
     "superficieActiva": "#E5E7EB",
 
@@ -13,12 +13,20 @@
       "fons":"#000",
       "text":"#fff"
     },
+    "main":{
+      "fons":"#fff",
+      "text":"#000"
+    },
+    "menu":{
+      "fons":"#d8a600",
+      "text":"#fff"
+    },
     "text": {
       "principal": "#111827",
       "secundari": "#4B5563",
       "suau": "#6B7280",
       "desactivat": "#9CA3AF",
-      "invers": "#FFFFFF"
+      "invers": "#fff"
     },
 
     "primari": {
@@ -72,7 +80,7 @@
     },
     
     "camp": {
-      "fons": "#FFFFFF",
+      "fons": "#fff",
       "vora": "#D1D5DB",
       "focus": "#2563EB",
       "placeholder": "#9CA3AF",
@@ -103,7 +111,7 @@
   },
   
   "fosc": {
-    "fons": "#121212",
+    "fons": "#000",
     "fonsSecundari": "#1A1A1A",
     "superficie": "#202124",
     "superficieHover": "#2A2A2A",
@@ -116,7 +124,14 @@
       "fons":"#fff",
       "text":"#000"
     },
-    
+    "main":{
+      "fons":"#000",
+      "text":"#fff"
+    },
+    "menu":{
+      "fons":"#fff",
+      "text":"#d8a600"
+    },
     "text": {
       "principal": "#F9FAFB",
       "secundari": "#D1D5DB",
