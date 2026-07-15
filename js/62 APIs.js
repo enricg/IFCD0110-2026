@@ -1,5 +1,5 @@
 const areaExercicis = document.getElementById("principal");
-const APIUsuariRandom = "https://randomuser.me/api/";
+const APIUsuariRandom = "https://randomuser.me/api/?results=";
 
 window.onload = async function () {
   // await carregaDades(APIUsuariRandom);
@@ -9,8 +9,8 @@ window.onload = async function () {
       "Usuaris aleatoris",
       "randomUser",
       "API que crea usuaris aleatoris amb les seves característiques",
-      carregaDades,
-      esborraDades,
+      // carregaDades,
+      // esborraDades,
     ),
   );
 };
@@ -18,20 +18,23 @@ window.onload = async function () {
 // Carrega dades
 async function carregaDades() {
   const divUsuariRandom = document.getElementById("solucio1");
-  const API = "https://randomuser.me/api/";
+  const iteracions = document.getElementById("selEx1");
+  // const API = "https://randomuser.me/api/?results=3";
   try {
-    const resposta = await fetch(API);
+    const resposta = await fetch(APIUsuariRandom + iteracions.value);
     const dades = await resposta.json();
-    console.log(dades.results[0]);
+    console.log(dades);
     // Aquí va el codi
-    divUsuariRandom.appendChild(
-      creaCarta(
-        dades.results[0].name.first,
-        "títol",
-        "text",
-        dades.results[0].picture.large,
-      ),
-    );
+    for (i = 0; i < dades.results.length; i++) {
+      divUsuariRandom.appendChild(
+        creaCarta(
+          dades.results[i].name.first,
+          "títol",
+          "text",
+          dades.results[i].picture.large,
+        ),
+      );
+    }
   } catch (e) {
     console.error("Error de càrrega ", e);
   }
@@ -60,6 +63,7 @@ function creaElement(
   if (text) {
     camp.textContent = text;
   }
+  // Afegir ruta imatge
   if (rutaImatge) {
     camp.src = rutaImatge;
   }
@@ -88,15 +92,16 @@ function creaExercici(
   titol,
   nomAPI,
   descripcio,
-  funcioCarrega,
-  funcioNeteja
+  botons = "funcioCarrega funcioNeteja",
+  // funcioCarrega,
+  // funcioNeteja
 ) {
   const exercici = creaElement("div", "container text-center");
   const fila = creaElement("div", "row");
   const esq = creaElement("div", "col-4");
   const dre = creaElement("div", "col-8");
-  dre.style.display="flex";
-  dre.style.flexWrap="wrap";
+  dre.style.display = "flex";
+  dre.style.flexWrap = "wrap";
   dre.id = "solucio" + numeroExercici;
   const tarjeta = creaElement("div", "card");
   const titolTarjeta = creaElement("h5", "card-header");
@@ -108,18 +113,48 @@ function creaExercici(
   titolCos.innerText = nomAPI;
   const textCos = creaElement("p", "card-text");
   textCos.innerText = descripcio;
-  const botoCarrega = creaElement("button", "btn btn-primary");
-  botoCarrega.innerText = "Carrega";
-  botoCarrega.id = "btnEx" + numeroExercici + "C";
-  botoCarrega.addEventListener("click", funcioCarrega);
-  const botoNeteja = creaElement("button", "btn btn-primary");
-  botoNeteja.innerText = "Neteja";
-  botoNeteja.id = "btnEx" + numeroExercici + "N";
-  botoNeteja.addEventListener("click", funcioNeteja);
+
   cos.appendChild(titolCos);
   cos.appendChild(textCos);
-  cos.appendChild(botoCarrega);
-  cos.appendChild(botoNeteja);
+
+  // Afegim desplegable
+  const quantitat = creaElement("select", "form-select form-select-lg mb-3");
+  for (let comptador = 1; comptador < 5; comptador++) {
+    const opcio = creaElement("option", "", comptador);
+    quantitat.appendChild(opcio);
+  }
+  quantitat.id = "selEx" + numeroExercici;
+  cos.appendChild(quantitat);
+
+  // Afegim botons
+  const btns = botons.split(" ");
+  for (btn of btns) {
+    const boto = creaElement("button", "btn btn-primary");
+    boto.id = "btnEx" + numeroExercici + btn;
+    switch (btn) {
+      case "funcioCarrega":
+        boto.innerText = "Carrega";
+        boto.addEventListener("click", carregaDades);
+        break;
+      case "funcioNeteja":
+        boto.innerText = "Neteja";
+        boto.addEventListener("click", esborraDades);
+        break;
+    }
+    cos.appendChild(boto);
+  }
+
+  // const botoCarrega = creaElement("button", "btn btn-primary");
+  // botoCarrega.innerText = "Carrega";
+  // botoCarrega.id = "btnEx" + numeroExercici + "C";
+  // botoCarrega.addEventListener("click", funcioCarrega);
+  // const botoNeteja = creaElement("button", "btn btn-primary");
+  // botoNeteja.innerText = "Neteja";
+  // botoNeteja.id = "btnEx" + numeroExercici + "N";
+  // botoNeteja.addEventListener("click", funcioNeteja);
+
+  // cos.appendChild(botoCarrega);
+  // cos.appendChild(botoNeteja);
   esq.appendChild(tarjeta);
   fila.appendChild(esq);
   fila.appendChild(dre);
