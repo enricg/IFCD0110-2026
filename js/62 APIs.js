@@ -24,14 +24,32 @@ async function carregaDades() {
     const resposta = await fetch(APIUsuariRandom + iteracions.value);
     const dades = await resposta.json();
     console.log(dades);
+    let persones = dades.results;
     // Aquí va el codi
-    for (i = 0; i < dades.results.length; i++) {
+    for (i = 0; i < persones.length; i++) {
       divUsuariRandom.appendChild(
         creaCarta(
-          dades.results[i].name.first,
-          "títol",
-          "text",
-          dades.results[i].picture.large,
+          persones[i].name.title +
+            " " +
+            persones[i].name.first +
+            " " +
+            persones[i].name.last,
+          persones[i].email +
+            "<br>" +
+            persones[i].phone +
+            " / " +
+            persones[i].cell,
+          "<b>Adreça: </b>" +
+            persones[i].location.street.name +
+            ", " +
+            persones[i].location.street.number +
+            "<br>" +
+            persones[i].location.city +
+            ", " +
+            persones[i].location.state +
+            ", " +
+            persones[i].location.country,
+          persones[i].picture.large,
         ),
       );
     }
@@ -61,7 +79,7 @@ function creaElement(
   }
   //  Afegir text
   if (text) {
-    camp.textContent = text;
+    camp.innerHTML = text;
   }
   // Afegir ruta imatge
   if (rutaImatge) {
@@ -143,15 +161,6 @@ function creaExercici(
     }
     cos.appendChild(boto);
   }
-
-  // const botoCarrega = creaElement("button", "btn btn-primary");
-  // botoCarrega.innerText = "Carrega";
-  // botoCarrega.id = "btnEx" + numeroExercici + "C";
-  // botoCarrega.addEventListener("click", funcioCarrega);
-  // const botoNeteja = creaElement("button", "btn btn-primary");
-  // botoNeteja.innerText = "Neteja";
-  // botoNeteja.id = "btnEx" + numeroExercici + "N";
-  // botoNeteja.addEventListener("click", funcioNeteja);
 
   // cos.appendChild(botoCarrega);
   // cos.appendChild(botoNeteja);
