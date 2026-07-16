@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ca">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pràctica Validacio</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="./css/64 Validacio.css" />
+    <link rel="shortcut icon" href="./imgs/rugby_r.jpg" type="image/x-icon" />
+    <script src="./js/64 Validacio.js" defer></script>
+  </head>
+  <body>
+    <header>Pràctica Validació de Dades</header>
+    <nav>
+      Menú
+      <hr />
+    </nav>
+    <main id="principal">
+      <h2>Validació formulari d'inici de sessió</h2>
+      <!-- Aquí es carreguen les etiquetes dels exercicis -->
+      <!-- <form action="#" method="get"> -->
+      <div class="mb-3 row">
+        <div class="mb-3 row">
+          <label for="txtUsuari" class="col-sm-2 col-form-label"
+          >Usuari</label
+        >
+        <div class="col-sm-4">
+          <input type="text" class="form-control" id="txtUsuari" />
+        </div>
+        <div class="col-sm-6 alert" id="mUsuari"></div>
+      </div>
+      <div class="mb-3 row">
+        <label for="txtClauDePas" class="col-sm-2 col-form-label"
+        >Contrasenya</label
+        >
+        <div class="col-sm-4">
+          <input type="text" class="form-control" id="txtClauDePas" />
+        </div>
+        <div class="col-sm-6 alert" id="mClauDePas"></div>
+        </div>
+      </div>
+
+      <!-- <tr> -->
+          <td><button id="btnIniciSessio">Inici sessió</button></td>
+          <td><button id="btnNetejaDades">Neteja dades</button></td>
+          <td><button id="btnNouUsuari">Nou usuari</button></td>
+        <!-- </tr>
+        <tr> -->
+          <td colspan="3" id="txtMissatge" class="alert"></td>
+        <!-- </tr> -->
+      <!-- </table> -->
+      <!-- </form> -->
+    </main>
+    <footer>Fet per mi &copy;</footer>
+  </body>
+</html>
