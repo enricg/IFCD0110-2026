@@ -1,10 +1,15 @@
-let colors;
+let colors; // colors per treballar
+let llista = []; // variables de colors utilitzades
+let llistaresultat = [];
 
+// Carrega els colors de la llista
 async function carregarColors(tema) {
   const dades = localStorage.getItem("colors");
   if (dades) {
+    // en el cas que la llista es trobi al localStorage
     colors = JSON.parse(dades);
   } else {
+    // si no es troba al localStorage, la llegim de l'arxiu extern i la guardem al localStorage
     try {
       const resposta = await fetch("./json/colors.json");
       if (!resposta.ok) {
@@ -13,58 +18,44 @@ async function carregarColors(tema) {
       colors = await resposta.json();
       localStorage.setItem("colors", JSON.stringify(colors));
     } catch (e) {
-        console.error(e);
-    }finally{
-        aplicarTema(tema);
+      console.error(e);
+    } finally {
+      actualitzarValorVariables(colors[tema]);
     }
   }
 }
 
 // Canvia el color de les variables
-function aplicarTema(tema) {
-  const t = colors[tema];
-   aplicarVariables(colors[tema]);
-
-//   document.documentElement.style.setProperty("--capcalera-fons", t.capcalera.fons);
-//   document.documentElement.style.setProperty("--fons", t.fons);
-//   document.documentElement.style.setProperty(
-//     "--text-principal",
-//     t.text.principal,
-//   );
-//   document.documentElement.style.setProperty(
-//     "--text-secundari",
-//     t.text.secundari,
-//   );
-//   document.documentElement.style.setProperty(
-//     "--color-primari",
-//     t.primari["500"],
-//   );
-//   document.documentElement.style.setProperty("--boto-primari", t.boto.primari);
-}
-
-function aplicarVariables(objecte, prefix = "") {
-
-    for (const [clau, valor] of Object.entries(objecte)) {
-
-        // Si és un altre objecte, continuem baixant un nivell
-        if (typeof valor === "object" && valor !== null) {
-
-            const nouPrefix = prefix
-                ? `${prefix}-${clau}`
-                : clau;
-
-            aplicarVariables(valor, nouPrefix);
-
-        } else {
-
-            // Si és un valor (string, número, etc.), creem la variable CSS
-            document.documentElement.style.setProperty(
-                `--${prefix}-${clau}`,
-                valor
-            );
-
+// Recorre tots els elements del JSON guardat a colors, i crea/actualitza les variables del CSS
+function actualitzarValorVariables(objecte, prefix = "") {
+  for (const [clau, valor] of Object.entries(objecte)) {
+    // Si és un altre objecte, continuem baixant un nivell
+    if (typeof valor === "object" && valor !== null) {
+      let nouPrefix;
+      if (prefix) {
+        nouPrefix = prefix & "-" & clau;
+      } else {
+        nouPrefix = clau;
+      }
+      actualitzarValorVariables(valor, nouPrefix);
+    } else {
+      // Si és un valor (string, número, etc.), actualitzem la variable CSS
+      if (prefix) {
+        if (llista.includes("--" + prefix + "-" + clau)) {
+          document.documentElement.style.setProperty(
+            "--" + prefix + "-" + clau,
+            valor,
+          );
+          llistaresultat.push("--" + clau);
         }
+      } else {
+        if (llista.includes("--" + clau)) {
+          document.documentElement.style.setProperty("--" + clau, valor);
+          llistaresultat.push("--" + clau);
+        }
+      }
     }
+  }
 }
 
 // Event que respon al clic del botó per canviar el mode clar/fosc
@@ -77,14 +68,28 @@ document.getElementById("btnMode").addEventListener("click", () => {
     localStorage.mode = "clar";
     txtBoto.innerText = "Canviar a mode obscur";
   }
-  aplicarTema(localStorage.mode);
+  actualitzarValorVariables(colors[localStorage.mode]);
 });
 
 // Event que s'executa al carregar la pàgina
 window.addEventListener("load", () => {
-  console.log(localStorage.mode);
   if (!localStorage.mode) {
     localStorage.mode = "clar";
   }
+  cercaestils();
   carregarColors(localStorage.mode);
 });
+
+// Event click pel botó d'eliminació de la Local Storage
+const botoNeteja = document.getElementById("btnDelLocalStorage");
+botoNeteja.addEventListener("click", () => {
+  localStorage.clear();
+  location.reload();
+});
+
+function cercaestils() {
+  const declaration = document.styleSheets[0].cssRules[0].style;
+  for (estil of declaration) {
+    llista.push(estil);
+  }
+}
