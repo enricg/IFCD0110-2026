@@ -1,0 +1,50 @@
+html {
+  scroll-behavior: smooth;
+}
+
+header {
+  height: 70px;
+}
+
+.sidebar {
+  position: fixed;
+  top: 70px;
+  left: 0;
+
+  width: 240px;
+  height: calc(100vh - 70px);
+
+  overflow: auto;
+
+  background: #f8f9fa;
+}
+
+main {
+  margin-top: 70px;
+  margin-left: 240px;
+}
+
+section {
+  height: 100vh;
+  padding: 40px;
+
+  scroll-margin-top: 70px;
+}
+
+footer {
+  margin-left: 240px;
+}
+
+@media (max-width: 991px) {
+  .sidebar {
+    display: none;
+  }
+
+  main {
+    margin-left: 0;
+  }
+
+  footer {
+    margin-left: 0;
+  }
+}
