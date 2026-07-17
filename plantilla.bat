@@ -16,7 +16,10 @@ copy /Y "%~dp0plantilla.html" "%~dp0%NOM%.html"
 copy /Y "%~dp0css\plantilla.css" "%~dp0css\%NOM%.css"
 copy /Y "%~dp0js\plantilla.js" "%~dp0js\%NOM%.js"
 
+rem Actualitzar referències dins de l'HTML
+powershell -Command "(Get-Content '%~dp0%NOM%.html') -replace 'plantilla\.css','%NOM%.css' -replace 'plantilla\.js','%NOM%.js' | Set-Content '%~dp0%NOM%.html'"
+
 echo.
-echo Fitxers creats correctament.
+echo Fitxers creats i HTML actualitzat correctament.
 
 endlocal
