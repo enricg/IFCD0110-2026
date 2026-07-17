@@ -3,7 +3,7 @@
 }
 
 html {
-  /* font-size: 2rem; */
+  font-size: 2rem;
   scroll-behavior: smooth;
 }
 
@@ -31,30 +31,19 @@ header {
 
 nav {
   grid-area: nav;
-  background: #deb887;
+  background: burlywood;
   padding: 5px;
-  position: sticky;
 }
 
 main {
   grid-area: prin;
-  }
+  /* display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap; */
+
+}
 
 footer {
   grid-area: peu;
-}
-
-form{
-  height: 100vh;
-}
-
-ul{
-  list-style-type: none;
-  padding: 0;
-  text-align: center;
-}
-
-li:hover{
-  background: #e19f4a;
-  cursor: pointer;
 }

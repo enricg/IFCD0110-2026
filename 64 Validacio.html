@@ -23,37 +23,89 @@
     <header>Pràctica Validació de Dades</header>
     <nav>
       Menú
+      <ul>
+        <li><a href="#exemple1">Inici de sessió</a></li>
+        <li><a href="#exemple2">Usuari</a></li>
+      </ul>
       <hr />
     </nav>
     <main id="principal">
-      <h2>Validació formulari d'inici de sessió</h2>
       <!-- Aquí es carreguen les etiquetes dels exercicis -->
-      <form action="#" method="get">
+      <h2 id="exemple1">Validació formulari d'inici de sessió</h2>
+      <form action="#" method="get" onsubmit="return;">
+        <div class="mb-6">
+          <div class="form-floating mb-3">
+            <input
+              type="text"
+              class="form-control"
+              id="txtUsuari"
+              placeholder="name@example.com"
+            />
+            <label for="txtUsuari">Usuari</label>
+          </div>
+          <div class="col-sm-6 alert" id="mUsuari"></div>
+          <div class="mb-6"></div>
+          <div class="form-floating">
+            <input
+            type="text"
+            class="form-control"
+            id="txtClauDePas"
+            placeholder="Contrasenya"
+            />
+            <label for="txtClauDePas">Contrasenya</label>
+          </div>
+          <div class="col-sm-6 alert" id="mClauDePas"></div>
+        </div>
+        <!-- <div class="mb-3 row">
+          <label for="txtUsuari" class="col-sm-2 col-form-label">Usuari</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" id="txtUsuari" />
+          </div>
+          <div class="col-sm-6 alert" id="mUsuari"></div>
+        </div>
         <div class="mb-3 row">
-          <div class="mb-3 row">
-            <label for="txtUsuari" class="col-sm-2 col-form-label"
-              >Usuari</label
-            >
-            <div class="col-sm-4">
-              <input type="text" class="form-control" id="txtUsuari" />
-            </div>
-            <div class="col-sm-6 alert" id="mUsuari"></div>
+          <label for="txtClauDePas" class="col-sm-2 col-form-label"
+            >Contrasenya</label
+          >
+          <div class="col-sm-4">
+            <input type="text" class="form-control" id="txtClauDePas" />
           </div>
-          <div class="mb-3 row">
-            <label for="txtClauDePas" class="col-sm-2 col-form-label"
-              >Contrasenya</label
-            >
-            <div class="col-sm-4">
-              <input type="text" class="form-control" id="txtClauDePas" />
-            </div>
-            <div class="col-sm-6 alert" id="mClauDePas"></div>
+          <div class="col-sm-6 alert" id="mClauDePas"></div>
+        </div> -->
+
+        <button class="btn btn-primary" id="btnIniciSessio">
+          Inici sessió
+        </button>
+        <button type="reset" class="btn btn-primary" id="btnNetejaDades">
+          Neteja dades
+        </button>
+        <button class="btn btn-primary" id="btnNouUsuari">Nou usuari</button>
+        <div id="txtMissatge" class="alert"></div>
+      </form>
+
+      <h2 id="exemple2">Validació nou usuari</h2>
+      <form action="#" method="get" onsubmit="return;">
+        <div class="mb-3 row">
+          <label for="txtUsuari" class="col-sm-2 col-form-label">Usuari</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" id="txtUsuari" />
           </div>
+          <div class="col-sm-6 alert" id="mUsuari"></div>
+        </div>
+        <div class="mb-3 row">
+          <label for="txtClauDePas" class="col-sm-2 col-form-label"
+            >Contrasenya</label
+          >
+          <div class="col-sm-4">
+            <input type="text" class="form-control" id="txtClauDePas" />
+          </div>
+          <div class="col-sm-6 alert" id="mClauDePas"></div>
         </div>
 
         <button class="btn btn-primary" id="btnIniciSessio">
           Inici sessió
         </button>
-        <button class="btn btn-primary" id="btnNetejaDades">
+        <button type="reset" class="btn btn-primary" id="btnNetejaDades">
           Neteja dades
         </button>
         <button class="btn btn-primary" id="btnNouUsuari">Nou usuari</button>

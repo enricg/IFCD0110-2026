@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ca">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pràctica Check Validity</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="./css/65 CheckValidity.css" />
+    <link rel="shortcut icon" href="./imgs/rugby_r.jpg" type="image/x-icon" />
+    <script src="./js/65 CheckValidity.js" defer></script>
+  </head>
+  <body>
+    <header>Pràctica Check Validity</header>
+    <nav>
+      Menú
+      <hr />
+      <div id="pagina"></div>
+    </nav>
+    <main id="principal">
+      Principal<br>
+      <!-- Aquí es carreguen les etiquetes dels exercicis -->
+       Exemple checkValidity
+       <input type="number" id="ex1" min="100" max="300" required>
+       <button onclick="valida1()">Executa</button>
+       <div id="resposta1"></div>
+       <hr>
+       Exemple rangeOverflow
+       <input type="number" id="ex2" max="300">
+       <button onclick="valida2()">Executa</button>
+       <div id="resposta2"></div>
+       <hr>
+       Exemple pattern
+       <input type="text" id="ex3" pattern="[a-z]+" required>
+       <button onclick="valida3()">Executa</button>
+       <div id="resposta3"></div>
+
+    </main>
+    <footer>Fet per mi &copy;</footer>
+  </body>
+</html>
