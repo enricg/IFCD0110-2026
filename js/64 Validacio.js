@@ -41,46 +41,52 @@ function validaCamp(txt,etiquetaMissatge, patro) {
 function validaClauDePas(){
     const camp=document.getElementById("txtClauDePas").value;
     const missatge=document.getElementById("mClauDePas");
-    console.log(camp.length);
-    console.log(camp);
+    // console.log(camp.length);
+    // console.log(camp);
     if(camp.length<8){
-        missatge.innerHTML="Falten "+(8-camp.length)+ " caracters<br>";
+        missatge.innerHTML="Falten "+(8-camp.length)+ " caracters";
     }else{
         missatge.innerHTML="";
     }
-
+    
     if(!camp.match(/\d+/)){
-        missatge.innerHTML+="Falta afegir un número<br>";
+        missatge.innerHTML+=", afegir un número";
     };
     
     if(!camp.match(/[a-z]+/)){
-        missatge.innerHTML+="Falta afegir una lletra minúscula<br>";
+        missatge.innerHTML+=", una lletra minúscula";
     };
     if(!camp.match(/[A-Z]+/)){
-        missatge.innerHTML+="Falta afegir una lletra majúscula<br>";
+        missatge.innerHTML+=", una lletra majúscula";
     };
     if(!camp.match(/[^a-z0-9]+/i)){
-        missatge.innerHTML+="Falta afegir un caracter especial<br>";
+        missatge.innerHTML+=", un caracter especial";
     };
+    
+    if(missatge.innerText.length==0){
+        missatge.classList.remove("alert-danger");
+    }else{
+        missatge.classList.add("alert-danger");
+    }
 
 }
 
-// function validaIniciSessio() {
-//   const usuari = document.getElementById("txtUsuari").value;
-//   console.log(usuari);
-//   const clauDePas = document.getElementById("txtClauDePas").value;
-//   console.log(clauDePas);
-//   const missatge = document.getElementById("txtMissatge");
+function validaIniciSessio() {
+  const usuari = document.getElementById("txtUsuari").value;
+  console.log(usuari);
+  const clauDePas = document.getElementById("txtClauDePas").value;
+  console.log(clauDePas);
+  const missatge = document.getElementById("txtMissatge");
 
-//   let patro = /^[a-zA-Z0-9]+$/;
-//   let resultat = usuari.match(patro);
-//   if (resultat) {
-//     missatge.classList.remove("alert-danger");
-//   } else {
-//     missatge.classList.add("alert-danger");
-//   }
+  let patro = /^[a-zA-Z0-9]+$/;
+  let resultat = usuari.match(patro);
+  if (resultat) {
+    missatge.classList.remove("alert-danger");
+  } else {
+    missatge.classList.add("alert-danger");
+  }
 
-//   if (!usuari.trim() || !clauDePas.trim()) {
-//     return "Algun dels dos camps està buit";
-//   }
-// }
+  if (!usuari.trim() || !clauDePas.trim()) {
+    return "Algun dels dos camps està buit";
+  }
+}

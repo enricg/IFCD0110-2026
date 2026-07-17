@@ -28,38 +28,37 @@
     <main id="principal">
       <h2>Validació formulari d'inici de sessió</h2>
       <!-- Aquí es carreguen les etiquetes dels exercicis -->
-      <!-- <form action="#" method="get"> -->
-      <div class="mb-3 row">
+      <form action="#" method="get">
         <div class="mb-3 row">
-          <label for="txtUsuari" class="col-sm-2 col-form-label"
-          >Usuari</label
-        >
-        <div class="col-sm-4">
-          <input type="text" class="form-control" id="txtUsuari" />
+          <div class="mb-3 row">
+            <label for="txtUsuari" class="col-sm-2 col-form-label"
+              >Usuari</label
+            >
+            <div class="col-sm-4">
+              <input type="text" class="form-control" id="txtUsuari" />
+            </div>
+            <div class="col-sm-6 alert" id="mUsuari"></div>
+          </div>
+          <div class="mb-3 row">
+            <label for="txtClauDePas" class="col-sm-2 col-form-label"
+              >Contrasenya</label
+            >
+            <div class="col-sm-4">
+              <input type="text" class="form-control" id="txtClauDePas" />
+            </div>
+            <div class="col-sm-6 alert" id="mClauDePas"></div>
+          </div>
         </div>
-        <div class="col-sm-6 alert" id="mUsuari"></div>
-      </div>
-      <div class="mb-3 row">
-        <label for="txtClauDePas" class="col-sm-2 col-form-label"
-        >Contrasenya</label
-        >
-        <div class="col-sm-4">
-          <input type="text" class="form-control" id="txtClauDePas" />
-        </div>
-        <div class="col-sm-6 alert" id="mClauDePas"></div>
-        </div>
-      </div>
 
-      <!-- <tr> -->
-          <td><button id="btnIniciSessio">Inici sessió</button></td>
-          <td><button id="btnNetejaDades">Neteja dades</button></td>
-          <td><button id="btnNouUsuari">Nou usuari</button></td>
-        <!-- </tr>
-        <tr> -->
-          <td colspan="3" id="txtMissatge" class="alert"></td>
-        <!-- </tr> -->
-      <!-- </table> -->
-      <!-- </form> -->
+        <button class="btn btn-primary" id="btnIniciSessio">
+          Inici sessió
+        </button>
+        <button class="btn btn-primary" id="btnNetejaDades">
+          Neteja dades
+        </button>
+        <button class="btn btn-primary" id="btnNouUsuari">Nou usuari</button>
+        <div id="txtMissatge" class="alert"></div>
+      </form>
     </main>
     <footer>Fet per mi &copy;</footer>
   </body>

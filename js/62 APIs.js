@@ -2,8 +2,8 @@ const areaExercicis = document.getElementById("principal");
 const APIUsuariRandom = "https://randomuser.me/api/?results=";
 
 window.onload = async function () {
-  // await carregaDades(APIUsuariRandom);
-  await areaExercicis.appendChild(
+  // randomusers
+  areaExercicis.appendChild(
     creaExercici(
       1,
       "Usuaris aleatoris",
@@ -13,6 +13,10 @@ window.onload = async function () {
       // esborraDades,
     ),
   );
+  // areaExercicis.appendChild(
+  //   creaExercici(2,)
+  // )
+
 };
 
 // Carrega dades
@@ -67,7 +71,7 @@ function creaElement(
   etiqueta = "div",
   classes = "",
   text = "",
-  rutaImatge = "",
+  // rutaImatge = "",
 ) {
   const camp = document.createElement(etiqueta);
   // Afegir classes
@@ -77,13 +81,11 @@ function creaElement(
       camp.classList.add(cl);
     }
   }
-  //  Afegir text
-  if (text) {
+  //  Afegir text o Afegir ruta imatge
+  if (etiqueta=="img") {
+    camp.src = text;
+  }else{
     camp.innerHTML = text;
-  }
-  // Afegir ruta imatge
-  if (rutaImatge) {
-    camp.src = rutaImatge;
   }
   return camp;
 }
@@ -93,7 +95,7 @@ function creaCarta(titolCapçalera, titol, text, url) {
   const carta = creaElement("div", "card");
   carta.style.maxWidth = "18rem";
 
-  const foto = creaElement("img", "card-img-top", titol, url);
+  const foto = creaElement("img", "card-img-top", url);
   const body = creaElement("div", "card-body");
   const titolBody = creaElement("h5", "card-title", titolCapçalera);
   const textBody = creaElement("p", "card-text", text);
@@ -171,3 +173,70 @@ function creaExercici(
 
   return exercici;
 }
+// ****************************************************************************************************************
+// const ACCESS_TOKEN = "JZxR7PuTOq8tYjdHKP0aPO2Nqyi06pALFKGFwUXo4Kc0Zwdne5XwjLDr0vDlDUjm";
+
+// async function searchSong(query) {
+//   const url = `https://api.genius.com/search?q=${encodeURIComponent(query)}`;
+
+//   const response = await fetch(url, {
+//     headers: {
+//       Authorization: `Bearer ${ACCESS_TOKEN}`,
+//       Accept: "application/json",
+//     },
+//   });
+
+//   if (!response.ok) {
+//     throw new Error(`Error ${response.status}: ${response.statusText}`);
+//   }
+
+//   const data = await response.json();
+
+//   return data.response.hits;
+// }
+
+// (async () => {
+//   try {
+//     const results = await searchSong("Bohemian Rhapsody");
+
+//     results.forEach((hit, index) => {
+//       const song = hit.result;
+
+//       console.log(`${index + 1}. ${song.full_title}`);
+//       console.log(`   Artista: ${song.artist_names}`);
+//       console.log(`   URL: ${song.url}`);
+//       console.log(`   ID: ${song.id}`);
+//       console.log("");
+//     });
+//   } catch (err) {
+//     console.error(err);
+//   }
+// })();
+
+// // const ACCESS_TOKEN = "JZxR7PuTOq8tYjdHKP0aPO2Nqyi06pALFKGFwUXo4Kc0Zwdne5XwjLDr0vDlDUjm";
+
+// async function getSong(songId) {
+//   const response = await fetch(`https://api.genius.com/songs/${songId}`, {
+//     headers: {
+//       Authorization: `Bearer ${ACCESS_TOKEN}`,
+//       Accept: "application/json",
+//     },
+//   });
+
+//   const data = await response.json();
+//   return data.response.song;
+// }
+
+// (async () => {
+//   const song = await getSong(378195);
+
+//   console.log({
+//     title: song.title,
+//     artist: song.primary_artist.name,
+//     releaseDate: song.release_date,
+//     page: song.url,
+//   });
+// })();
+
+// const songs = await searchSong("Imagine");
+// console.log(songs);
