@@ -1,0 +1,85 @@
+* {
+  margin: 0;
+}
+
+html {
+  font-size: 2rem;
+  scroll-behavior: smooth;
+}
+
+body {
+  display: grid;
+  grid-template-columns: 1fr 10fr;
+  grid-template-rows: 3rem auto 3rem;
+  height: 100vh;
+  grid-template-areas:
+    "cap cap cap"
+    "nav prin prin"
+    "peu peu peu";
+}
+
+header,
+footer {
+  background: #000;
+  color: #fff;
+  text-align: center;
+}
+
+header {
+  grid-area: cap;
+}
+
+nav {
+  grid-area: nav;
+  background: burlywood;
+  padding: 5px;
+}
+
+main {
+  grid-area: prin;
+  /* display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap; */
+}
+
+footer {
+  grid-area: peu;
+}
+
+.parell {
+  color: green;
+}
+
+.imparell {
+  color: red;
+}
+
+.caixa {
+  height: 100px;
+  width: 100px;
+  text-align: center;
+  align-content: center;
+  display: none;
+}
+
+.blau{
+  background: blue;
+}
+.vermell{
+  background: red;
+}
+.groc{
+  background: yellow;
+}
+.verd{
+  background: green;  
+}
+
+#slideCos{
+  display: none;
+}
+
+#slideTitol:hover{
+  cursor: pointer;
+}
