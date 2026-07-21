@@ -33,6 +33,9 @@ nav {
   grid-area: nav;
   background: burlywood;
   padding: 5px;
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: flex-end;
 }
 
 main {
@@ -82,4 +85,12 @@ footer {
 
 #slideTitol:hover{
   cursor: pointer;
+}
+
+.arbre{
+  border: 1px solid #000;
+}
+
+.ancestre{
+  border: 3px solid #ff0000;
 }
