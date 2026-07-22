@@ -228,4 +228,19 @@ $(document).ready(function () {
     let fillsDirectes=prompt("de quina etiqueta vols veure els fills");
     $(fillsDirectes).children("span:first").css("border","5px solid #ff0000")
   })
+
+  $("#button28").click(function(){
+    let germans=prompt("De qui vols veure els seus germans?");
+    $(germans).siblings().css("border","5px solid #ff0000");
+  })
+  
+  $("#button29").click(function(){
+    let següentGerma=prompt("De qui vols veure els seu següent germ?");
+    $(següentGerma).next().css("border","5px solid #ff0000");
+  })
+  
+  $("#button30").click(function(){
+    let elPrimer=prompt("De qui vols veure el primer element");
+    $(elPrimer).first().css("border","5px solid #ff0000");
+  })
 });
