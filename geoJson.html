@@ -2,7 +2,7 @@
 <html lang="ca">
   <head>
     <meta charset="UTF-8" />
-    <link rel="shortcut icon" href="./imgs/favicon.svg" type="image/x-icon">
+    <link rel="shortcut icon" href="./imgs/favicon.svg" type="image/x-icon" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script
       src="https://code.jquery.com/jquery-4.0.0.js"
@@ -22,6 +22,18 @@
       integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
       crossorigin=""
     ></script>
+    <!-- CSS del plugin de clustering (a més del CSS de Leaflet que ja tens) -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css"
+    />
+
+    <!-- JS del plugin: ha d'anar DESPRÉS de leaflet.js i ABANS del teu script.js -->
+    <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
     <script src="./js/geoJson.js" defer></script>
   </head>
 

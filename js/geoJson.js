@@ -1,177 +1,245 @@
 $(document).ready(function () {
+  /*************************************************************/
+  /** ESTAT GLOBAL DEL MÒDUL ************************************/
+  /*************************************************************/
+
   let dades = "";
-  let map;
-  let popup;
+  let marker; // marcador de la cerca de ciutat
+  let temporitzador;
+
+  const inputCiutat = document.getElementById("ciutat");
+  const divResultat = document.getElementById("resultat");
+
+  // 1. Inicialitzem el mapa UNA sola vegada (centrat en una vista global)
+  //    preferCanvas: dibuixa tots els marcadors en un únic <canvas> en lloc
+  //    de crear un element SVG per cadascun -> molt més ràpid amb molts punts
+  const map = L.map("map", { preferCanvas: true }).setView([20, 0], 2);
+
+  // Capa base OpenStreetMap
+  L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom: 19,
+    attribution:
+      '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+  }).addTo(map);
+
+  // 2. Grup de capes amb CLUSTERING per als marcadors carregats des dels fitxers
+  //    Amb 70.000 registres és imprescindible: agrupa punts propers en un sol
+  //    cercle (que mostra el recompte) i només els "desplega" en fer zoom.
+  //    chunkedLoading afegeix els punts en petits lots per no bloquejar la
+  //    pestanya del navegador mentre es carreguen.
+  const capaDades = L.markerClusterGroup({
+    chunkedLoading: true,
+    chunkInterval: 200, // ms de marge que es dona al navegador entre lots
+    chunkDelay: 50,
+    spiderfyOnMaxZoom: false, // amb 70k punts, "desplegar" tots a un clic pot ser molt pesat
+  }).addTo(map);
 
   carregarOpcióSelect();
 
   /*************************************************************/
-  /** LISTENERS ************************************************/
+  /** LISTENERS ***************************************************/
   /*************************************************************/
 
-  // Per cercar l'arxiu de dades a mostrar al mapa
+  // Cerca de ciutat amb un petit retard (debounce) mentre l'usuari escriu
+  if (inputCiutat) {
+    inputCiutat.addEventListener("input", () => {
+      const nomCiutat = inputCiutat.value.trim();
+      clearTimeout(temporitzador);
+
+      if (nomCiutat.length < 2) {
+        divResultat.innerHTML =
+          "Escriu una ciutat per veure les coordenades i el mapa.";
+        return;
+      }
+
+      temporitzador = setTimeout(() => {
+        cercaCoordenades(nomCiutat);
+      }, 500);
+    });
+  }
+
+  // Selector de l'arxiu de dades a mostrar al mapa
   $("#select-fitxers").change(async function () {
-    const rutaFitxer = $("#select-fitxers").val();
-    if (!rutaFitxer) return;
-    // 1. Recuperem les dades directament a la variable
+    const rutaFitxer = $(this).val();
+    if (!rutaFitxer) {
+      capaDades.clearLayers();
+      return;
+    }
+
     dades = await llegirArxiu(rutaFitxer);
-    // A partir d'aquí pots fer servir la variable 'dades' (per exemple, per pintar al mapa)
     processarDadesMapa(dades);
   });
 
   /*************************************************************/
-  /** FUNCIONS *************************************************/
+  /** FUNCIONS ******************************************************/
   /*************************************************************/
 
-  function processarDadesMapa(dades) {
-    // console.log(dades);
-    for (element of dades) {
-      afegirElement(element);
+  // Cerca les coordenades d'una ciutat i les mostra al mapa
+  async function cercaCoordenades(ciutat) {
+    divResultat.innerHTML = "Cercant coordenades...";
+
+    try {
+      const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(ciutat)}`;
+      const resposta = await fetch(url);
+      const dades = await resposta.json();
+
+      if (dades.length > 0) {
+        const lat = parseFloat(dades[0].lat);
+        const lon = parseFloat(dades[0].lon);
+        const nomComplet = dades[0].display_name;
+
+        divResultat.innerHTML = `
+          <strong>${nomComplet}</strong><br><br>
+          📍 <strong>Latitud:</strong> ${lat}<br>
+          📍 <strong>Longitud:</strong> ${lon}
+        `;
+
+        map.setView([lat, lon], 12);
+
+        if (marker) {
+          marker.setLatLng([lat, lon]);
+        } else {
+          marker = L.marker([lat, lon]).addTo(map);
+        }
+
+        marker.bindPopup(`<b>${nomComplet}</b>`).openPopup();
+      } else {
+        divResultat.innerHTML = "❌ No s'ha trobat cap ciutat amb aquest nom.";
+      }
+    } catch (error) {
+      divResultat.innerHTML =
+        "⚠️ Error en connectar amb el servei de geolocalització.";
+      console.error(error);
     }
   }
 
-  function afegirElement(element) {
-    console.log(element.Longitud);
-    // const marker = L.marker([element.Latitud, element.Longitud]).addTo(map);
-    // marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
-    // const marker = L.marker([51.5, -0.09]).addTo(map);
-    // marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
+  // Omple el selector amb la llista d'arxius disponible a DATA/arxius.json
+  async function carregarOpcióSelect() {
+    const selectFitxers = document.getElementById("select-fitxers");
+    if (!selectFitxers) return;
+
+    try {
+      const response = await fetch("./DATA/arxius.json");
+      if (!response.ok) {
+        throw new Error("No s'ha pogut carregar l'arxiu arxius.json");
+      }
+
+      const llistaFitxers = await response.json();
+
+      selectFitxers.innerHTML =
+        '<option value="">-- Selecciona un arxiu --</option>';
+
+      llistaFitxers.forEach((fitxer) => {
+        const option = document.createElement("option");
+        option.value = `./DATA/${fitxer}`;
+        option.textContent = fitxer;
+        selectFitxers.appendChild(option);
+      });
+    } catch (error) {
+      console.error("Error carregant el JSON d'arxius:", error);
+      selectFitxers.innerHTML =
+        '<option value="">Error en carregar els arxius</option>';
+    }
   }
 
-  function csvToJson(csv) {
-    const fila = csv.trim().split("\n");
-    const capçalera = fila[0].split(",");
+  // Llegeix un arxiu (CSV o JSON) i el retorna com a array d'objectes
+  async function llegirArxiu(arxiu) {
+    try {
+      const resposta = await fetch(arxiu);
+      if (!resposta.ok) {
+        throw new Error(`No s'ha pogut carregar l'arxiu: ${arxiu}`);
+      }
 
-    const resultat = fila.slice(1).map((linia) => {
-      const values = linia.split(",");
-      let obj = {};
+      const text = await resposta.text();
+
+      if (arxiu.endsWith(".csv")) {
+        return csvToJson(text);
+      }
+      return JSON.parse(text);
+    } catch (e) {
+      alert(e);
+      return [];
+    }
+  }
+
+  // Converteix un CSV en array d'objectes {capçalera: valor}
+  function csvToJson(csv) {
+    const files = csv.trim().split("\n");
+    if (files.length < 2) return [];
+
+    const capçalera = files[0].split(",").map((h) => h.trim());
+
+    return files.slice(1).map((linia) => {
+      const valors = linia.split(",");
+      const obj = {};
       capçalera.forEach((header, i) => {
-        obj[header.trim()] = values[i] ? values[i].trim() : "";
+        obj[header] = valors[i] ? valors[i].trim() : "";
       });
       return obj;
     });
-    return resultat;
   }
 
-  async function llegirArxiu(arxiu) {
-    let resultat = "";
-    try {
-      const resposta = await fetch(arxiu);
-      const texto = await resposta.text();
-      // Comprovem l'extensió de l'arxiu
-      if (arxiu.endsWith(".csv")) {
-        resultat = csvToJson(texto);
-      } else {
-        resultat = texto;
-        // resultat = await resposta.json();
-      }
-      return resultat;
-    } catch (e) {
-      alert(e);
+  // Recorre les dades carregades i afegeix un marcador per cadascuna
+  function processarDadesMapa(dades) {
+    capaDades.clearLayers(); // netegem els marcadors del fitxer anterior
+
+    if (!Array.isArray(dades) || dades.length === 0) return;
+
+    const marcadors = [];
+    let minLat = Infinity, maxLat = -Infinity;
+    let minLon = Infinity, maxLon = -Infinity;
+
+    for (const element of dades) {
+      const lat = parseFloat(element.Latitud);
+      const lon = parseFloat(element.Longitud);
+
+      if (Number.isNaN(lat) || Number.isNaN(lon)) continue;
+
+      marcadors.push(crearMarcador(lat, lon, element));
+
+      if (lat < minLat) minLat = lat;
+      if (lat > maxLat) maxLat = lat;
+      if (lon < minLon) minLon = lon;
+      if (lon > maxLon) maxLon = lon;
     }
-  }
-});
 
-const inputCiutat = document.getElementById("ciutat");
-const divResultat = document.getElementById("resultat");
-let temporitzador;
-let marker; // Guardarà la referència del marcador
+    if (marcadors.length === 0) return;
 
-// 3. Inicialitzar el mapa (centrat en una vista global per defecte)
-const map = L.map("map").setView([20, 0], 2);
+    // Ajustem la vista immediatament amb els límits calculats,
+    // sense esperar que el clustering acabi d'afegir els marcadors
+    map.fitBounds(
+      [
+        [minLat, minLon],
+        [maxLat, maxLon],
+      ],
+      { padding: [30, 30] }
+    );
 
-// Carregar la capa de rajoles (tiles) d'OpenStreetMap
-L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-  maxZoom: 19,
-  attribution:
-    '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-}).addTo(map);
-
-// Revisa els canvis a l'input amb un retard (500ms)
-inputCiutat.addEventListener("input", () => {
-  const nomCiutat = inputCiutat.value.trim();
-  clearTimeout(temporitzador);
-
-  if (nomCiutat.length < 2) {
-    divResultat.innerHTML =
-      "Escriu una ciutat per veure les coordenades i el mapa.";
-    return;
+    // addLayers (plural) afegeix tots els marcadors d'un cop de manera
+    // molt més eficient que cridar addLayer un per un dins d'un bucle
+    capaDades.addLayers(marcadors);
   }
 
-  temporitzador = setTimeout(() => {
-    cercaCoordenades(nomCiutat);
-  }, 500);
-});
-
-// A partir d'un nom de ciutat recupera les seves coordenades i ho mostra al mapa
-async function cercaCoordenades(ciutat) {
-  divResultat.innerHTML = "Cercant coordenades...";
-
-  try {
-    const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(ciutat)}`;
-    const resposta = await fetch(url);
-    const dades = await resposta.json();
-
-    if (dades.length > 0) {
-      const lat = parseFloat(dades[0].lat);
-      const lon = parseFloat(dades[0].lon);
-      const nomComplet = dades[0].display_name;
-
-      // Mostrar informació en text
-      divResultat.innerHTML = `
-            <strong>${nomComplet}</strong><br><br>
-            📍 <strong>Latitud:</strong> ${lat}
-            📍 <strong>Longitud:</strong> ${lon}
-          `;
-
-      // 4. Moure el mapa a la nova posició amb zoom 12
-      map.setView([lat, lon], 12);
-
-      // 5. Moure o crear el marcador
-      if (marker) {
-        marker.setLatLng([lat, lon]);
-      } else {
-        marker = L.marker([lat, lon]).addTo(map);
-      }
-
-      // Afegir una finestra emergent (popup) al marcador
-      marker.bindPopup(`<b>${nomComplet}</b>`).openPopup();
-    } else {
-      divResultat.innerHTML = "❌ No s'ha trobat cap ciutat amb aquest nom.";
-    }
-  } catch (error) {
-    divResultat.innerHTML =
-      "⚠️ Error en connectar amb el servei de geolocalització.";
-    console.error(error);
-  }
-}
-
-// Omple el selector per escollir l'arxiu de dades a mostrar
-async function carregarOpcióSelect() {
-  const selectFitxers = document.getElementById("select-fitxers");
-  if (!selectFitxers) return;
-  try {
-    // 1. Carreguem l'arxiu arxius.json
-    const response = await fetch("./DATA/arxius.json"); // json que conté llista d'arxius
-    if (!response.ok) {
-      throw new Error("No s'ha pogut carregar l'arxiu arxius.json");
-    }
-    // 2. Convertim la resposta a JSON
-    const llistaFitxers = await response.json();
-    // 3. Netejem el select
-    selectFitxers.innerHTML =
-      '<option value="">-- Selecciona un arxiu --</option>';
-    // 4. Afegim cada element al select
-
-    llistaFitxers.forEach((fitxer) => {
-      const option = document.createElement("option");
-      option.value = `./data/${fitxer}`; // RUTA on es troba el fitxer real
-      option.textContent = fitxer; // Text visible al menú
-      selectFitxers.appendChild(option);
+  // Crea un marcador (sense afegir-lo encara al mapa) a partir d'unes coordenades
+  function crearMarcador(lat, lon, element) {
+    const marcador = L.circleMarker([lat, lon], {
+      radius: 6,
+      weight: 1,
+      color: "#2563eb",
+      fillColor: "#3b82f6",
+      fillOpacity: 0.8,
     });
-  } catch (error) {
-    console.error("Error carregant el JSON d'arxius:", error);
-    selectFitxers.innerHTML =
-      '<option value="">Error en carregar els arxius</option>';
+
+    // Generem el contingut del popup NOMÉS quan l'usuari fa clic,
+    // en lloc de construir-lo per als 70.000 punts per endavant
+    marcador.bindPopup("");
+    marcador.on("popupopen", () => {
+      const contingutPopup = Object.entries(element)
+        .map(([clau, valor]) => `<strong>${clau}:</strong> ${valor}`)
+        .join("<br>");
+      marcador.setPopupContent(contingutPopup);
+    });
+
+    return marcador;
   }
-}
+});
