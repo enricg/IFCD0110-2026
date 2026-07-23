@@ -3,126 +3,47 @@ $(document).ready(function () {
   let map;
   let popup;
 
-  // Inicialització
-  // function inicialitzarMapa(longitud, latitud, zoom) {
-  //   map = L.map("map").setView([longitud, latitud], zoom);
-
-  // afegirCapaMapa();
-  //   afegirElements();
-  //   afegirPopupInicial();
-  //   activarEvents();
-  // }
-  // carregarFitxersData();
   carregarOpcióSelect();
-  // Afegim el mapa base
-  function afegirCapaMapa() {
-    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      maxZoom: 19,
-      attribution:
-        '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-    }).addTo(map);
-  }
-
-  // Afegim els diferents elements
-  function afegirElements() {
-    // Marcador
-    const marker = L.marker([51.5, -0.09]).addTo(map);
-    marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
-
-    // Cercle
-    const circle = L.circle([51.508, -0.11], {
-      color: "red",
-      fillColor: "#f03",
-      fillOpacity: 0.5,
-      radius: 500,
-    }).addTo(map);
-    circle.bindPopup("I am a circle.");
-
-    // Polígon
-    const polygon = L.polygon([
-      [51.509, -0.08],
-      [51.503, -0.06],
-      [51.51, -0.047],
-    ]).addTo(map);
-
-    polygon.bindPopup("I am a polygon.");
-  }
-
-  // Popup inicial
-  function afegirPopupInicial() {
-    L.popup()
-      .setLatLng([51.513, -0.09])
-      .setContent("I am a standalone popup.")
-      .openOn(map);
-  }
-
-  // Activem els esdeveniments
-  function activarEvents() {
-    popup = L.popup();
-    map.on("click", onMapClick);
-  }
-
-  // Quan es fa clic al mapa
-  function onMapClick(e) {
-    popup
-      .setLatLng(e.latlng)
-      .setContent("You clicked the map at " + e.latlng.toString())
-      .openOn(map);
-  }
 
   /*************************************************************/
   /** LISTENERS ************************************************/
   /*************************************************************/
 
-  //   window.addEventListener("load", function () {
-  //   cercaCoordenades();
-  // inicialitzarMapa(41.9793006, 2.8199439, 13);
-  llegirCSV();
-  //   });
-
-  $("#tCiutat").change(function () {
-    console.log($("#tCiutat").val());
-    // ubicaMapa();
-  });
-
-  $("#select-fitxers").change(function () {
+  // Per cercar l'arxiu de dades a mostrar al mapa
+  $("#select-fitxers").change(async function () {
     const rutaFitxer = $("#select-fitxers").val();
     if (!rutaFitxer) return;
-    let dades;
-    try {
-      const response = fetch(rutaFitxer);
-      console.log(response);
-      // const response = await fetch(rutaFitxer);
-      // if (!response.ok) throw new Error('Error en carregar el fitxer');
-      // Comprovem l'extensió de l'arxiu
-      // if (rutaFitxer.endsWith('.csv')) {
-      // 1. Llegim com a text pla
-      // const textCSV = await response.text();
-      // 2. Executem la funció de conversió
-      // dades = csvToJson(textCSV);
-      // console.log('Fitxer CSV convertit a JSON:', dades);
-      // } else if (rutaFitxer.endsWith('.json') || rutaFitxer.endsWith('.geojson')) {
-      // 1. Recuperem les dades directament a la variable
-      // dades = await response.json();
-      // console.log('Dades JSON recuperades:', dades);
-      // }
-      // A partir d'aquí pots fer servir la variable 'dades' (per exemple, per pintar al mapa)
-      // processarDadesMapa(dades);
-    } catch (e) {
-      console.error("S'ha produït un error en processar l'arxiu:", e);
-    }
+    // 1. Recuperem les dades directament a la variable
+    dades = await llegirArxiu(rutaFitxer);
+    // A partir d'aquí pots fer servir la variable 'dades' (per exemple, per pintar al mapa)
+    processarDadesMapa(dades);
   });
 
   /*************************************************************/
   /** FUNCIONS *************************************************/
   /*************************************************************/
 
+  function processarDadesMapa(dades) {
+    // console.log(dades);
+    for (element of dades) {
+      afegirElement(element);
+    }
+  }
+
+  function afegirElement(element) {
+    console.log(element.Longitud);
+    // const marker = L.marker([element.Latitud, element.Longitud]).addTo(map);
+    // marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
+    // const marker = L.marker([51.5, -0.09]).addTo(map);
+    // marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
+  }
+
   function csvToJson(csv) {
     const fila = csv.trim().split("\n");
     const capçalera = fila[0].split(",");
 
-    const resultat = fila.slice(1).map((line) => {
-      const values = line.split(",");
+    const resultat = fila.slice(1).map((linia) => {
+      const values = linia.split(",");
       let obj = {};
       capçalera.forEach((header, i) => {
         obj[header.trim()] = values[i] ? values[i].trim() : "";
@@ -132,19 +53,25 @@ $(document).ready(function () {
     return resultat;
   }
 
-  async function llegirCSV() {
+  async function llegirArxiu(arxiu) {
+    let resultat = "";
     try {
-      const resposta = await fetch(
-        "./DATA/241021_censcomercialbcn_opendata_2024_v5.csv",
-      );
-      // const texto = await resposta.text();
+      const resposta = await fetch(arxiu);
+      const texto = await resposta.text();
+      // Comprovem l'extensió de l'arxiu
+      if (arxiu.endsWith(".csv")) {
+        resultat = csvToJson(texto);
+      } else {
+        resultat = texto;
+        // resultat = await resposta.json();
+      }
+      return resultat;
     } catch (e) {
       alert(e);
     }
-    // let resultat = csvToJson(texto);
-    // console.log(resultat);
   }
 });
+
 const inputCiutat = document.getElementById("ciutat");
 const divResultat = document.getElementById("resultat");
 let temporitzador;
@@ -160,7 +87,7 @@ L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
     '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
 }).addTo(map);
 
-// Escoltar els canvis a l'input amb debounce (500ms)
+// Revisa els canvis a l'input amb un retard (500ms)
 inputCiutat.addEventListener("input", () => {
   const nomCiutat = inputCiutat.value.trim();
   clearTimeout(temporitzador);
@@ -176,6 +103,7 @@ inputCiutat.addEventListener("input", () => {
   }, 500);
 });
 
+// A partir d'un nom de ciutat recupera les seves coordenades i ho mostra al mapa
 async function cercaCoordenades(ciutat) {
   divResultat.innerHTML = "Cercant coordenades...";
 
@@ -218,29 +146,23 @@ async function cercaCoordenades(ciutat) {
   }
 }
 
-// const inputCarpeta = document.getElementById("carpeta");
-const selectFitxers = document.getElementById("llista-fitxers");
-
+// Omple el selector per escollir l'arxiu de dades a mostrar
 async function carregarOpcióSelect() {
   const selectFitxers = document.getElementById("select-fitxers");
   if (!selectFitxers) return;
-
   try {
     // 1. Carreguem l'arxiu arxius.json
-    const response = await fetch("./DATA/arxius.json"); // Canvia el camí si està a ./data/arxius.json
-
+    const response = await fetch("./DATA/arxius.json"); // json que conté llista d'arxius
     if (!response.ok) {
       throw new Error("No s'ha pogut carregar l'arxiu arxius.json");
     }
-
     // 2. Convertim la resposta a JSON
     const llistaFitxers = await response.json();
-
     // 3. Netejem el select
     selectFitxers.innerHTML =
       '<option value="">-- Selecciona un arxiu --</option>';
-
     // 4. Afegim cada element al select
+
     llistaFitxers.forEach((fitxer) => {
       const option = document.createElement("option");
       option.value = `./data/${fitxer}`; // RUTA on es troba el fitxer real
