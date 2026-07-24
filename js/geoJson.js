@@ -23,10 +23,6 @@ $(document).ready(function () {
   }).addTo(map);
 
   // 2. Grup de capes amb CLUSTERING per als marcadors carregats des dels fitxers
-  //    Amb 70.000 registres és imprescindible: agrupa punts propers en un sol
-  //    cercle (que mostra el recompte) i només els "desplega" en fer zoom.
-  //    chunkedLoading afegeix els punts en petits lots per no bloquejar la
-  //    pestanya del navegador mentre es carreguen.
   const capaDades = L.markerClusterGroup({
     chunkedLoading: true,
     chunkInterval: 200, // ms de marge que es dona al navegador entre lots
@@ -87,7 +83,6 @@ $(document).ready(function () {
         const lat = parseFloat(dades[0].lat);
         const lon = parseFloat(dades[0].lon);
         const nomComplet = dades[0].display_name;
-
         divResultat.innerHTML = `
           <strong>${nomComplet}</strong><br><br>
           📍 <strong>Latitud:</strong> ${lat}<br>
@@ -131,8 +126,8 @@ $(document).ready(function () {
 
       llistaFitxers.forEach((fitxer) => {
         const option = document.createElement("option");
-        option.value = `./DATA/${fitxer}`;
-        option.textContent = fitxer;
+        option.value = `./DATA/${fitxer.arxiu}`;
+        option.textContent = fitxer.arxiu;
         selectFitxers.appendChild(option);
       });
     } catch (error) {
@@ -231,13 +226,13 @@ $(document).ready(function () {
     });
 
     // Generem el contingut del popup NOMÉS quan l'usuari fa clic,
-    // en lloc de construir-lo per als 70.000 punts per endavant
     marcador.bindPopup("");
     marcador.on("popupopen", () => {
       const contingutPopup = Object.entries(element)
         .map(([clau, valor]) => `<strong>${clau}:</strong> ${valor}`)
         .join("<br>");
-      marcador.setPopupContent(contingutPopup);
+        marcador.setPopupContent(contingutPopup);
+        log(contingutPopup);
     });
 
     return marcador;
