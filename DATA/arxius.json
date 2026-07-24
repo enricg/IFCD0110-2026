@@ -1,5 +1,59 @@
 [
-    "241021_censcomercialbcn_opendata_2024_v5.csv",
-    "prova1.json",
-    "prova2.json"
+  {
+    "arxiu": "241021_censcomercialbcn_opendata_2024_v5.csv",
+    "descripcio": "Cens de locals en planta baixa destinats a activitat econòmica de la ciutat de Barcelona",
+    "camps":["Planta","Porta","Nom_Via","Nom_Barri","Nom_Districte"]
+  },
+  {
+    "arxiu": "Carrers_Sense_Vehicles_Motoritzats.geojson",
+    "descripcio": "Carrers amb plataforma única sense vehicles motoritzats a la ciutat de Barcelona"
+  },
+  {
+    "arxiu": "Carrers_Amb_Prioritat_Vianants.GeoJson",
+    "descripcio": "Carrers amb plataforma única amb prioritat del vianant a la ciutat de Barcelona"
+  },
+  {
+    "arxiu": "CARRERS_30.geojson",
+    "descripcio": "Carrers 30 a la ciutat de Barcelona"
+  },
+  {
+    "arxiu": "20252_edificis_amics_bici_bcn.geojson",
+    "descripcio": "Edificis Amics de la Bici dels equipaments públics de la ciutat de Barcelona "
+  },
+  {
+    "arxiu": "Zones_EstacionamentZonaBUS.geojson",
+    "descripcio": "Zones d'estacionament Zona BUS de la ciutat de Barcelona"
+  },
+  {
+    "arxiu": "CORREDORS_BICI.geojson",
+    "descripcio": "Corredors bicicleta de la ciutat de Barcelona"
+  },
+  {
+    "arxiu": "BarcelonaCiutat_Districtes.json",
+    "descripcio": "Unitats administratives de la ciutat de Barcelona"
+  },
+  {
+    "arxiu": "CARRIL_BICI_CONSTRUCCIO.geojson",
+    "descripcio": "Carrils Bici en construcció a la ciutat de Barcelona"
+  },
+  {
+    "arxiu": "CARRIL_BICI_ALTRES_MUNICIPIS.geojson",
+    "descripcio": "Carrils Bici d'altres municipis de l'Àrea Metropolitana de Barcelona"
+  },
+  {
+    "arxiu": "RONDA_VERDA.geojson",
+    "descripcio": "Ronda Verda de la ciutat de Barcelona"
+  },
+  {
+    "arxiu": "CARRIL_BICI.geojson",
+    "descripcio": "Carrils Bici de la ciutat de Barcelona"
+  },
+  {
+    "arxiu": "obres_espai_public.json",
+    "descripcio": "Obres a l'espai públic de la ciutat de Barcelona"
+  },
+  {
+    "arxiu": "2022_Carta_Arqueologica_de_Barcelona.geojson",
+    "descripcio": "Carta arqueològica de la ciutat de Barcelona"
+  }
 ]
