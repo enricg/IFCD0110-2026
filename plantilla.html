@@ -3,10 +3,6 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!-- <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    /> -->
     <link rel="stylesheet" href="./css/plantilla.css" />
     <script src="./js/plantilla.js" defer></script>
   </head>
@@ -29,15 +25,7 @@
     <!-- Menú lateral PC -->
 
     <div class="sidebar d-none d-lg-block">
-      <div class="list-group list-group-flush">
-        <a href="#inici" class="list-group-item">Inici</a>
-
-        <a href="#serveis" class="list-group-item">Serveis</a>
-
-        <a href="#projectes" class="list-group-item">Projectes</a>
-
-        <a href="#contacte" class="list-group-item">Contacte</a>
-      </div>
+      <div class="list-group list-group-flush" id="container"></div>
     </div>
 
     <!-- Menú mòbil -->
@@ -50,55 +38,11 @@
       </div>
 
       <div class="offcanvas-body">
-        <div class="list-group">
-          <a class="list-group-item" href="#inici" data-bs-dismiss="offcanvas">
-            Inici
-          </a>
-
-          <a
-            class="list-group-item"
-            href="#serveis"
-            data-bs-dismiss="offcanvas"
-          >
-            Serveis
-          </a>
-
-          <a
-            class="list-group-item"
-            href="#projectes"
-            data-bs-dismiss="offcanvas"
-          >
-            Projectes
-          </a>
-
-          <a
-            class="list-group-item"
-            href="#contacte"
-            data-bs-dismiss="offcanvas"
-          >
-            Contacte
-          </a>
-        </div>
+        <div class="list-group" id="responsive"></div>
       </div>
     </div>
 
-    <main>
-      <section id="inici" class="bg-light">
-        <h2>Inici</h2>
-      </section>
-
-      <section id="serveis" class="bg-secondary text-white">
-        <h2>Serveis</h2>
-      </section>
-
-      <section id="projectes" class="bg-warning">
-        <h2>Projectes</h2>
-      </section>
-
-      <section id="contacte" class="bg-info">
-        <h2>Contacte</h2>
-      </section>
-    </main>
+    <main id="principal"></main>
 
     <footer class="bg-dark text-white text-center p-4">Peu de pàgina</footer>
 
