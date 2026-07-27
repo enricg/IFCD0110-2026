@@ -158,6 +158,7 @@ main {
 
 section {
   min-height: 100vh;
+  height: 100%;
   padding: 40px;
   scroll-margin-top: 70px;
 }
@@ -169,6 +170,7 @@ footer {
 }
 
 .card {
+  height: calc(100% - 70px);
   max-width: 100%;
   background: white;
   padding: 1.5rem;

@@ -55,15 +55,7 @@
     <!-- Menú lateral PC -->
 
     <div class="sidebar d-none d-lg-block">
-      <div class="list-group list-group-flush">
-        <a href="#mapes" class="list-group-item">Mapes</a>
-
-        <a href="#serveis" class="list-group-item">Serveis</a>
-
-        <a href="#projectes" class="list-group-item">Projectes</a>
-
-        <a href="#contacte" class="list-group-item">Contacte</a>
-      </div>
+      <div class="list-group list-group-flush" id="container"></div>
     </div>
 
     <!-- Menú mòbil -->
@@ -76,83 +68,11 @@
       </div>
 
       <div class="offcanvas-body">
-        <div class="list-group">
-          <a class="list-group-item" href="#mapes" data-bs-dismiss="offcanvas">
-            Mapes
-          </a>
-
-          <a
-            class="list-group-item"
-            href="#serveis"
-            data-bs-dismiss="offcanvas"
-          >
-            Serveis
-          </a>
-
-          <a
-            class="list-group-item"
-            href="#projectes"
-            data-bs-dismiss="offcanvas"
-          >
-            Projectes
-          </a>
-
-          <a
-            class="list-group-item"
-            href="#contacte"
-            data-bs-dismiss="offcanvas"
-          >
-            Contacte
-          </a>
-        </div>
+        <div class="list-group" id="responsive"></div>
       </div>
     </div>
 
-    <main>
-      <section id="mapes" class="bg-light">
-        <h2>Mapes</h2>
-        <div class="card">
-          <!-- Contenidor per posar els dos camps en línia (costat a costat) -->
-          <div class="camps-inline">
-            <!-- Camp 1: Ciutat -->
-            <div class="field-group">
-              <label for="ciutat">Escriu una ciutat:</label>
-              <input
-                type="text"
-                id="ciutat"
-                placeholder="Ex: Barcelona, Tòquio, Nova York..."
-              />
-            </div>
-
-            <!-- Camp 2: Desplegable d'arxius (a la dreta) -->
-            <div class="field-group">
-              <label for="select-fitxers">Tria un arxiu:</label>
-              <select id="select-fitxers">
-                <option value="">-- Carregant arxius... --</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="resultat" id="resultat">
-            Escriu una ciutat per veure-la al mapa.
-          </div>
-          <!-- Contenidor on es dibuixarà el mapa -->
-          <div id="map"></div>
-        </div>
-      </section>
-
-      <section id="serveis" class="bg-secondary text-white">
-        <h2>Serveis</h2>
-      </section>
-
-      <section id="projectes" class="bg-warning">
-        <h2>Projectes</h2>
-      </section>
-
-      <section id="contacte" class="bg-info">
-        <h2>Contacte</h2>
-      </section>
-    </main>
+    <main id="principal"></main>
 
     <footer class="bg-dark text-white text-center p-4">Peu de pàgina</footer>
   </body>
