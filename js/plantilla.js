@@ -1,39 +1,39 @@
 window.addEventListener("load", function () {
-  novaSeccio("Inici");
-  novaSeccio("Serveis");
-  novaSeccio("Projectes");
-  novaSeccio("Contacte");
+  crearSeccions(["Inici", "Serveis", "Projectes", "Contacte", "Hola"]);
 });
 
-function novaSeccio(nomSeccio) {
-  const contenidor = document.getElementById("container");
-  // Menú mode normal
-  const enllaç = document.createElement("a");
-  enllaç.classList.add("list-group-item");
-  enllaç.href = "#" + nomSeccio;
-  enllaç.innerText = nomSeccio;
-  contenidor.appendChild(enllaç);
-  // Menú mode responsiu
-  const responsiu = document.getElementById("responsive");
-  const enllaçResp = document.createElement("a");
-  enllaçResp.classList.add("list-group-item");
-  enllaçResp.href = "#" + nomSeccio;
-  enllaçResp.innerText = nomSeccio;
-  enllaçResp.setAttribute("data-bs-dismiss", "offcanvas");
-  responsiu.appendChild(enllaçResp);
-  // Color aleatori
-  const color =
-    "#" +
-    Math.floor(Math.random() * 16777215)
+// Crea les seccions, que es passen com una llista
+function crearSeccions(llistaSeccions) {
+  // En comptes d'utilitzar createElement, el mètode createDocumentFragment evita repintar el el DOM
+  const fragContainer = document.createDocumentFragment();
+  const fragResponsive = document.createDocumentFragment();
+  const fragPrincipal = document.createDocumentFragment();
+
+  llistaSeccions.forEach((nomSeccio) => {
+    // Container
+    const aContainer = document.createElement("a");
+    aContainer.className = "list-group-item";
+    aContainer.href = `#${nomSeccio}`;
+    aContainer.textContent = nomSeccio;
+    fragContainer.appendChild(aContainer);
+
+    // Responsive
+    const aResp = aContainer.cloneNode(true);
+    aResp.setAttribute("data-bs-dismiss", "offcanvas");
+    fragResponsive.appendChild(aResp);
+
+    // Principal (secció)
+    const color = `#${Math.floor(Math.random() * 16777215)
       .toString(16)
-      .padStart(6, "0");
-  // Pàgina
-  const pagina = document.getElementById("principal");
-  const seccio = document.createElement("section");
-  const titol = document.createElement("h2");
-  titol.innerText = nomSeccio;
-  seccio.id = nomSeccio;
-  seccio.style.background = color;
-  seccio.appendChild(titol);
-  pagina.appendChild(seccio);
+      .padStart(6, "0")}`;
+    const section = document.createElement("section");
+    section.id = nomSeccio;
+    section.style.background = color;
+    section.innerHTML = `<h2>${nomSeccio}</h2>`;
+    fragPrincipal.appendChild(section);
+  });
+
+  document.getElementById("container").appendChild(fragContainer);
+  document.getElementById("responsive").appendChild(fragResponsive);
+  document.getElementById("principal").appendChild(fragPrincipal);
 }
