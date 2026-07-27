@@ -1,4 +1,12 @@
 $(document).ready(function () {
+  // Seccions
+  novaSeccio("Mapes");
+  novaSeccio("Serveis");
+  novaSeccio("Projectes");
+  novaSeccio("Contacte");
+  novaSeccio("Hola");
+
+  $("#Mapes").append(seccioMapa());
   /*************************************************************/
   /** ESTAT GLOBAL DEL MÒDUL ************************************/
   /*************************************************************/
@@ -67,8 +75,64 @@ $(document).ready(function () {
   });
 
   /*************************************************************/
-  /** FUNCIONS ******************************************************/
+  /** FUNCIONS *************************************************/
   /*************************************************************/
+
+  // Creació de secció
+  function novaSeccio(nomSeccio) {
+    $("#container").append(
+      `<a class="list-group-item" href="#${nomSeccio}">${nomSeccio}</a>`,
+    );
+
+    $("#responsive").append(
+      `<a class="list-group-item" href="#${nomSeccio}" data-bs-dismiss="offcanvas">${nomSeccio}</a>`,
+    );
+
+    const color =
+      "#" +
+      Math.floor(Math.random() * 16777215)
+        .toString(16)
+        .padStart(6, "0");
+
+    $("#principal").append(`
+        <section id="${nomSeccio}" style="background:${color}">
+            <h2>${nomSeccio}</h2>
+        </section>
+    `);
+  }
+
+  function seccioMapa() {
+    const card = document.createElement("div");
+    card.className = "card";
+
+    card.innerHTML = `
+  <div class="camps-inline">
+    <div class="field-group">
+      <label for="ciutat">Escriu una ciutat:</label>
+      <input
+        type="text"
+        id="ciutat"
+        placeholder="Ex: Barcelona, Tòquio, Nova York..."
+      />
+    </div>
+
+    <div class="field-group">
+      <label for="select-fitxers">Tria un arxiu:</label>
+      <select id="select-fitxers">
+        <option value="">-- Carregant arxius... --</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="resultat" id="resultat">
+    Escriu una ciutat per veure-la al mapa.
+  </div>
+
+  <div id="map"></div>
+`;
+
+    return card;
+  }
 
   // Cerca les coordenades d'una ciutat i les mostra al mapa
   async function cercaCoordenades(ciutat) {
@@ -147,13 +211,22 @@ $(document).ready(function () {
 
       const text = await resposta.text();
 
-      if (arxiu.endsWith(".csv")) {
-        return csvToJson(text);
+      if (arxiu.toLowerCase().endsWith(".csv")) {
+        return {
+          tipus: "csv",
+          dades: csvToJson(text),
+        };
       }
-      return JSON.parse(text);
+      return {
+        tipus: "json",
+        dades: JSON.parse(text),
+      };
     } catch (e) {
       alert(e);
-      return [];
+      return {
+        tipus: "desconegut",
+        dades: [],
+      };
     }
   }
 
@@ -175,16 +248,26 @@ $(document).ready(function () {
   }
 
   // Recorre les dades carregades i afegeix un marcador per cadascuna
-  function processarDadesMapa(dades) {
+  function processarDadesMapa(descarregat) {
     capaDades.clearLayers(); // netegem els marcadors del fitxer anterior
 
-    if (!Array.isArray(dades) || dades.length === 0) return;
+    // Si detectem que és un GeoJSON, cridem a la nova funció
+    if (
+      descarregat.tipus === "geojson" ||
+      descarregat.dades.type === "FeatureCollection" ||
+      descarregat.dades.type === "Feature"
+    ) {
+      processarGeoJSON(descarregat.dades);
+      return;
+    }
 
     const marcadors = [];
-    let minLat = Infinity, maxLat = -Infinity;
-    let minLon = Infinity, maxLon = -Infinity;
+    let minLat = Infinity,
+      maxLat = -Infinity;
+    let minLon = Infinity,
+      maxLon = -Infinity;
 
-    for (const element of dades) {
+    for (const element of descarregat.dades) {
       const lat = parseFloat(element.Latitud);
       const lon = parseFloat(element.Longitud);
 
@@ -207,12 +290,47 @@ $(document).ready(function () {
         [minLat, minLon],
         [maxLat, maxLon],
       ],
-      { padding: [30, 30] }
+      { padding: [30, 30] },
     );
 
     // addLayers (plural) afegeix tots els marcadors d'un cop de manera
     // molt més eficient que cridar addLayer un per un dins d'un bucle
     capaDades.addLayers(marcadors);
+  }
+
+  function processarGeoJSON(geojson) {
+    capaDades.clearLayers();
+
+    // Validació bàsica de l'estructura GeoJSON
+    if (
+      !geojson ||
+      (geojson.type !== "FeatureCollection" && geojson.type !== "Feature")
+    ) {
+      return;
+    }
+
+    // L.geoJSON crea automàticament les capes segons la geometria (Point, LineString, Polygon...)
+    const capaGeoJSON = L.geoJSON(geojson, {
+      pointToLayer: function (feature, latlng) {
+        // Per als punts, reutilitzem la teva funció crearMarcador pasant-li les propietats
+        return crearMarcador(latlng.lat, latlng.lng, feature.properties);
+      },
+      onEachFeature: function (feature, layer) {
+        // Si vols afegir popups automàtics o esdeveniments per a polígons/línies
+        if (feature.properties && feature.properties.nom) {
+          layer.bindPopup(feature.properties.nom);
+        }
+      },
+    });
+
+    // Si no s'ha pogut carregar cap element, sortim
+    if (capaGeoJSON.getLayers().length === 0) return;
+
+    // Afegim les entitats creades a la teva capa principal (compatible amb MarkerCluster o FeatureGroup)
+    capaDades.addLayer(capaGeoJSON);
+
+    // Ajustem la vista automàticament usant els límits primaris de Leaflet
+    map.fitBounds(capaGeoJSON.getBounds(), { padding: [30, 30] });
   }
 
   // Crea un marcador (sense afegir-lo encara al mapa) a partir d'unes coordenades
@@ -231,8 +349,8 @@ $(document).ready(function () {
       const contingutPopup = Object.entries(element)
         .map(([clau, valor]) => `<strong>${clau}:</strong> ${valor}`)
         .join("<br>");
-        marcador.setPopupContent(contingutPopup);
-        log(contingutPopup);
+      marcador.setPopupContent(contingutPopup);
+      // log(contingutPopup);
     });
 
     return marcador;
