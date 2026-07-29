@@ -3,40 +3,42 @@ $(document).ready(function () {
   /** ESTAT GLOBAL DEL MÒDUL ************************************/
   /*************************************************************/
 
-  let dades = "";
-  let marker; // marcador de la cerca de ciutat
-  let temporitzador;
+  let dades = null;
+  let marker = null; // marcador de la cerca de ciutat
+  let temporitzador = null;
+  let cercaController = null; // Per cancel·lar peticions HTTP pendents
+
+  // 1. Inicialitzem les seccions del DOM de cop (millor rendiment)
+  crearSeccions(["Mapes", "Serveis", "Projectes", "Contacte", "Hola"]);
+  $("#Mapes").append(seccioMapa());
 
   const inputCiutat = document.getElementById("ciutat");
   const divResultat = document.getElementById("resultat");
 
-  // 1. Inicialitzem el mapa UNA sola vegada (centrat en una vista global)
-  //    preferCanvas: dibuixa tots els marcadors en un únic <canvas> en lloc
-  //    de crear un element SVG per cadascun -> molt més ràpid amb molts punts
+  // 2. Inicialitzem el mapa UNA sola vegada
   const map = L.map("map", { preferCanvas: true }).setView([20, 0], 2);
 
-  // Capa base OpenStreetMap
   L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
     maxZoom: 19,
     attribution:
       '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
   }).addTo(map);
 
-  // 2. Grup de capes amb CLUSTERING per als marcadors carregats des dels fitxers
+  // 3. Grup de capes amb CLUSTERING
   const capaDades = L.markerClusterGroup({
     chunkedLoading: true,
-    chunkInterval: 200, // ms de marge que es dona al navegador entre lots
+    chunkInterval: 200,
     chunkDelay: 50,
-    spiderfyOnMaxZoom: false, // amb 70k punts, "desplegar" tots a un clic pot ser molt pesat
+    spiderfyOnMaxZoom: false,
   }).addTo(map);
 
-  carregarOpcióSelect();
+  carregarOpcionsSelect();
 
   /*************************************************************/
   /** LISTENERS ***************************************************/
   /*************************************************************/
 
-  // Cerca de ciutat amb un petit retard (debounce) mentre l'usuari escriu
+  // Cerca de ciutat amb debounce i cancel·lació de peticions antigues
   if (inputCiutat) {
     inputCiutat.addEventListener("input", () => {
       const nomCiutat = inputCiutat.value.trim();
@@ -50,43 +52,113 @@ $(document).ready(function () {
 
       temporitzador = setTimeout(() => {
         cercaCoordenades(nomCiutat);
-      }, 500);
+      }, 400);
     });
   }
 
   // Selector de l'arxiu de dades a mostrar al mapa
-  $("#select-fitxers").change(async function () {
+  $("#select-fitxers").on("change", async function () {
     const rutaFitxer = $(this).val();
-    if (!rutaFitxer) {
-      capaDades.clearLayers();
-      return;
-    }
+    capaDades.clearLayers();
+
+    if (!rutaFitxer) return;
 
     dades = await llegirArxiu(rutaFitxer);
     processarDadesMapa(dades);
   });
 
   /*************************************************************/
-  /** FUNCIONS ******************************************************/
+  /** FUNCIONS DE DOM ******************************************/
   /*************************************************************/
 
-  // Cerca les coordenades d'una ciutat i les mostra al mapa
+  // Crea les seccions, que es passen com una llista
+  function crearSeccions(llistaSeccions) {
+    // En comptes d'utilitzar createElement, el mètode createDocumentFragment evita repintar el el DOM
+    const fragContainer = document.createDocumentFragment();
+    const fragResponsive = document.createDocumentFragment();
+    const fragPrincipal = document.createDocumentFragment();
+
+    llistaSeccions.forEach((nomSeccio) => {
+      // Container
+      const aContainer = document.createElement("a");
+      aContainer.className = "list-group-item";
+      aContainer.href = `#${nomSeccio}`;
+      aContainer.textContent = nomSeccio;
+      fragContainer.appendChild(aContainer);
+
+      // Responsive
+      const aResp = aContainer.cloneNode(true);
+      aResp.setAttribute("data-bs-dismiss", "offcanvas");
+      fragResponsive.appendChild(aResp);
+
+      // Principal (secció)
+      const color = `#${Math.floor(Math.random() * 16777215)
+        .toString(16)
+        .padStart(6, "0")}`;
+      const section = document.createElement("section");
+      section.id = nomSeccio;
+      section.style.background = color;
+      section.innerHTML = `<h2>${nomSeccio}</h2>`;
+      fragPrincipal.appendChild(section);
+    });
+
+    document.getElementById("container").appendChild(fragContainer);
+    document.getElementById("responsive").appendChild(fragResponsive);
+    document.getElementById("principal").appendChild(fragPrincipal);
+  }
+
+  // Crea el contingut de la secció Mapa
+  function seccioMapa() {
+    const card = document.createElement("div");
+    card.className = "card";
+    card.innerHTML = `
+      <div class="camps-inline">
+        <div class="field-group">
+          <label for="ciutat">Escriu una ciutat:</label>
+          <input type="text" id="ciutat" placeholder="Ex: Barcelona, Tòquio, Nova York..." />
+        </div>
+        <div class="field-group">
+          <label for="select-fitxers">Tria un arxiu:</label>
+          <select id="select-fitxers">
+            <option value="">-- Carregant arxius... --</option>
+          </select>
+        </div>
+      </div>
+      <div class="resultat" id="resultat">Escriu una ciutat per veure-la al mapa.</div>
+      <div id="map"></div>
+    `;
+    return card;
+  }
+
+  /*************************************************************/
+  /** FUNCIONS DE DADES I MAPA ********************************/
+  /*************************************************************/
+
+  // Cerca les coordenades d'una ciutat amb AbortController
   async function cercaCoordenades(ciutat) {
+    // Si hi ha una cerca anterior en curs, la cancel·lem
+    if (cercaController) cercaController.abort();
+    cercaController = new AbortController();
+
     divResultat.innerHTML = "Cercant coordenades...";
 
     try {
       const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(ciutat)}`;
-      const resposta = await fetch(url);
-      const dades = await resposta.json();
+      const resposta = await fetch(url, { signal: cercaController.signal }); // si l'usuari escriu de pressa, es cancel·len les peticions HTTP pendents a Nominatim, reduint el tràfic de xarxa.
+      const dadesGeo = await resposta.json();
 
-      if (dades.length > 0) {
-        const lat = parseFloat(dades[0].lat);
-        const lon = parseFloat(dades[0].lon);
-        const nomComplet = dades[0].display_name;
+      if (dadesGeo.length > 0) {
+        const {
+          lat: rawLat,
+          lon: rawLon,
+          display_name: nomComplet,
+        } = dadesGeo[0];
+        const lat = parseFloat(rawLat);
+        const lon = parseFloat(rawLon);
+
         divResultat.innerHTML = `
           <strong>${nomComplet}</strong><br><br>
-          📍 <strong>Latitud:</strong> ${lat}<br>
-          📍 <strong>Longitud:</strong> ${lon}
+          📍 <strong>Latitud:</strong> ${lat} 📍 <strong>Longitud:</strong> ${lon}
         `;
 
         map.setView([lat, lon], 12);
@@ -102,34 +174,40 @@ $(document).ready(function () {
         divResultat.innerHTML = "❌ No s'ha trobat cap ciutat amb aquest nom.";
       }
     } catch (error) {
-      divResultat.innerHTML =
-        "⚠️ Error en connectar amb el servei de geolocalització.";
-      console.error(error);
+      if (error.name !== "AbortError") {
+        divResultat.innerHTML =
+          "⚠️ Error en connectar amb el servei de geolocalització.";
+        console.error(error);
+      }
     }
   }
 
-  // Omple el selector amb la llista d'arxius disponible a DATA/arxius.json
-  async function carregarOpcióSelect() {
+  // Carrega la llista de fitxers al dropdown
+  async function carregarOpcionsSelect() {
     const selectFitxers = document.getElementById("select-fitxers");
     if (!selectFitxers) return;
 
     try {
       const response = await fetch("./DATA/arxius.json");
-      if (!response.ok) {
-        throw new Error("No s'ha pogut carregar l'arxiu arxius.json");
-      }
+      if (!response.ok) throw new Error("No s'ha pogut carregar arxius.json");
 
       const llistaFitxers = await response.json();
+      const fragment = document.createDocumentFragment();
 
-      selectFitxers.innerHTML =
-        '<option value="">-- Selecciona un arxiu --</option>';
+      const defaultOpt = document.createElement("option");
+      defaultOpt.value = "";
+      defaultOpt.textContent = "-- Selecciona un arxiu --";
+      fragment.appendChild(defaultOpt);
 
       llistaFitxers.forEach((fitxer) => {
         const option = document.createElement("option");
         option.value = `./DATA/${fitxer.arxiu}`;
         option.textContent = fitxer.arxiu;
-        selectFitxers.appendChild(option);
+        fragment.appendChild(option);
       });
+
+      selectFitxers.innerHTML = "";
+      selectFitxers.appendChild(fragment);
     } catch (error) {
       console.error("Error carregant el JSON d'arxius:", error);
       selectFitxers.innerHTML =
@@ -137,85 +215,112 @@ $(document).ready(function () {
     }
   }
 
-  // Llegeix un arxiu (CSV o JSON) i el retorna com a array d'objectes
+  // Llegeix arxiu (CSV o JSON)
   async function llegirArxiu(arxiu) {
     try {
       const resposta = await fetch(arxiu);
-      if (!resposta.ok) {
+      if (!resposta.ok)
         throw new Error(`No s'ha pogut carregar l'arxiu: ${arxiu}`);
-      }
 
       const text = await resposta.text();
 
-      if (arxiu.endsWith(".csv")) {
-        return csvToJson(text);
+      if (arxiu.toLowerCase().endsWith(".csv")) {
+        return { tipus: "csv", dades: csvToJson(text) };
       }
-      return JSON.parse(text);
+
+      const json = JSON.parse(text);
+      const isGeoJSON =
+        json.type === "FeatureCollection" || json.type === "Feature";
+
+      return {
+        tipus: isGeoJSON ? "geojson" : "json",
+        dades: json,
+      };
     } catch (e) {
-      alert(e);
-      return [];
+      console.error("Error en llegir l'arxiu:", e);
+      return { tipus: "desconegut", dades: [] };
     }
   }
 
-  // Converteix un CSV en array d'objectes {capçalera: valor}
+  // Bucle d'alt rendiment per a CSVs
   function csvToJson(csv) {
-    const files = csv.trim().split("\n");
-    if (files.length < 2) return [];
+    const linies = csv.trim().split(/\r?\n/);
+    if (linies.length < 2) return [];
 
-    const capçalera = files[0].split(",").map((h) => h.trim());
+    const capçalera = linies[0].split(",").map((h) => h.trim());
+    const totalLinies = linies.length;
+    const resultat = new Array(totalLinies - 1);
 
-    return files.slice(1).map((linia) => {
-      const valors = linia.split(",");
+    for (let i = 1; i < totalLinies; i++) {
+      const valors = linies[i].split(",");
       const obj = {};
-      capçalera.forEach((header, i) => {
-        obj[header] = valors[i] ? valors[i].trim() : "";
-      });
-      return obj;
-    });
+      for (let j = 0; j < capçalera.length; j++) {
+        obj[capçalera[j]] = valors[j] ? valors[j].trim() : "";
+      }
+      resultat[i - 1] = obj;
+    }
+
+    return resultat;
   }
 
-  // Recorre les dades carregades i afegeix un marcador per cadascuna
-  function processarDadesMapa(dades) {
-    capaDades.clearLayers(); // netegem els marcadors del fitxer anterior
+  // Processa les dades i afegeix els marcadors
+  function processarDadesMapa(descarregat) {
+    capaDades.clearLayers();
 
-    if (!Array.isArray(dades) || dades.length === 0) return;
+    if (!descarregat || !descarregat.dades) return;
+
+    if (descarregat.tipus === "geojson") {
+      processarGeoJSON(descarregat.dades);
+      return;
+    }
 
     const marcadors = [];
-    let minLat = Infinity, maxLat = -Infinity;
-    let minLon = Infinity, maxLon = -Infinity;
+    const coordenades = [];
 
-    for (const element of dades) {
+    for (let i = 0; i < descarregat.dades.length; i++) {
+      const element = descarregat.dades[i];
       const lat = parseFloat(element.Latitud);
       const lon = parseFloat(element.Longitud);
 
-      if (Number.isNaN(lat) || Number.isNaN(lon)) continue;
+      if (isNaN(lat) || isNaN(lon)) continue;
 
       marcadors.push(crearMarcador(lat, lon, element));
-
-      if (lat < minLat) minLat = lat;
-      if (lat > maxLat) maxLat = lat;
-      if (lon < minLon) minLon = lon;
-      if (lon > maxLon) maxLon = lon;
+      coordenades.push([lat, lon]);
     }
 
     if (marcadors.length === 0) return;
 
-    // Ajustem la vista immediatament amb els límits calculats,
-    // sense esperar que el clustering acabi d'afegir els marcadors
-    map.fitBounds(
-      [
-        [minLat, minLon],
-        [maxLat, maxLon],
-      ],
-      { padding: [30, 30] }
-    );
-
-    // addLayers (plural) afegeix tots els marcadors d'un cop de manera
-    // molt més eficient que cridar addLayer un per un dins d'un bucle
     capaDades.addLayers(marcadors);
+    map.fitBounds(coordenades, { padding: [30, 30] });
   }
 
-  // Crea un marcador (sense afegir-lo encara al mapa) a partir d'unes coordenades
+  // Processa dades en format GeoJSON
+  function processarGeoJSON(geojson) {
+    if (
+      !geojson ||
+      (geojson.type !== "FeatureCollection" && geojson.type !== "Feature")
+    )
+      return;
+
+    const capaGeoJSON = L.geoJSON(geojson, {
+      pointToLayer: (feature, latlng) =>
+        crearMarcador(latlng.lat, latlng.lng, feature.properties),
+      onEachFeature: (feature, layer) => {
+        if (feature.properties?.nom) {
+          layer.bindPopup(feature.properties.nom);
+        }
+      },
+    });
+
+    const capesInternes = capaGeoJSON.getLayers();
+    if (capesInternes.length === 0) return;
+
+    // Afegeix les capes individuals al MarkerClusterGroup perquè el clustering funcioni correctament
+    capaDades.addLayers(capesInternes);
+    map.fitBounds(capaGeoJSON.getBounds(), { padding: [30, 30] });
+  }
+
+  // Crea un cercle marcador amb popups 'lazy'
   function crearMarcador(lat, lon, element) {
     const marcador = L.circleMarker([lat, lon], {
       radius: 6,
@@ -225,14 +330,12 @@ $(document).ready(function () {
       fillOpacity: 0.8,
     });
 
-    // Generem el contingut del popup NOMÉS quan l'usuari fa clic,
     marcador.bindPopup("");
-    marcador.on("popupopen", () => {
+    marcador.once("popupopen", () => {
       const contingutPopup = Object.entries(element)
         .map(([clau, valor]) => `<strong>${clau}:</strong> ${valor}`)
         .join("<br>");
-        marcador.setPopupContent(contingutPopup);
-        log(contingutPopup);
+      marcador.setPopupContent(contingutPopup);
     });
 
     return marcador;
