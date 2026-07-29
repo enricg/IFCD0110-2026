@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ca">
+  <head>
+    <title>Exercici events</title>
+    <link rel="stylesheet" href="./css/68 preventDefault.css" />
+    <link rel="shortcut icon" href="./imgs/chavo.jpg" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <header>Pràctica per veure el comportament del preventDefault</header>
+    <nav>
+      <ul id="menu">
+        <li><a href="https://www.google.com" target="_blank">Google</a></li>
+        <li>
+          <a href="https://www.mundodeportivo.com/" target="_blank"
+            >Mundo Deportivo</a
+          >
+        </li>
+        <li>
+          <a
+            href="https://opendata-ajuntament.barcelona.cat/data/ca/dataset"
+            target="_blank"
+            >Opendata Barcelona</a
+          >
+        </li>
+        <li>
+          <a href="https://www.cetpenedes.cat/sat/" target="_blank"
+            >CET Penedès</a
+          >
+        </li>
+      </ul>
+    </nav>
+    <main>
+      <div id="resultat"></div>
+      <h5>Exemple 1: Evitar que un enllaç obri una pàgina</h5>
+      <a href="https://www.google.com" target="_blank" id="aGoogle"
+        >Anar a Google</a
+      >
+      <h5>Exemple 2: Evitar l'enviament d'un formulari</h5>
+      <form id="formulari2">
+        <label for="inom2">Entra el teu nom:</label><input type="text" id="inom2">
+        <button type="submit" id="bSubmit">Submit</button>
+      </form>
+      <h5>Exemple 3: Validar un formulari abans d'enviar-lo</h5>
+      <form id="formulari3">
+        <input type="text" name="inom3" id="inom3">
+        <button type="submit">Registrar-se</button>
+      </form>
+      <h5>Exemple 4: Evitar el menú contextual del botó dret</h5>
+      <h5>Exemple 5: Evitar que una tecla faci una acció</h5>
+      <label for="inom5">Escriu algo que no contiguni la lletra <b>a</b></label>
+      <input type="text" name="inom5" id="inom5">
+      <h5>Exemple 7: Evitar que es tanqui finestra per accident (beforeunload)</h5>
+    </main>
+    <aside>banner</aside>
+    <footer>Fet per mi</footer>
+    <script src="./js/68 preventDefault.js"></script>
+  </body>
+</html>
