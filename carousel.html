@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      .carousel {
+        /* Variables para fácil configuración */
+        --slides: 3; /* Cantidad total de slides */
+        --h: 35dvw; /* Altura proporcional al ancho del viewport */
+
+        width: 100%;
+        height: var(--h);
+        overflow: hidden; /* La magia: oculta los slides que no están en foco */
+      }
+      .carousel-inner {
+        display: flex; /* Alinea los slides horizontalmente */
+        height: 100%;
+
+        /* Ancho dinámico: Si son 3 slides, ancho = 300% */
+        width: calc(var(--slides) * 100%);
+
+        /* La animación que mueve la pista */
+        animation: slide 20s infinite ease-in-out;
+        will-change: transform; /* Optimización de rendimiento */
+      }
+
+      .carousel-item {
+        position: relative;
+        /* Cada slide ocupa exactamente una fracción del ancho total (100% / 3) */
+        flex: 0 0 calc(100% / var(--slides));
+        height: 100%;
+        display: flex;
+        place-content: center;
+        place-items: center;
+      }
+      .carousel-image {
+        position: absolute;
+        inset: 0; /* Top, Right, Bottom, Left en 0 */
+        width: 100%;
+        height: 100%;
+
+        object-fit: cover; /* Recorta la imagen para llenar el contenedor */
+        z-index: 1; /* Queda por detrás del texto */
+      }
+      .carousel-caption {
+        position: relative;
+        z-index: 2; /* Por encima de la imagen */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        width: 40dvw; /* Ancho relativo al viewport */
+        padding: 5dvw;
+        gap: 3dvw;
+        border-radius: 2dvw;
+
+        background: rgb(0 0 0 / 0.5); /* Fondo oscuro semitransparente */
+        color: #fff;
+        text-align: center;
+      }
+
+      .carousel-title {
+        font-size: 1.6dvw; /* Tipografía responsiva */
+        font-weight: 700;
+      }
+
+      .carousel-text {
+        /* Texto un poco más chico */
+        font-size: 1dvw;
+      }
+      @keyframes slide {
+        /* Slide 1: Quieto del 0% al 22.5% */
+        0%,
+        22.5% {
+          transform: translateX(0%);
+        }
+
+        /* Slide 2: Quieto del 25% al 47.5% (-33.33% es 1/3 del ancho) */
+        25%,
+        47.5% {
+          transform: translateX(-33.333%);
+        }
+
+        /* Slide 3: Quieto del 50% al 72.5% (-66.66% es 2/3 del ancho) */
+        50%,
+        72.5% {
+          transform: translateX(-66.666%);
+        }
+
+        /* Vuelta al Slide 2 (efecto rebote o ciclo) */
+        75%,
+        97.5% {
+          transform: translateX(-33.333%);
+        }
+
+        /* Vuelta al inicio */
+        100% {
+          transform: translateX(0%);
+        }
+      }
+      @media (orientation: portrait) {
+        .carousel {
+          /* En vertical usamos el 65% de la altura de la pantalla */
+          --h: 65dvh;
+        }
+
+        .carousel-caption {
+          /* Ancho casi total y texto más grande */
+          width: 70%;
+          padding: 6dvw;
+          gap: 4dvw;
+          border-radius: 4dvw;
+        }
+
+        .carousel-title {
+          font-size: 5dvw;
+        }
+        .carousel-text {
+          font-size: 3.2dvw;
+        }
+
+        .carousel-button {
+          width: 70%;
+          padding: 3.2dvw;
+          font-size: 3.4dvw;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item">
+          <img src="./imgs/frenchfood.jpg" class="carousel-image" alt="playa" />
+          <div class="carousel-caption">
+            <h2 class="carousel-title">Playa rocosa</h2>
+            <p class="carousel-text">Descubrí una costa única...</p>
+            <button class="carousel-button">Ver más</button>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img src="./imgs/lion.jpg" class="carousel-image" alt="playa" />
+          <div class="carousel-caption">
+            <h2 class="carousel-title">Playa rocosa</h2>
+            <p class="carousel-text">Descubrí una costa única...</p>
+            <button class="carousel-button">Ver más</button>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img src="./imgs/mapa.png" class="carousel-image" alt="playa" />
+          <div class="carousel-caption">
+            <h2 class="carousel-title">Playa rocosa</h2>
+            <p class="carousel-text">Descubrí una costa única...</p>
+            <button class="carousel-button">Ver más</button>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img src="./imgs/rugby.jpg" class="carousel-image" alt="playa" />
+          <div class="carousel-caption">
+            <h2 class="carousel-title">Playa rocosa</h2>
+            <p class="carousel-text">Descubrí una costa única...</p>
+            <button class="carousel-button">Ver más</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
