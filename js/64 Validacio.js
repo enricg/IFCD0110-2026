@@ -1,6 +1,3 @@
-// localStorage.usuari1="Enric";
-// localStorage.clau1="CETPenedès";
-
 const botoInici = document.getElementById("btnIniciSessio");
 botoInici.addEventListener("click", () => {
   const missatge = document.getElementById("txtMissatge");
