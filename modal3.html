@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 1001;
+            }
+
+            /* MIRAR DIALOG, que és el que ha proposat en David*/
+            /* https://www.auladiv.com/snippets/modales/index.html#top */
+            /* 
+      .modal.active {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .modal .modal-inner {
+        background: #fff;
+        padding: 2rem;
+        border-radius: 10px;
+        min-width: 300px;
+        opacity: 0;
+        transform: scale(0.9);
+        animation: anim-modal 0.4s forwards;
+      }
+      @keyframes anim-modal {
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+         */
+    </style>
+  </head>
+  <body>
+    <div class="modal" id="modal1">
+      <div class="modal-inner">
+        <h2>Modal 1: Zoom In</h2>
+        <p>Animación de zoom y fondo translúcido.</p>
+        <button class="close-modal" data-close="modal1">Cerrar</button>
+      </div>
+    </div>
+
+    <button id="open-modal1">Zoom</button>
+    <script>
+      var open = document.getElementById("open-modal1");
+      var modal1 = document.getElementById("modal1");
+      var close = modal1.querySelector("[data-close=modal1]");
+      open.addEventListener("click", () => modal1.classList.add("active"));
+      close.addEventListener("click", () => modal1.classList.remove("active"));
+    </script>
+  </body>
+</html>

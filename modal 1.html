@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .modalDialog {
+  position: fixed;
+  top: 0; right: 0; bottom: 0; left: 0;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 99999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 400ms ease-in;
+}
+
+.modalDialog:target {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modalDialog > div {
+  width: 90%;
+  max-width: 500px;
+  margin: 10% auto;
+  padding: 20px;
+  border-radius: 10px;
+  background: #fff;
+  position: relative;
+}
+
+.close {
+  background: #606061;
+  color: #FFFFFF;
+  position: absolute;
+  right: -12px; top: -10px;
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 30px;
+}
+  </style>
+</head>
+<body>
+  <!-- Botón trigger -->
+<a href="#modalConfirmacion" class="btn-modal">Abrir Modal</a>
+
+<!-- Estructura del modal -->
+<div id="modalConfirmacion" class="modalDialog">
+  <div>
+    <a href="#cerrar" title="Cerrar" class="close">×</a>
+    <h2>Formulario Enviado</h2>
+    <p>La información se ha procesado correctamente.</p>
+  </div>
+</div>
+</body>
+</html>
