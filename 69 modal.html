@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ca">
+    <head>
+        <meta charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>Finestra modal</title>
+        <link rel="shortcut icon" href="./imgs/favicon.svg" type="image/x-icon"/>
+        <link rel="stylesheet" href="./css/69 modal.css"/>
+        <script src="./js/69 modal.js" defer></script>
+    </head>
+    <body id="cos" onload="dialogo.showModal()">
+        <header>Exemple de finestra modal</header>
+        <nav class="menu">
+            Menu d'opcions
+            <button id="bObrir" onclick="dialogo.showModal()">Obrir modal</button>
+            <button id="bTancar" onclick="tancarModal()">Tancar modal</button>
+        </nav>
+        <main>
+            Marc principal
+            <dialog id="dialogo">Aquest és contingut de la finestra modal
+                <button onclick="dialogo.close()">Tancar</button>
+            </dialog>
+        </main>
+        <aside>Anuncis, banners</aside>
+        <footer>Peu de pàgina</footer>
+    </body>
+
+</html>
