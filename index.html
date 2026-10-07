@@ -1,20 +1,28 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Reutilització de codi</title>
-        <link rel="shortcut icon" href="./imgs/chavo.jpg" type="image/x-icon">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-        <link rel="stylesheet" href="./css/37 plantilles.css">
-    </head>
-    <body>
-        <header id="header"></header>
-        <div id="menu"></div>
-        <main>
-            Principal
-        </main>
-        <div id="footer"></div>
-    </body>
-    <script src="./js/includes.js"></script>
+<!doctype html>
+<html lang="ca">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pràctica Pokemon</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./css/61 Pokemon.css" />
+    <link rel="shortcut icon" href="./imgs/favicon.svg" type="image/x-icon" />
+    <script src="./js/61 Pokemon.js" defer></script>
+  </head>
+  <body>
+<header>Pràctica Pokemon</header>
+    <nav>
+      Menú<hr>
+      <div id="pagina"></div>
+      <button type="button" class="btn btn-primary btn-sm" id="previ">Anterior</button>
+      <button type="button" class="btn btn-primary btn-sm" id="seguent">Següent</button>
+    </nav>
+    <main id="principal">Principal
+      <!-- Aquí es carreguen les etiquetes dels exercicis -->
+    </main>
+    <footer>
+      Fet per mi &copy;<br>
+    </footer>
+  </body>
 </html>

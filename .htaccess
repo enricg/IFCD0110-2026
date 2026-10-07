@@ -1,0 +1,6 @@
+AuthType Basic
+AuthName "Curs"
+AuthUserFile /home/vol5_1/byethost8.com/b8_43109996/.htpasswd
+Require valid-user
+
+Options +Indexes
