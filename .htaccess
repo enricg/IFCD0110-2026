@@ -1,6 +1,16 @@
-AuthType Basic
-AuthName "Curs"
-AuthUserFile /home/vol5_1/byethost8.com/b8_43109996/.htpasswd
-Require valid-user
+#AuthType Basic
+#AuthName "Curs"
+#AuthUserFile /home/vol5_1/byethost8.com/b8_43109996/.htpasswd
+#Require valid-user
 
+# Per permetre navegar per l'estructura d'arxius del lloc web
 Options +Indexes
+
+# Redireccionament
+#order deny,allow
+#deny from all
+#allow from 81.45.169.21
+# allow from 185.27.134.11 # ftp.byethost8.com
+#ErrorDocument 403 /pagina2.html
+
+Redirect /index.html /pagina2.html
